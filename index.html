@@ -35,13 +35,20 @@
 </head>
 <body>
 
-  <!-- Top Announcement Bar -->
-  <div class="announcement-bar">
-    <div class="container announcement-inner">
-      <div class="announcement-text">
-        <span>AUTHENTIC TASTE. EVERYDAY TRADITION.</span>
-        <span class="dot"></span>
-        <span>ONLINE ORDERS ACCEPTED ABOVE ₹999</span>
+  <!-- Top Announcement Bar (Live Animated Marquee) -->
+  <div class="announcement-bar" role="region" aria-label="Announcement">
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>ONLINE ORDERS ACCEPTED ABOVE ₹999</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALA PRODUCTS</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MASALA POWDERS & PURE SPICES</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MINIMUM ONLINE ORDER VALUE: ₹999</span> <span class="marquee-arrow">→</span></div>
+      </div>
+      <div class="marquee-track" aria-hidden="true">
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>ONLINE ORDERS ACCEPTED ABOVE ₹999</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALA PRODUCTS</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MASALA POWDERS & PURE SPICES</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MINIMUM ONLINE ORDER VALUE: ₹999</span> <span class="marquee-arrow">→</span></div>
       </div>
     </div>
   </div>
@@ -147,9 +154,9 @@
                 Handcrafted South Indian spice powders and pure ground spices. Prepared with unadulterated whole ingredients for everyday home cooking.
               </p>
               <div class="hero-cta-group">
-                <a href="shop.html" class="btn btn-primary btn-lg">
-                  <span>SHOP ALL PRODUCTS</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <a href="#shopProducts" class="btn btn-primary btn-lg">
+                  <span>SHOP OUR PRODUCTS</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                 </a>
                 <a href="#whyChooseHipa" class="btn btn-secondary btn-lg">OUR TRADITION</a>
               </div>
@@ -201,9 +208,9 @@
                 Stock your kitchen with authentic pantry essentials including Sambar Powder, Rasam Powder, Garam Masala, Turmeric, Chilli, Coriander, Cumin and Pepper.
               </p>
               <div class="hero-cta-group">
-                <a href="shop.html" class="btn btn-primary btn-lg">
-                  <span>START SHOPPING</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <a href="#shopProducts" class="btn btn-primary btn-lg">
+                  <span>START SHOPPING NOW</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                 </a>
               </div>
             </div>
@@ -231,9 +238,9 @@
                 From vibrant Turmeric and stemless Red Chilli to fragrant Sambar and Rasam powders—experience genuine spice purity in every pinch.
               </p>
               <div class="hero-cta-group">
-                <a href="shop.html" class="btn btn-primary btn-lg">
-                  <span>EXPLORE 8 CORE PRODUCTS</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                <a href="#shopProducts" class="btn btn-primary btn-lg">
+                  <span>SHOP 8 CORE PRODUCTS</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                 </a>
                 <a href="shop.html?category=masalas" class="btn btn-secondary btn-lg">VIEW MASALAS</a>
               </div>
@@ -274,117 +281,23 @@
       </div>
     </section>
 
-    <!-- Information Strip Immediately Below Hero -->
-    <section class="info-strip-section" aria-label="Store Benefits">
-      <div class="container">
-        <div class="info-strip-grid">
-          
-          <div class="info-strip-item">
-            <div class="info-strip-icon-box">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-            </div>
-            <div>
-              <div class="info-strip-title">ONLINE ORDERS ABOVE ₹999</div>
-              <div class="info-strip-sub">Minimum online order value</div>
-            </div>
-          </div>
-
-          <div class="info-strip-item">
-            <div class="info-strip-icon-box">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-            </div>
-            <div>
-              <div class="info-strip-title">SECURE CHECKOUT</div>
-              <div class="info-strip-sub">UPI & Card payments supported</div>
-            </div>
-          </div>
-
-          <div class="info-strip-item">
-            <div class="info-strip-icon-box">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-            </div>
-            <div>
-              <div class="info-strip-title">GENUINE HIPA PRODUCTS</div>
-              <div class="info-strip-sub">100% pure authentic spices</div>
-            </div>
-          </div>
-
-          <div class="info-strip-item">
-            <div class="info-strip-icon-box">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
-            </div>
-            <div>
-              <div class="info-strip-title">EASY ONLINE SHOPPING</div>
-              <div class="info-strip-sub">Direct doorstep delivery</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Shop by Category Section (2 Categories Only) -->
-    <section class="section section-light" id="shopCategories">
-      <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Explore Catalog</span>
-          <h2 class="section-title">SHOP BY CATEGORY</h2>
-          <p class="section-subtitle">Choose from our traditional blended masalas and pure ground spices.</p>
-        </div>
-
-        <div class="category-cards-grid">
-          <!-- Category 1: Masala Powders -->
-          <a href="shop.html?category=masalas" class="category-card">
-            <div class="category-card-content">
-              <span class="category-card-tag">Traditional Blends</span>
-              <h3 class="category-card-title">MASALA POWDERS</h3>
-              <p class="category-card-desc">Sambar Powder, Rasam Powder, and Garam Masala crafted with roasted lentils and aromatic spices.</p>
-              <span class="category-card-link">
-                <span>View Masalas (3 Products)</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </span>
-            </div>
-            <div class="category-card-img-wrap">
-              <img class="category-card-img" src="assets/images/categories/masalas.webp" alt="HIPA Masala Powders Category">
-            </div>
-          </a>
-
-          <!-- Category 2: Pure Spices -->
-          <a href="shop.html?category=spices" class="category-card">
-            <div class="category-card-content">
-              <span class="category-card-tag">Kitchen Essentials</span>
-              <h3 class="category-card-title">PURE SPICES</h3>
-              <p class="category-card-desc">Turmeric, Red Chilli, Coriander, Cumin, and Pepper ground pure without additives or colourants.</p>
-              <span class="category-card-link">
-                <span>View Pure Spices (5 Products)</span>
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-              </span>
-            </div>
-            <div class="category-card-img-wrap">
-              <img class="category-card-img" src="assets/images/categories/spices.webp" alt="HIPA Pure Spices Category">
-            </div>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Main Products Section: Shop HIPA Favourites (8 Core Products) -->
+    <!-- PRODUCTS DIRECTLY: Shop Our Products (8 Core Products Immediately After Hero) -->
     <section class="section" id="shopProducts">
       <div class="container">
-        <div class="section-header">
-          <span class="section-tag">Direct From HIPA</span>
-          <h2 class="section-title">SHOP HIPA FAVOURITES</h2>
-          <p class="section-subtitle">Select your preferred pack size and add to cart. Online orders accepted above ₹999.</p>
+        <div class="section-header reveal">
+          <span class="section-tag">100% Pure Spices & Blends</span>
+          <h2 class="section-title">SHOP OUR PRODUCTS</h2>
+          <p class="section-subtitle">Select pack size and add directly to cart. Minimum online order value ₹999.</p>
         </div>
 
         <!-- 8 Core Products Grid: 4 cols Desktop, 2 cols Mobile -->
         <div class="grid-4" id="homeProductsGrid">
-          <!-- Dynamically populated from centralized js/products-data.js -->
+          <!-- Dynamically populated by js/main.js from js/products-data.js -->
         </div>
 
-        <div style="text-align:center; margin-top:48px;">
-          <a href="shop.html" class="btn btn-outline btn-lg">
-            <span>View Full Product Catalog</span>
+        <div style="text-align:center; margin-top:48px;" class="reveal">
+          <a href="shop.html" class="btn btn-secondary btn-lg">
+            <span>EXPLORE FULL STORE CATALOG</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </div>
@@ -394,14 +307,14 @@
     <!-- Why Choose HIPA -->
     <section class="section section-light" id="whyChooseHipa">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header reveal">
           <span class="section-tag">Purity Standard</span>
           <h2 class="section-title">WHY CHOOSE HIPA?</h2>
           <p class="section-subtitle">We uphold quality standards to deliver authentic flavour, cleanliness, and trusted consistency.</p>
         </div>
 
         <div class="why-grid">
-          <div class="why-card">
+          <div class="why-card reveal reveal-delay-1">
             <div class="why-icon-box">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
             </div>
@@ -409,7 +322,7 @@
             <p class="why-desc">Whole spices selected for natural essential oils, vibrant appearance, and unpolished purity.</p>
           </div>
 
-          <div class="why-card">
+          <div class="why-card reveal reveal-delay-2">
             <div class="why-icon-box">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
             </div>
@@ -417,7 +330,7 @@
             <p class="why-desc">Roasted in small batches to preserve the natural volatile aroma and rich taste profile.</p>
           </div>
 
-          <div class="why-card">
+          <div class="why-card reveal reveal-delay-3">
             <div class="why-icon-box">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M9 12l2 2 4-4"></path></svg>
             </div>
@@ -425,7 +338,7 @@
             <p class="why-desc">Multi-layer food-grade packaging preserves freshness, protects against moisture, and seals aroma.</p>
           </div>
 
-          <div class="why-card">
+          <div class="why-card reveal reveal-delay-4">
             <div class="why-icon-box">
               <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
             </div>
@@ -440,10 +353,10 @@
     <section class="section story-section" id="brandStory">
       <div class="container">
         <div class="story-grid">
-          <div class="story-img-wrap">
+          <div class="story-img-wrap reveal">
             <img class="story-img" src="assets/images/about-story.jpg" alt="Traditional spice ingredients and roasting">
           </div>
-          <div class="story-content">
+          <div class="story-content reveal reveal-delay-2">
             <span class="section-tag" style="align-self:flex-start;">Our Heritage</span>
             <h2 class="story-title">
               ROOTED IN TRADITION.<br>
@@ -477,7 +390,7 @@
     <!-- Need Help / Support Section -->
     <section class="support-section" id="needHelp">
       <div class="container">
-        <div class="support-card">
+        <div class="support-card reveal">
           <div>
             <span class="section-tag" style="background:#FFF; border:1px solid #F0DCDC;">Customer Assistance</span>
             <h2 class="support-title">NEED HELP WITH YOUR ORDER?</h2>
@@ -512,7 +425,7 @@
             <p style="font-size:0.8125rem; color:var(--text-muted); margin-bottom:20px;">We respond promptly to all messages during business hours (9:00 AM – 7:00 PM).</p>
             <div style="display:flex; flex-direction:column; gap:10px;">
               <a href="contact.html" class="btn btn-primary btn-block">CONTACT FORM</a>
-              <a href="shop.html" class="btn btn-secondary btn-block">BROWSE PRODUCTS</a>
+              <a href="shop.html" class="btn btn-secondary btn-block">BROWSE CATALOG</a>
             </div>
           </div>
         </div>

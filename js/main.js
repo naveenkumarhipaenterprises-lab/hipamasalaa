@@ -1,6 +1,6 @@
 /**
  * HIPA MASALA GLOBAL SITE ENGINE
- * 3-Slide Hero Carousel Controller, Sticky Header, Mobile Nav, Dynamic Product Cards
+ * 3-Slide Hero Carousel Controller, Sticky Header, Mobile Nav, Dynamic Product Cards & Scroll Reveal
  */
 
 const HeroCarousel = {
@@ -109,7 +109,7 @@ const HeroCarousel = {
 const App = {
   selectedVariants: {},
 
-  renderProductCard: function(product) {
+  renderProductCard: function(product, index = 0) {
     const selectedSize = this.selectedVariants[product.slug] || product.variants[0].size;
     const currentVariant = product.variants.find(v => v.size === selectedSize) || product.variants[0];
 
@@ -123,8 +123,10 @@ const App = {
       </button>
     `).join('');
 
+    const delay = (index % 4) * 0.08;
+
     return `
-      <article class="product-card" id="card-${product.slug}">
+      <article class="product-card reveal" id="card-${product.slug}" style="transition-delay: ${delay}s">
         <div class="card-top">
           <span class="card-badge ${product.category === 'masalas' ? 'gold' : 'green'}">
             ${product.categoryName}
@@ -158,17 +160,17 @@ const App = {
         <div class="card-bottom">
           <div class="price-row">
             <span class="current-price">₹${currentVariant.price}</span>
+            <span class="tax-inclusive-tag">Inc. of all taxes</span>
           </div>
           <div class="card-actions-row">
-            <button type="button" class="btn-card-cart" onclick="Cart.addItem('${product.slug}', '${selectedSize}', 1)">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            <button type="button" class="btn-card-cart" onclick="Cart.addItem('${product.slug}', '${selectedSize}', 1)" aria-label="Add ${product.name} ${selectedSize} to cart">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
               </svg>
-              <span>Add to Cart</span>
+              <span>+ ADD TO CART</span>
             </button>
-            <button type="button" class="btn-card-buy" onclick="Cart.buyNow('${product.slug}', '${selectedSize}', 1)">
+            <button type="button" class="btn-card-buy" onclick="Cart.buyNow('${product.slug}', '${selectedSize}', 1)" aria-label="Buy ${product.name} now">
               <span>Buy Now</span>
             </button>
           </div>
@@ -188,6 +190,9 @@ const App = {
       const product = window.HipaStore.getProductBySlug(productSlug);
       if (product) {
         cardEl.outerHTML = this.renderProductCard(product);
+        // Ensure the replaced card is visible immediately
+        const newCard = document.getElementById(`card-${productSlug}`);
+        if (newCard) newCard.classList.add('is-visible');
       }
     }
   },
@@ -230,6 +235,7 @@ const App = {
           
           <div class="price-row" style="margin-bottom:16px;">
             <span class="current-price" style="font-size:1.75rem;">₹${variant.price}</span>
+            <span class="tax-inclusive-tag">Inc. of all taxes</span>
           </div>
 
           <p style="font-size:0.875rem; color:var(--text-body); line-height:1.5; margin-bottom:20px;">
@@ -249,7 +255,7 @@ const App = {
 
           <div style="display:flex; gap:10px; margin-top:auto;">
             <button class="btn btn-primary" style="flex:1;" onclick="Cart.addItem('${product.slug}', '${selectedSize}', 1); App.closeQuickView();">
-              Add to Cart • ₹${variant.price}
+              + Add to Cart • ₹${variant.price}
             </button>
             <a href="product.html?slug=${product.slug}" class="btn btn-secondary">Full Details</a>
           </div>
@@ -322,6 +328,26 @@ const App = {
     }
   },
 
+  initScrollReveal: function() {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        }
+      });
+    }, {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  },
+
   init: function() {
     this.initHeaderScroll();
     this.initMobileNav();
@@ -332,8 +358,11 @@ const App = {
     const homeGrid = document.getElementById('homeProductsGrid');
     if (homeGrid && window.HipaStore) {
       const allProducts = window.HipaStore.getAllProducts();
-      homeGrid.innerHTML = allProducts.map(p => this.renderProductCard(p)).join('');
+      homeGrid.innerHTML = allProducts.map((p, idx) => this.renderProductCard(p, idx)).join('');
     }
+
+    // Initialize Scroll Reveal Animations
+    this.initScrollReveal();
   }
 };
 

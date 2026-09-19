@@ -120,8 +120,9 @@ const ProductPage = {
   },
 
   buyNow: function() {
-    this.addToCart();
-    window.location.href = 'checkout.html';
+    if (window.Cart && this.currentProduct) {
+      window.Cart.buyNow(this.currentProduct.slug, this.selectedSize, this.currentQty);
+    }
   },
 
   renderTabs: function() {

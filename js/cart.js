@@ -61,7 +61,43 @@ const Cart = {
 
   buyNow: function(productSlug, variantSize, quantity = 1) {
     this.addItem(productSlug, variantSize, quantity, false);
+    const subtotal = this.getSubtotal();
+    if (subtotal >= this.MIN_ORDER_VALUE) {
+      window.location.href = 'checkout.html';
+    } else {
+      this.openDrawer();
+      const needed = this.MIN_ORDER_VALUE - subtotal;
+      this.showToast(`Minimum online order value is ₹999. Add ₹${needed} more to continue.`, 'warning');
+    }
+  },
+
+  proceedToCheckout: function(event) {
+    if (event) {
+      event.preventDefault();
+    }
+    const items = this.getItems();
+    if (!items || items.length === 0) {
+      this.showToast('Your shopping cart is empty. Please add items to checkout.', 'warning');
+      return false;
+    }
+
+    const subtotal = this.getSubtotal();
+    const meetsMinOrder = subtotal >= this.MIN_ORDER_VALUE;
+    const amountNeeded = this.MIN_ORDER_VALUE - subtotal;
+
+    if (!meetsMinOrder) {
+      this.showToast(`Minimum online order value is ₹999. Add ₹${amountNeeded} more to continue.`, 'warning');
+      const alertBox = document.querySelector('.cart-min-order-alert');
+      if (alertBox) {
+        alertBox.classList.remove('pulse-alert');
+        void alertBox.offsetWidth;
+        alertBox.classList.add('pulse-alert');
+      }
+      return false;
+    }
+
     window.location.href = 'checkout.html';
+    return true;
   },
 
   updateQuantity: function(itemId, newQty) {
@@ -200,16 +236,18 @@ const Cart = {
       if (meetsMinOrder) {
         checkoutBtn.classList.remove('btn-checkout-disabled');
         checkoutBtn.removeAttribute('aria-disabled');
+        checkoutBtn.setAttribute('title', 'Proceed to Secure Checkout');
         checkoutBtn.href = 'checkout.html';
       } else {
         checkoutBtn.classList.add('btn-checkout-disabled');
         checkoutBtn.setAttribute('aria-disabled', 'true');
+        checkoutBtn.setAttribute('title', `Minimum online order value is ₹999. Add ₹${amountNeeded} more to continue.`);
         checkoutBtn.removeAttribute('href');
       }
     }
   },
 
-  showToast: function(message) {
+  showToast: function(message, type = 'success') {
     let container = document.getElementById('toastContainer');
     if (!container) {
       container = document.createElement('div');
@@ -219,11 +257,13 @@ const Cart = {
     }
 
     const toast = document.createElement('div');
-    toast.className = 'toast toast-success is-visible';
+    const isWarning = type === 'warning' || type === 'error';
+    toast.className = `toast ${isWarning ? 'toast-warning' : 'toast-success'} is-visible`;
     toast.innerHTML = `
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#25D366" stroke-width="2.2">
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="${isWarning ? '#D97706' : '#25D366'}" stroke-width="2.2">
+        ${isWarning 
+          ? '<circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line>'
+          : '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>'}
       </svg>
       <span>${message}</span>
     `;
@@ -233,7 +273,7 @@ const Cart = {
     setTimeout(() => {
       toast.classList.remove('is-visible');
       setTimeout(() => toast.remove(), 300);
-    }, 3000);
+    }, 3200);
   },
 
   init: function() {
@@ -252,6 +292,11 @@ const Cart = {
 
     const backdrop = document.getElementById('cartBackdrop');
     if (backdrop) backdrop.addEventListener('click', () => this.closeDrawer());
+
+    const drawerCheckoutBtn = document.getElementById('drawerCheckoutBtn');
+    if (drawerCheckoutBtn) {
+      drawerCheckoutBtn.addEventListener('click', (e) => this.proceedToCheckout(e));
+    }
   }
 };
 

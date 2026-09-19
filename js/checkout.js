@@ -9,6 +9,15 @@ const Checkout = {
   initCartPage: function() {
     this.renderCartTable();
     window.addEventListener('cartUpdated', () => this.renderCartTable());
+
+    const checkoutBtn = document.getElementById('cartPageCheckoutBtn');
+    if (checkoutBtn) {
+      checkoutBtn.addEventListener('click', (e) => {
+        if (window.Cart) {
+          window.Cart.proceedToCheckout(e);
+        }
+      });
+    }
   },
 
   renderCartTable: function() {
@@ -81,10 +90,12 @@ const Checkout = {
       if (meetsMinOrder) {
         checkoutBtn.classList.remove('btn-checkout-disabled');
         checkoutBtn.removeAttribute('aria-disabled');
+        checkoutBtn.setAttribute('title', 'Proceed to Secure Checkout');
         checkoutBtn.href = 'checkout.html';
       } else {
         checkoutBtn.classList.add('btn-checkout-disabled');
         checkoutBtn.setAttribute('aria-disabled', 'true');
+        checkoutBtn.setAttribute('title', `Minimum online order value is ₹999. Add ₹${amountNeeded} more to checkout.`);
         checkoutBtn.removeAttribute('href');
       }
     }

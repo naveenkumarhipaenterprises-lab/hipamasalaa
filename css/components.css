@@ -561,6 +561,33 @@
   gap: 8px;
 }
 
+/* Disabled state for checkout button below ₹999 minimum order */
+.btn-checkout-disabled {
+  opacity: 0.65;
+  cursor: not-allowed !important;
+  background-color: #8C8C8C !important;
+  border-color: #8C8C8C !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.btn-checkout-disabled:hover {
+  background-color: #7D7D7D !important;
+  color: #FFFFFF !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+@keyframes alertPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); box-shadow: 0 0 10px rgba(220, 38, 38, 0.35); }
+}
+
+.pulse-alert {
+  animation: alertPulse 0.4s ease 2;
+}
+
 /* ============================================================
    Search Modal
    ============================================================ */
@@ -707,6 +734,10 @@
 
 .toast-success {
   border-left: 4px solid #25D366;
+}
+
+.toast-warning {
+  border-left: 4px solid #D97706;
 }
 
 /* ============================================================

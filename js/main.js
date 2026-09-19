@@ -347,6 +347,27 @@ const App = {
     document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => observer.observe(el));
   },
 
+  initHeritageVideo: function() {
+    const video = document.querySelector('.heritage-bg-video');
+    if (!video) return;
+
+    video.muted = true;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        const startOnInteraction = () => {
+          video.play().catch(() => {});
+          window.removeEventListener('click', startOnInteraction);
+          window.removeEventListener('touchstart', startOnInteraction);
+          window.removeEventListener('scroll', startOnInteraction);
+        };
+        window.addEventListener('click', startOnInteraction, { once: true, passive: true });
+        window.addEventListener('touchstart', startOnInteraction, { once: true, passive: true });
+        window.addEventListener('scroll', startOnInteraction, { once: true, passive: true });
+      });
+    }
+  },
+
   init: function() {
     this.initHeaderScroll();
     this.initMobileNav();
@@ -359,6 +380,9 @@ const App = {
       const allProducts = window.HipaStore.getAllProducts();
       homeGrid.innerHTML = allProducts.map((p, idx) => this.renderProductCard(p, idx)).join('');
     }
+
+    // Initialize Heritage Video Background
+    this.initHeritageVideo();
 
     // Initialize Scroll Reveal Animations
     this.initScrollReveal();

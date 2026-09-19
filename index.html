@@ -349,38 +349,83 @@
       </div>
     </section>
 
-    <!-- Brand Story Section -->
-    <section class="section story-section" id="brandStory">
-      <div class="container">
-        <div class="story-grid">
-          <div class="story-img-wrap reveal">
-            <img class="story-img" src="assets/images/about-story.jpg" alt="Traditional spice ingredients and roasting">
+    <!-- Brand Story & Heritage Video Section -->
+    <section class="heritage-video-section reveal" id="brandStory" aria-label="Our Heritage">
+      <!-- Background Video Container -->
+      <div class="heritage-video-wrap">
+        <video 
+          class="heritage-bg-video" 
+          autoplay 
+          muted 
+          loop 
+          playsinline 
+          webkit-playsinline 
+          preload="auto" 
+          poster="assets/images/about-story.jpg"
+          aria-hidden="true">
+          <source src="public/videos/hipa-heritage.mp4" type="video/mp4">
+        </video>
+        <!-- Subtle Cinematic Gradient Overlay for text contrast -->
+        <div class="heritage-video-overlay"></div>
+      </div>
+
+      <!-- Foreground Content Container -->
+      <div class="container heritage-content-container">
+        <div class="heritage-card">
+          <div class="heritage-eyebrow">
+            <span class="heritage-pill">OUR HERITAGE</span>
+            <span class="heritage-rule"></span>
           </div>
-          <div class="story-content reveal reveal-delay-2">
-            <span class="section-tag" style="align-self:flex-start;">Our Heritage</span>
-            <h2 class="story-title">
-              ROOTED IN TRADITION.<br>
-              MADE FOR TODAY'S KITCHEN.
-            </h2>
-            <p class="story-desc">
-              At HIPA Masala, we believe great cooking starts with unadulterated spices. Inspired by South Indian roasting traditions, our blends are crafted using whole ingredients—free from artificial colours or unnecessary fillers.
-            </p>
-            <div class="story-highlights">
-              <div class="story-highlight-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Small-batch roasting preserving natural oils</span>
+
+          <h2 class="heritage-title">
+            ROOTED IN TRADITION.<br>
+            <span class="heritage-title-highlight">MADE FOR TODAY'S KITCHEN.</span>
+          </h2>
+
+          <p class="heritage-desc">
+            At HIPA Masala, we believe great cooking starts with unadulterated spices. Inspired by South Indian roasting traditions, our blends are crafted using whole ingredients—free from artificial colours or unnecessary fillers.
+          </p>
+
+          <div class="heritage-highlights-grid">
+            <div class="heritage-highlight-card">
+              <div class="highlight-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
               </div>
-              <div class="story-highlight-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Zero synthetic food dyes or additives</span>
-              </div>
-              <div class="story-highlight-item">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                <span>Convenient pack sizes for daily home use</span>
+              <div class="highlight-info">
+                <strong>Small-Batch Roasting</strong>
+                <span>Preserves natural essential spice oils</span>
               </div>
             </div>
-            <div>
-              <a href="about.html" class="btn btn-primary">LEARN MORE ABOUT US</a>
+
+            <div class="heritage-highlight-card">
+              <div class="highlight-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="highlight-info">
+                <strong>Pure & Unadulterated</strong>
+                <span>Zero synthetic food dyes or additives</span>
+              </div>
+            </div>
+
+            <div class="heritage-highlight-card">
+              <div class="highlight-icon-wrap">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              </div>
+              <div class="highlight-info">
+                <strong>Daily Kitchen Convenience</strong>
+                <span>Pack sizes crafted for everyday homes</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="heritage-cta-row">
+            <a href="about.html" class="btn-heritage-cta" aria-label="Learn more about our heritage">
+              <span>LEARN MORE ABOUT US</span>
+              <span class="btn-heritage-arrow">→</span>
+            </a>
+            <div class="heritage-trust-badge">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FCD34D" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              <span>Authentic Traditional Recipes</span>
             </div>
           </div>
         </div>

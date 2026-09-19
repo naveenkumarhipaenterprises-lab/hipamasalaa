@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | HIPA Masala Online Store</title>
+  <meta name="description" content="Secure checkout for your HIPA Masala order. Minimum online order value ₹999. Fast direct shipping.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/header-footer.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/checkout.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" role="region" aria-label="Announcement">
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>ONLINE ORDERS ACCEPTED ABOVE ₹999</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALA PRODUCTS</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MASALA POWDERS & PURE SPICES</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MINIMUM ONLINE ORDER VALUE: ₹999</span> <span class="marquee-arrow">→</span></div>
+      </div>
+      <div class="marquee-track" aria-hidden="true">
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>ONLINE ORDERS ACCEPTED ABOVE ₹999</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALA PRODUCTS</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MASALA POWDERS & PURE SPICES</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MINIMUM ONLINE ORDER VALUE: ₹999</span> <span class="marquee-arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="HIPA Masala Home">
+        <img class="brand-logo-img" src="assets/images/logo.png" alt="HIPA Masala Logo">
+        <div class="brand-info">
+          <span class="brand-name">HIPA <span>MASALA</span></span>
+          <span class="brand-tag">Taste of Tradition</span>
+        </div>
+      </a>
+      <div style="font-size:0.875rem; color:var(--text-muted);">
+        Need help? Call <a href="tel:+917058053055" style="color:var(--color-primary); font-weight:700;">+91 70580 53055</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" style="padding-top:32px;">
+      <div class="container">
+        <h1 style="font-size:2rem; font-weight:800; color:var(--text-dark); margin-bottom:28px;">SECURE CHECKOUT</h1>
+
+        <form id="checkoutForm">
+          <div class="checkout-grid">
+            <!-- Left: Checkout Forms -->
+            <div>
+              <!-- Step 1: Customer Contact & Shipping Address -->
+              <div class="checkout-card">
+                <h2 class="checkout-step-title">
+                  <span class="step-num">1</span>
+                  <span>Shipping Address & Contact Information</span>
+                </h2>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="custName">Full Name *</label>
+                    <input type="text" id="custName" class="form-input" placeholder="e.g. Ramesh Kumar" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="custPhone">Mobile Number *</label>
+                    <input type="tel" id="custPhone" class="form-input" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="custEmail">Email Address (for order invoice) *</label>
+                  <input type="email" id="custEmail" class="form-input" placeholder="e.g. name@example.com" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="custAddress">Street Address / House No. / Flat *</label>
+                  <input type="text" id="custAddress" class="form-input" placeholder="e.g. Flat 302, Green Meadows, 4th Cross" required>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="custCity">City *</label>
+                    <input type="text" id="custCity" class="form-input" placeholder="e.g. Chennai" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="custState">State *</label>
+                    <select id="custState" class="form-select" required>
+                      <option value="Tamil Nadu" selected>Tamil Nadu</option>
+                      <option value="Karnataka">Karnataka</option>
+                      <option value="Kerala">Kerala</option>
+                      <option value="Andhra Pradesh">Andhra Pradesh</option>
+                      <option value="Telangana">Telangana</option>
+                      <option value="Maharashtra">Maharashtra</option>
+                      <option value="Other">Other State</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-grid-2">
+                  <div class="form-group">
+                    <label class="form-label" for="custPincode">PIN Code *</label>
+                    <input type="text" id="custPincode" class="form-input" placeholder="e.g. 600001" pattern="[0-9]{6}" required>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label" for="custLandmark">Landmark (Optional)</label>
+                    <input type="text" id="custLandmark" class="form-input" placeholder="e.g. Near Bus Stand">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 2: Payment Method -->
+              <div class="checkout-card">
+                <h2 class="checkout-step-title">
+                  <span class="step-num">2</span>
+                  <span>Select Payment Method</span>
+                </h2>
+
+                <div class="payment-options">
+                  <label class="payment-option-label">
+                    <input type="radio" name="payment_method" value="upi" checked>
+                    <div>
+                      <div style="font-weight:700; color:var(--text-dark);">UPI / Instant Online Payment</div>
+                      <div style="font-size:0.8125rem; color:var(--text-muted);">GPay, PhonePe, Paytm, BHIM, or any UPI App</div>
+                    </div>
+                  </label>
+
+                  <label class="payment-option-label">
+                    <input type="radio" name="payment_method" value="card">
+                    <div>
+                      <div style="font-weight:700; color:var(--text-dark);">Credit / Debit Card & Netbanking</div>
+                      <div style="font-size:0.8125rem; color:var(--text-muted);">Visa, Mastercard, RuPay, Netbanking</div>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Order Summary Sidebar -->
+            <div>
+              <div class="order-summary-card">
+                <h2 class="summary-title">ORDER SUMMARY</h2>
+                
+                <div id="checkoutItemsList" style="max-height:260px; overflow-y:auto; margin-bottom:16px; border-bottom:1px solid var(--border-light); padding-bottom:12px;"></div>
+
+                <div class="summary-row">
+                  <span>Subtotal:</span>
+                  <span id="checkoutSummarySubtotal">₹0</span>
+                </div>
+                <div class="summary-row total">
+                  <span>Grand Total:</span>
+                  <span id="checkoutSummaryTotal">₹0</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:8px;">
+                  PLACE ORDER
+                </button>
+                <p style="font-size:0.75rem; color:var(--text-muted); text-align:center; margin-top:10px;">
+                  Online orders accepted above ₹999.
+                </p>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Order Success Modal Popup -->
+  <div class="order-success-modal" id="orderSuccessModal" role="dialog" aria-modal="true">
+    <div class="order-success-card">
+      <div class="order-success-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2 style="font-size:1.75rem; font-weight:800; color:var(--text-dark); margin-bottom:8px;">ORDER CONFIRMED!</h2>
+      <div style="font-size:0.875rem; color:var(--color-primary); font-weight:700; margin-bottom:16px;">
+        Order Reference: <span id="successOrderNumber">HIPA-123456</span>
+      </div>
+      <p id="successOrderDetails" style="font-size:0.9375rem; color:var(--text-body); line-height:1.6; margin-bottom:28px;">
+        Thank you for choosing HIPA Masala! Your authentic spice order is confirmed.
+      </p>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <a href="index.html" class="btn btn-primary">Return to Homepage</a>
+        <a href="shop.html" class="btn btn-secondary">Shop More Products</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom" style="border:none; padding:0;">
+        <div>&copy; 2026 HIPA Masala Online Store. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop All Products | HIPA Masala Online Store</title>
+  <meta name="description" content="Explore and buy authentic HIPA Masala products online. Masala blends & pure spices in 100g, 200g, 500g and 1kg packs. Online orders accepted above ₹999.">
+  <link rel="canonical" href="https://www.hipamasalas.com/shop.html">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/header-footer.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/shop.css">
+</head>
+<body>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar" role="region" aria-label="Announcement">
+    <div class="marquee-container">
+      <div class="marquee-track">
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>ONLINE ORDERS ACCEPTED ABOVE ₹999</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALA PRODUCTS</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MASALA POWDERS & PURE SPICES</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MINIMUM ONLINE ORDER VALUE: ₹999</span> <span class="marquee-arrow">→</span></div>
+      </div>
+      <div class="marquee-track" aria-hidden="true">
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>ONLINE ORDERS ACCEPTED ABOVE ₹999</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALA PRODUCTS</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MASALA POWDERS & PURE SPICES</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>MINIMUM ONLINE ORDER VALUE: ₹999</span> <span class="marquee-arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="index.html" class="brand" aria-label="HIPA Masala Home">
+        <img class="brand-logo-img" src="assets/images/logo.png" alt="HIPA Masala Logo">
+        <div class="brand-info">
+          <span class="brand-name">HIPA <span>MASALA</span></span>
+          <span class="brand-tag">Taste of Tradition</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="shop.html" class="nav-link active">Shop All</a></li>
+          <li><a href="shop.html?category=masalas" class="nav-link">Masalas</a></li>
+          <li><a href="shop.html?category=spices" class="nav-link">Pure Spices</a></li>
+          <li><a href="about.html" class="nav-link">About Us</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="header-icon-btn js-search-trigger" aria-label="Search Products">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <button type="button" class="header-icon-btn js-cart-trigger" aria-label="View Shopping Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="cart-count-badge" id="headerCartCount" style="display:none;">0</span>
+        </button>
+        <button type="button" class="mobile-toggle" id="mobileNavToggle" aria-label="Open Mobile Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div class="mobile-nav-header">
+      <div class="brand-name" style="font-size:1.2rem;">HIPA <span>MASALA</span></div>
+      <button type="button" class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-nav-list">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="shop.html" class="mobile-nav-link active">Shop All Products</a></li>
+      <li><a href="shop.html?category=masalas" class="mobile-nav-link">Masala Powders</a></li>
+      <li><a href="shop.html?category=spices" class="mobile-nav-link">Pure Spices</a></li>
+      <li><a href="about.html" class="mobile-nav-link">About Brand</a></li>
+      <li><a href="contact.html" class="mobile-nav-link">Contact & Support</a></li>
+    </ul>
+  </div>
+  <div class="backdrop-overlay" id="mobileNavBackdrop"></div>
+
+  <main>
+    <!-- Shop Hero Banner -->
+    <div class="shop-banner">
+      <div class="container">
+        <h1 class="shop-banner-title">HIPA PRODUCT CATALOG</h1>
+        <p class="shop-banner-desc">Explore our complete range of 8 South Indian spice blends and pure powders. Online orders accepted above ₹999.</p>
+      </div>
+    </div>
+
+    <!-- Shop Content & Filters -->
+    <section class="section">
+      <div class="container">
+        <!-- Horizontal Category Filter Tabs -->
+        <div class="category-filter-tabs">
+          <button type="button" class="cat-tab-btn js-cat-tab is-active" data-cat="all">All Products (8)</button>
+          <button type="button" class="cat-tab-btn js-cat-tab" data-cat="masalas">Masala Powders (3)</button>
+          <button type="button" class="cat-tab-btn js-cat-tab" data-cat="spices">Pure Spices (5)</button>
+        </div>
+
+        <div class="shop-layout">
+          <!-- Left Sidebar Filters -->
+          <aside class="shop-sidebar">
+            <div class="filter-group">
+              <h3 class="filter-group-title">Category</h3>
+              <div class="filter-options">
+                <label class="filter-radio-label">
+                  <input type="radio" name="cat_filter" value="all" checked>
+                  <span>All Products</span>
+                  <span class="filter-count">8</span>
+                </label>
+                <label class="filter-radio-label">
+                  <input type="radio" name="cat_filter" value="masalas">
+                  <span>Masala Powders</span>
+                  <span class="filter-count">3</span>
+                </label>
+                <label class="filter-radio-label">
+                  <input type="radio" name="cat_filter" value="spices">
+                  <span>Pure Spices</span>
+                  <span class="filter-count">5</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-group-title">Pack Size</h3>
+              <div class="filter-options">
+                <label class="filter-radio-label">
+                  <input type="radio" name="size_filter" value="all" checked>
+                  <span>All Sizes</span>
+                </label>
+                <label class="filter-radio-label">
+                  <input type="radio" name="size_filter" value="100g">
+                  <span>100g Packs</span>
+                </label>
+                <label class="filter-radio-label">
+                  <input type="radio" name="size_filter" value="200g">
+                  <span>200g Packs</span>
+                </label>
+                <label class="filter-radio-label">
+                  <input type="radio" name="size_filter" value="500g">
+                  <span>500g Packs</span>
+                </label>
+                <label class="filter-radio-label">
+                  <input type="radio" name="size_filter" value="1kg">
+                  <span>1kg Packs</span>
+                </label>
+              </div>
+            </div>
+
+            <div style="margin-top:20px;">
+              <button class="btn btn-secondary btn-block btn-sm" onclick="ShopPage.resetFilters()">Reset All Filters</button>
+            </div>
+          </aside>
+
+          <!-- Main Products Grid Container -->
+          <div>
+            <div class="shop-toolbar">
+              <span class="shop-result-count" id="shopResultCount">Showing 8 products</span>
+              <div class="shop-toolbar-right">
+                <label for="shopSortSelect" class="visually-hidden">Sort By</label>
+                <select id="shopSortSelect" class="sort-select">
+                  <option value="default">Featured / Recommended</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid-3" id="shopProductsGrid">
+              <!-- Dynamically populated by js/shop.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="brand">
+            <img class="brand-logo-img" src="assets/images/logo.png" alt="HIPA Masala Logo">
+            <span class="brand-name">HIPA <span>MASALA</span></span>
+          </a>
+          <p class="footer-desc">Authentic South Indian masalas and pure spices crafted for everyday home cooking.</p>
+        </div>
+        <div>
+          <h4 class="footer-col-title">CATEGORIES</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html?category=masalas" class="footer-link">Masala Powders</a></li>
+            <li><a href="shop.html?category=spices" class="footer-link">Pure Spices</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">PAGES</h4>
+          <ul class="footer-links">
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="footer-col-title">SUPPORT</h4>
+          <div style="font-size:0.875rem; color:var(--text-body); margin-bottom:8px;">+91 70580 53055</div>
+          <div style="font-size:0.875rem; color:var(--text-muted);">support@hipamasalas.com</div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>&copy; 2026 HIPA Masala Online Store. All rights reserved.</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title"><span>Your Shopping Cart</span></div>
+      <button type="button" class="cart-drawer-close" id="cartDrawerClose">&times;</button>
+    </div>
+    <div class="cart-drawer-body" id="cartDrawerBody"></div>
+    <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none;">
+      <div class="cart-subtotal-row"><span>Subtotal:</span><span id="drawerSubtotal">₹0</span></div>
+      <p class="cart-min-order-note">Online orders accepted above ₹999.</p>
+      <div class="cart-drawer-actions">
+        <a id="drawerCheckoutBtn" class="btn btn-primary btn-block">PROCEED TO CHECKOUT</a>
+      </div>
+    </div>
+  </div>
+  <div class="backdrop-overlay" id="cartBackdrop"></div>
+
+  <!-- Search Modal -->
+  <div class="search-modal" id="searchModal">
+    <div class="search-container">
+      <div class="search-input-wrap">
+        <input type="text" class="search-input" id="siteSearchInput" placeholder="Search spices, masalas..." autocomplete="off">
+        <button type="button" class="search-close-btn" id="searchModalClose">&times;</button>
+      </div>
+      <div class="search-results" id="searchResultsList"></div>
+    </div>
+  </div>
+
+  <!-- Quick View Modal -->
+  <div class="quickview-modal" id="quickviewModal">
+    <div class="quickview-dialog">
+      <button type="button" class="quickview-close-btn" id="quickviewClose">&times;</button>
+      <div class="quickview-content" id="quickviewContent"></div>
+    </div>
+  </div>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>

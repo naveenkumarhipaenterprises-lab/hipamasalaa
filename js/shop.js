@@ -9,21 +9,22 @@ const ShopPage = {
   currentSort: 'default',
 
   init: function() {
+    this.bindEvents();
+
     const urlParams = new URLSearchParams(window.location.search);
     const catParam = urlParams.get('category');
     if (catParam) {
-      this.currentCategory = catParam;
+      this.setCategory(catParam);
+    } else {
+      this.render();
     }
-
-    this.bindEvents();
-    this.render();
   },
 
   bindEvents: function() {
     // Category tabs
     document.querySelectorAll('.js-cat-tab').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        const cat = e.target.getAttribute('data-cat');
+        const cat = e.currentTarget.getAttribute('data-cat');
         this.setCategory(cat);
       });
     });
@@ -109,7 +110,12 @@ const ShopPage = {
       return;
     }
 
-    grid.innerHTML = list.map(p => window.App ? window.App.renderProductCard(p) : '').join('');
+    grid.innerHTML = list.map((p, idx) => window.App ? window.App.renderProductCard(p, idx) : '').join('');
+
+    // Ensure all newly rendered cards are observed / made visible
+    if (window.App && typeof window.App.initScrollReveal === 'function') {
+      window.App.initScrollReveal();
+    }
   },
 
   resetFilters: function() {

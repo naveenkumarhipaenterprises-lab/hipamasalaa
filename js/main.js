@@ -123,10 +123,10 @@ const App = {
       </button>
     `).join('');
 
-    const delay = (index % 4) * 0.08;
+    const delay = (index % 4) * 0.06;
 
     return `
-      <article class="product-card reveal" id="card-${product.slug}" style="transition-delay: ${delay}s">
+      <article class="product-card reveal is-visible" id="card-${product.slug}" style="transition-delay: ${delay}s">
         <div class="card-top">
           <span class="card-badge ${product.category === 'masalas' ? 'gold' : 'green'}">
             ${product.categoryName}
@@ -190,7 +190,6 @@ const App = {
       const product = window.HipaStore.getProductBySlug(productSlug);
       if (product) {
         cardEl.outerHTML = this.renderProductCard(product);
-        // Ensure the replaced card is visible immediately
         const newCard = document.getElementById(`card-${productSlug}`);
         if (newCard) newCard.classList.add('is-visible');
       }
@@ -341,11 +340,11 @@ const App = {
         }
       });
     }, {
-      rootMargin: '0px 0px -40px 0px',
-      threshold: 0.1
+      rootMargin: '0px 0px -20px 0px',
+      threshold: 0.05
     });
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => observer.observe(el));
   },
 
   init: function() {

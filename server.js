@@ -19,20 +19,31 @@ const MIME_TYPES = {
 
 const server = http.createServer((req, res) => {
   let reqUrl = req.url.split('?')[0];
-  if (reqUrl === '/') reqUrl = '/index.html';
+  if (reqUrl === '/' || reqUrl === '') reqUrl = '/index.html';
 
   // Prevent directory traversal
   const safePath = path.normalize(reqUrl).replace(/^(\.\.[\/\\])+/, '');
   let filePath = path.join(__dirname, safePath);
 
+  // Check if .html version exists for clean URLs
+  if (!fs.existsSync(filePath) || (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory())) {
+    if (fs.existsSync(filePath + '.html')) {
+      filePath = filePath + '.html';
+    }
+  }
+
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
       res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' });
       res.end(`
-        <div style="font-family:sans-serif; text-align:center; padding:50px;">
+        <!DOCTYPE html>
+        <html lang="en">
+        <head><title>404 - Page Not Found</title></head>
+        <body style="font-family:sans-serif; text-align:center; padding:60px 20px;">
           <h2>404 - Page Not Found</h2>
-          <p><a href="/" style="color:#9E1B1E; text-decoration:none; font-weight:bold;">Return to HIPA Masala Home &rarr;</a></p>
-        </div>
+          <p><a href="/" style="color:#9E1B1E; font-weight:bold;">Return to HIPA Masala Home &rarr;</a></p>
+        </body>
+        </html>
       `);
       return;
     }

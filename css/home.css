@@ -378,7 +378,8 @@
 /* ============================================================
    Heritage Cinematic Video Section
    ============================================================ */
-.heritage-video-section {
+.heritage-video-section,
+.video-section {
   position: relative;
   overflow: hidden;
   min-height: 640px;
@@ -388,7 +389,8 @@
   background-color: #0E0F12;
 }
 
-.heritage-video-wrap {
+.heritage-video-wrap,
+.video-wrap {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -398,18 +400,20 @@
   background-color: #0E0F12;
 }
 
-.heritage-bg-video {
+.heritage-bg-video,
+.video-background {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   display: block;
   transform: scale(1.03);
   transition: transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
 
-.heritage-video-section.is-visible .heritage-bg-video {
+.heritage-video-section.is-visible .heritage-bg-video,
+.video-section.is-visible .video-background {
   transform: scale(1);
 }
 
@@ -745,32 +749,107 @@
   .hero-title {
     font-size: 2.2rem;
   }
-  .heritage-video-section {
-    padding: 44px 0;
+
+  /* Responsive Video Section for Tablet & Mobile: 16/10 aspect ratio preserves original 16:9 composition */
+  .heritage-video-section,
+  .video-section {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    min-height: 0;
+    background-color: #0E0F12;
   }
+
+  .heritage-video-wrap,
+  .video-wrap {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    height: auto;
+    min-height: 0;
+    overflow: hidden;
+    background-color: #0E0F12;
+  }
+
+  .heritage-bg-video,
+  .video-background {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    transform: none;
+    transition: none;
+  }
+
+  .heritage-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(14, 15, 18, 0.0) 0%, rgba(14, 15, 18, 0.15) 55%, rgba(14, 15, 18, 0.95) 100%);
+    pointer-events: none;
+  }
+
+  .heritage-content-container {
+    position: relative;
+    width: 100%;
+    padding: 0 16px 36px 16px;
+    margin-top: -24px;
+    z-index: 3;
+  }
+
   .heritage-card {
+    max-width: 100%;
     padding: 28px 20px;
-    border-radius: 16px;
+    background: rgba(18, 19, 23, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+    transform: none;
+    opacity: 1;
   }
+
   .heritage-title {
-    font-size: 1.75rem;
+    font-size: 1.7rem;
+    line-height: 1.25;
   }
+
   .heritage-desc {
     font-size: 0.9375rem;
     margin-bottom: 22px;
   }
+
+  .heritage-highlights-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .heritage-highlight-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+  }
+
   .btn-heritage-cta {
     width: 100%;
     justify-content: center;
   }
+
   .heritage-cta-row {
     flex-direction: column;
     align-items: stretch;
     gap: 14px;
   }
+
   .heritage-trust-badge {
     justify-content: center;
   }
+
   .category-cards-grid {
     grid-template-columns: 1fr;
   }
@@ -798,20 +877,69 @@
   .hero-cta-group .btn {
     width: 100%;
   }
-  .heritage-video-section {
-    padding: 32px 0;
+  .heritage-video-wrap,
+  .video-wrap {
+    aspect-ratio: 16 / 10;
+  }
+  .heritage-content-container {
+    padding: 0 12px 28px 12px;
+    margin-top: -18px;
   }
   .heritage-card {
-    padding: 20px 14px;
+    padding: 22px 16px;
+    border-radius: 16px;
   }
   .heritage-title {
     font-size: 1.4rem;
   }
   .heritage-desc {
     font-size: 0.875rem;
+    line-height: 1.55;
+    margin-bottom: 18px;
   }
   .heritage-pill {
     font-size: 0.6875rem;
     padding: 4px 10px;
+  }
+  .btn-heritage-cta {
+    padding: 13px 20px;
+    font-size: 0.8125rem;
+  }
+}
+
+/* Extra small mobile screens: 320px - 360px */
+@media (max-width: 360px) {
+  .heritage-video-wrap,
+  .video-wrap {
+    aspect-ratio: 16 / 10;
+  }
+  .heritage-content-container {
+    padding: 0 10px 24px 10px;
+    margin-top: -14px;
+  }
+  .heritage-card {
+    padding: 18px 12px;
+    border-radius: 14px;
+  }
+  .heritage-title {
+    font-size: 1.25rem;
+  }
+  .heritage-desc {
+    font-size: 0.8125rem;
+    line-height: 1.5;
+  }
+  .heritage-highlight-card {
+    padding: 10px;
+    gap: 10px;
+  }
+  .highlight-info strong {
+    font-size: 0.75rem;
+  }
+  .highlight-info span {
+    font-size: 0.6875rem;
+  }
+  .btn-heritage-cta {
+    padding: 12px 14px;
+    font-size: 0.75rem;
   }
 }

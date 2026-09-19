@@ -3,6 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 const PORT = 3000;
+const ROOT_DIR = path.join(__dirname, '..');
+
 const MIME_TYPES = {
   '.html': 'text/html; charset=UTF-8',
   '.css': 'text/css; charset=UTF-8',
@@ -23,7 +25,7 @@ const server = http.createServer((req, res) => {
 
   // Prevent directory traversal
   const safePath = path.normalize(reqUrl).replace(/^(\.\.[\/\\])+/, '');
-  let filePath = path.join(__dirname, safePath);
+  let filePath = path.join(ROOT_DIR, safePath);
 
   // Check if .html version exists for clean URLs
   if (!fs.existsSync(filePath) || (fs.existsSync(filePath) && fs.statSync(filePath).isDirectory())) {
@@ -63,5 +65,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`HIPA Masala E-Commerce Local Server running at http://localhost:${PORT}/`);
+  console.log(`HIPA Masala Local Dev Server running at http://localhost:${PORT}/`);
 });

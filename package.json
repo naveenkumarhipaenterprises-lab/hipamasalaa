@@ -4,8 +4,7 @@
   "private": true,
   "description": "HIPA Masala Standalone E-Commerce Storefront",
   "scripts": {
-    "build": "node -e \"console.log('HIPA Masala Static Frontend Build Complete')\"",
-    "dev": "node server.js",
-    "start": "node server.js"
+    "dev": "node scripts/dev-server.js",
+    "start": "node scripts/dev-server.js"
   }
 }

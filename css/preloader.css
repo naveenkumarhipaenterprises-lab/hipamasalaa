@@ -1,0 +1,120 @@
+/* ==========================================================================
+   ANIMATED WEBSITE PRELOADER
+   Branded Entrance Animation with Smooth Fade-Out & Non-Blocking Fallback
+   ========================================================================== */
+
+.site-preloader {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #FFFFFF;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, visibility;
+  pointer-events: all;
+}
+
+.site-preloader.is-loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.preloader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.preloader-brand-wrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.preloader-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3px solid rgba(158, 27, 30, 0.12);
+  border-top-color: var(--color-primary, #9E1B1E);
+  border-right-color: var(--color-accent-spice, #D97706);
+  animation: preloaderSpin 1s cubic-bezier(0.5, 0.1, 0.5, 0.9) infinite;
+}
+
+.preloader-logo-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  animation: preloaderPulse 1.8s ease-in-out infinite alternate;
+}
+
+.preloader-title {
+  font-family: var(--font-heading, 'Plus Jakarta Sans', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #111827;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.preloader-title span {
+  color: var(--color-primary, #9E1B1E);
+}
+
+.preloader-tagline {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6B7280;
+}
+
+.preloader-bar-wrap {
+  width: 140px;
+  height: 3px;
+  background: #F3F4F6;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 18px;
+  position: relative;
+}
+
+.preloader-bar-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(90deg, #9E1B1E, #D97706);
+  border-radius: 4px;
+  animation: preloaderProgress 1.4s ease-in-out infinite;
+}
+
+@keyframes preloaderSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes preloaderPulse {
+  0% { transform: scale(0.96); opacity: 0.85; }
+  100% { transform: scale(1.04); opacity: 1; }
+}
+
+@keyframes preloaderProgress {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}

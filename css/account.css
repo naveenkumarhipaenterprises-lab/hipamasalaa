@@ -1,0 +1,285 @@
+/* ==========================================================================
+   HIPA MASALA USER ACCOUNT DASHBOARD STYLES
+   ========================================================================== */
+
+.account-page-section {
+  padding: 48px 0 80px;
+  min-height: calc(100vh - 360px);
+  background-color: var(--bg-light, #FAFAF9);
+}
+
+.account-dashboard-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+/* Sidebar */
+.account-sidebar {
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 24px 20px;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 100px;
+}
+
+.account-user-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+  margin-bottom: 16px;
+}
+
+.account-user-avatar-lg {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent-spice));
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.4rem;
+  box-shadow: 0 4px 12px rgba(158, 27, 30, 0.25);
+  flex-shrink: 0;
+}
+
+.account-user-name {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text-dark);
+}
+
+.account-user-email {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  word-break: break-all;
+}
+
+.account-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.account-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.account-nav-btn:hover {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.account-nav-btn.is-active {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.account-nav-btn.logout-btn {
+  color: #DC2626;
+  margin-top: 12px;
+  border-top: 1px solid var(--border-light);
+  padding-top: 16px;
+  border-radius: 0;
+}
+
+.account-nav-btn.logout-btn:hover {
+  background-color: #FEF2F2;
+  color: #B91C1C;
+}
+
+/* Content Area */
+.account-main-content {
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 36px 32px;
+  box-shadow: var(--shadow-sm);
+}
+
+.account-tab-pane {
+  display: none;
+}
+
+.account-tab-pane.is-active {
+  display: block;
+  animation: tabFadeIn 0.25s ease;
+}
+
+@keyframes tabFadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.account-section-title {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+.account-section-desc {
+  font-size: 0.9375rem;
+  color: var(--text-muted);
+  margin-bottom: 28px;
+}
+
+/* Profile Form */
+.account-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.full-col {
+  grid-column: 1 / -1;
+}
+
+/* Order History Cards */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-card {
+  border: 1.5px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  transition: all 0.2s ease;
+}
+
+.order-card:hover {
+  border-color: rgba(158, 27, 30, 0.3);
+  box-shadow: var(--shadow-sm);
+}
+
+.order-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+}
+
+.order-number {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--text-dark);
+}
+
+.order-date {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+.order-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.status-confirmed { background-color: #DCFCE7; color: #15803D; }
+.status-pending { background-color: #FEF3C7; color: #B45309; }
+.status-delivered { background-color: #DBEAFE; color: #1E40AF; }
+
+.order-items-summary {
+  font-size: 0.875rem;
+  color: var(--text-body);
+  margin-bottom: 14px;
+}
+
+.order-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px dashed var(--border-color);
+  font-weight: 800;
+}
+
+/* Wishlist Summary in Account */
+.account-wishlist-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #FFFBEB;
+  border: 1px solid #FDE68A;
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  margin-bottom: 24px;
+}
+
+/* Empty States */
+.empty-tab-box {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.empty-tab-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .account-dashboard-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .account-sidebar {
+    position: static;
+  }
+  .account-nav-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .account-nav-btn {
+    width: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .account-form-grid {
+    grid-template-columns: 1fr;
+  }
+  .account-main-content {
+    padding: 24px 18px;
+  }
+}

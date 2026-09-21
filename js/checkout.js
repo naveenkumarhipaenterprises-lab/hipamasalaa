@@ -189,6 +189,19 @@ const Checkout = {
       modal.classList.add('is-open');
     }
 
+    // Persist order in local history for account page
+    try {
+      const savedOrders = JSON.parse(localStorage.getItem('hipa_user_orders') || '[]');
+      savedOrders.unshift({
+        order_number: orderRef,
+        created_at: new Date().toISOString(),
+        total_amount: subtotal,
+        status: 'Processing',
+        items: items.map(i => ({ name: i.name, size: i.size, price: i.price, quantity: i.quantity, image: i.image }))
+      });
+      localStorage.setItem('hipa_user_orders', JSON.stringify(savedOrders));
+    } catch(e) {}
+
     window.Cart.clearCart();
   }
 };
@@ -199,6 +212,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   if (document.getElementById('checkoutForm')) {
     Checkout.initCheckoutPage();
+    // Prefill if customer logged in
+    setTimeout(() => {
+      if (window.HipaAuth && window.HipaAuth.currentUser) {
+        const u = window.HipaAuth.currentUser;
+        const nameEl = document.getElementById('custName');
+        const emailEl = document.getElementById('custEmail');
+        const phoneEl = document.getElementById('custPhone');
+        if (nameEl && !nameEl.value && u.name) nameEl.value = u.name;
+        if (emailEl && !emailEl.value && u.email) emailEl.value = u.email;
+        if (phoneEl && !phoneEl.value && u.phone) phoneEl.value = u.phone;
+      }
+    }, 100);
   }
 });
 window.Checkout = Checkout;

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopping Cart | HIPA Masala Online Store</title>
-  <meta name="description" content="Review your selected HIPA Masala products. Minimum online order value ₹999. Proceed to secure checkout.">
+  <title>Your Wishlist | HIPA Masala Online Store</title>
+  <meta name="description" content="View and manage your saved HIPA Masala products. Save authentic South Indian masala powders and pure ground spices to your wishlist.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/header-footer.css">
   <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="css/wishlist.css">
   <link rel="stylesheet" href="css/whatsapp.css">
   <link rel="stylesheet" href="css/preloader.css">
 </head>
@@ -35,7 +35,6 @@
         <div class="marquee-item"><span class="marquee-star">✦</span> <span>MINIMUM ONLINE ORDER VALUE: ₹999</span> <span class="marquee-arrow">→</span></div>
       </div>
     </div>
-  </div>
   </div>
 
   <!-- Header -->
@@ -61,23 +60,32 @@
       </nav>
 
       <div class="header-actions">
+        <!-- Search -->
         <button type="button" class="header-icon-btn js-search-trigger" aria-label="Search Products">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
         </button>
+
+        <!-- Wishlist Link with Badge -->
         <a href="wishlist.html" class="header-icon-btn" aria-label="View Wishlist" title="Wishlist">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
           <span class="wishlist-count-badge" id="headerWishlistCount" style="display:none;">0</span>
         </a>
+
+        <!-- Cart Button -->
         <button type="button" class="header-icon-btn js-cart-trigger" aria-label="View Shopping Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
           <span class="cart-count-badge" id="headerCartCount" style="display:none;">0</span>
         </button>
+
+        <!-- User Authentication Widget -->
         <div class="nav-auth-container js-auth-action">
           <a href="login.html" class="nav-auth-link" title="Customer Login">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             <span>Login</span>
           </a>
         </div>
+
+        <!-- Mobile Toggle -->
         <button type="button" class="mobile-toggle" id="mobileNavToggle" aria-label="Open Mobile Menu">
           <span></span><span></span><span></span>
         </button>
@@ -85,11 +93,11 @@
     </div>
   </header>
 
-  <!-- Mobile Drawer -->
+  <!-- Mobile Drawer Menu -->
   <div class="mobile-nav-drawer" id="mobileNavDrawer">
     <div class="mobile-nav-header">
       <div class="brand-name" style="font-size:1.2rem;">HIPA <span>MASALA</span></div>
-      <button type="button" class="mobile-nav-close" id="mobileNavClose">&times;</button>
+      <button type="button" class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&times;</button>
     </div>
     <div id="mobileAuthNav" class="mobile-auth-section"></div>
     <ul class="mobile-nav-list">
@@ -97,103 +105,108 @@
       <li><a href="shop.html" class="mobile-nav-link">Shop All Products</a></li>
       <li><a href="shop.html?category=masalas" class="mobile-nav-link">Masala Powders</a></li>
       <li><a href="shop.html?category=spices" class="mobile-nav-link">Pure Spices</a></li>
-      <li><a href="wishlist.html" class="mobile-nav-link">My Wishlist</a></li>
+      <li><a href="wishlist.html" class="mobile-nav-link active">My Wishlist</a></li>
       <li><a href="about.html" class="mobile-nav-link">About Brand</a></li>
       <li><a href="contact.html" class="mobile-nav-link">Contact & Support</a></li>
     </ul>
   </div>
   <div class="backdrop-overlay" id="mobileNavBackdrop"></div>
 
-  <main>
-    <section class="section">
-      <div class="container">
-        <h1 style="font-size:2rem; font-weight:800; color:var(--text-dark); margin-bottom:28px;">YOUR SHOPPING CART</h1>
-
-        <!-- Empty Cart Notice -->
-        <div id="cartPageEmptyNotice" style="display:none; text-align:center; padding:64px 20px; background:#fff; border:1px solid var(--border-color); border-radius:var(--radius-md);">
-          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="var(--text-light)" stroke-width="1.5" style="margin-bottom:16px;">
-            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <path d="M16 10a4 4 0 0 1-8 0"></path>
-          </svg>
-          <h2 style="font-size:1.35rem; font-weight:700; color:var(--text-dark); margin-bottom:8px;">Your Cart is Currently Empty</h2>
-          <p style="color:var(--text-muted); margin-bottom:24px;">Explore our 8 pure spices and masalas. Online orders accepted above ₹999.</p>
-          <a href="shop.html" class="btn btn-primary">Browse Products</a>
-        </div>
-
-        <!-- Cart Content Grid -->
-        <div class="cart-page-grid" id="cartPageContentWrap">
-          <!-- Left: Items Table -->
-          <div class="cart-table-card">
-            <div class="cart-table-header">
-              <div>Product</div>
-              <div>Price</div>
-              <div>Quantity</div>
-              <div>Total</div>
-              <div></div>
-            </div>
-            <div id="cartPageTableBody">
-              <!-- Populated by Checkout.renderCartTable() -->
-            </div>
-            <div style="margin-top:24px; display:flex; justify-content:space-between; align-items:center;">
-              <a href="shop.html" class="btn btn-outline btn-sm">← Continue Shopping</a>
-              <button class="btn btn-secondary btn-sm" onclick="Cart.clearCart()">Clear Cart</button>
-            </div>
-          </div>
-
-          <!-- Right: Order Summary Sidebar -->
-          <div class="order-summary-card">
-            <h2 class="summary-title">ORDER SUMMARY</h2>
-
-            <div class="summary-row">
-              <span>Items Subtotal:</span>
-              <span id="cartSummarySubtotal">₹0</span>
-            </div>
-            <div class="summary-row total">
-              <span>Total Amount:</span>
-              <span id="cartSummaryTotal">₹0</span>
-            </div>
-
-            <div id="cartMinOrderMsg"></div>
-
-            <a id="cartPageCheckoutBtn" class="btn btn-primary btn-block btn-lg" onclick="Cart.proceedToCheckout(event)" role="button" aria-label="Proceed to Checkout">PROCEED TO CHECKOUT</a>
-          </div>
-        </div>
-      </div>
-    </section>
+  <!-- Wishlist Main Content -->
+  <main class="wishlist-page-section">
+    <div class="container" id="wishlistContainer">
+      <!-- Populated dynamically by WishlistPage.render() -->
+    </div>
   </main>
 
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-bottom" style="border:none; padding:0;">
-        <div>&copy; 2026 HIPA Masala Online Store. All rights reserved.</div>
+  <!-- Cart Drawer -->
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <div class="cart-drawer-title">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+        <span>Your Shopping Cart</span>
+      </div>
+      <button type="button" class="cart-close-btn" id="cartDrawerClose" aria-label="Close cart">&times;</button>
+    </div>
+    <div class="cart-drawer-body" id="cartDrawerBody"></div>
+    <div class="cart-drawer-footer" id="cartDrawerFooter" style="display:none;">
+      <div class="cart-subtotal-row">
+        <span>Subtotal:</span>
+        <span id="drawerSubtotal">₹0</span>
+      </div>
+      <p class="cart-min-order-note">Online orders accepted above ₹999.</p>
+      <div class="cart-drawer-actions">
+        <a id="drawerCheckoutBtn" class="btn btn-primary btn-block" onclick="Cart.proceedToCheckout(event)" role="button">PROCEED TO CHECKOUT</a>
+        <a href="cart.html" class="btn btn-secondary btn-block">View Full Cart</a>
       </div>
     </div>
-  </footer>
+  </div>
+  <div class="backdrop-overlay" id="cartBackdrop"></div>
 
   <!-- Search Modal -->
-  <div class="search-modal" id="searchModal">
+  <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-label="Search Products">
     <div class="search-container">
       <div class="search-input-wrap">
-        <input type="text" class="search-input" id="siteSearchInput" placeholder="Search spices, masalas..." autocomplete="off">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" class="search-input" id="siteSearchInput" placeholder="Search Sambar, Rasam, Turmeric..." autocomplete="off">
         <button type="button" class="search-close-btn" id="searchModalClose">&times;</button>
       </div>
       <div class="search-results" id="searchResultsList"></div>
     </div>
   </div>
 
-  <!-- Centralized JavaScript Engines -->
+  <!-- Quick View Modal -->
+  <div class="quickview-modal" id="quickviewModal" role="dialog" aria-modal="true">
+    <div class="quickview-dialog">
+      <button type="button" class="quickview-close-btn" id="quickviewClose">&times;</button>
+      <div class="quickview-content" id="quickviewContent"></div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <div class="footer-brand-title">HIPA <span>MASALA</span></div>
+        <p class="footer-brand-desc">Authentic South Indian spice powders and pure ground spices crafted from whole natural ingredients.</p>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Shop Online</h4>
+        <ul class="footer-links">
+          <li><a href="shop.html" class="footer-link">All Products</a></li>
+          <li><a href="shop.html?category=masalas" class="footer-link">Masala Powders</a></li>
+          <li><a href="shop.html?category=spices" class="footer-link">Pure Spices</a></li>
+          <li><a href="wishlist.html" class="footer-link">My Wishlist</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Support</h4>
+        <ul class="footer-links">
+          <li><a href="about.html" class="footer-link">About Brand</a></li>
+          <li><a href="contact.html" class="footer-link">Contact Us</a></li>
+          <li><a href="cart.html" class="footer-link">View Cart (₹999 Min)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 class="footer-heading">Online Policy</h4>
+        <p style="font-size:0.8125rem; color:#9CA3AF; line-height:1.6;">Orders above ₹999 are delivered directly to your doorstep with freshness-sealed packaging.</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 HIPA Masala. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
   <script src="js/config.js"></script>
   <script src="js/products-data.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
   <script src="js/wishlist.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/search.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/checkout.js"></script>
   <script src="js/whatsapp.js"></script>
   <script src="js/preloader.js"></script>
+  <script src="js/wishlist-page.js"></script>
 </body>
 </html>

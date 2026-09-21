@@ -131,8 +131,13 @@ const App = {
           <span class="card-badge ${product.category === 'masalas' ? 'gold' : 'green'}">
             ${product.categoryName}
           </span>
-          <button type="button" class="wishlist-btn" onclick="App.toggleWishlist('${product.slug}', this)" aria-label="Save to Wishlist">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <button 
+            type="button" 
+            class="wishlist-btn ${window.Wishlist && window.Wishlist.has(product.slug) ? 'active' : ''}" 
+            data-slug="${product.slug}"
+            onclick="Wishlist.toggle('${product.slug}', event)" 
+            aria-label="Save ${product.name} to Wishlist">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="${window.Wishlist && window.Wishlist.has(product.slug) ? 'var(--color-primary, #9E1B1E)' : 'none'}" stroke="${window.Wishlist && window.Wishlist.has(product.slug) ? 'var(--color-primary, #9E1B1E)' : 'currentColor'}" stroke-width="1.8">
               <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
             </svg>
           </button>
@@ -282,15 +287,48 @@ const App = {
 
   initHeaderScroll: function() {
     const header = document.getElementById('siteHeader');
-    if (header) {
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-          header.classList.add('is-scrolled');
-        } else {
-          header.classList.remove('is-scrolled');
+    if (!header) return;
+
+    let lastScrollY = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+    let ticking = false;
+    const scrollThreshold = 8; // Small delta to prevent jitter
+
+    const updateHeader = () => {
+      const currentScrollY = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+
+      // Add shadow when scrolled
+      if (currentScrollY > 20) {
+        header.classList.add('is-scrolled');
+      } else {
+        header.classList.remove('is-scrolled');
+      }
+
+      // At top of page: restore full navbar immediately
+      if (currentScrollY <= 15) {
+        header.classList.remove('header-hidden');
+        header.classList.add('header-visible');
+      } else if (Math.abs(currentScrollY - lastScrollY) > scrollThreshold) {
+        // Scrolling DOWN: smoothly minimize/hide
+        if (currentScrollY > lastScrollY && currentScrollY > 70) {
+          header.classList.add('header-hidden');
+          header.classList.remove('header-visible');
+        } else if (currentScrollY < lastScrollY) {
+          // Scrolling UP: smoothly reappear completely
+          header.classList.remove('header-hidden');
+          header.classList.add('header-visible');
         }
-      });
-    }
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    };
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    }, { passive: true });
   },
 
   initMobileNav: function() {

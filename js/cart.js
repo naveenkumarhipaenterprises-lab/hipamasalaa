@@ -28,6 +28,36 @@ const Cart = {
     }
   },
 
+  syncWithUser: function(user) {
+    if (!user) return;
+    const userCartKey = `hipa_cart_user_${user.id}`;
+    const guestItems = this.getItems();
+    let userItems = [];
+
+    try {
+      const savedUserCart = localStorage.getItem(userCartKey);
+      userItems = savedUserCart ? JSON.parse(savedUserCart) : [];
+    } catch (e) {
+      userItems = [];
+    }
+
+    // Merge guest items into user cart without duplicates
+    guestItems.forEach(guestItem => {
+      const matchIndex = userItems.findIndex(u => u.slug === guestItem.slug && u.size === guestItem.size);
+      if (matchIndex > -1) {
+        userItems[matchIndex].quantity = Math.max(userItems[matchIndex].quantity, guestItem.quantity);
+      } else {
+        userItems.push(guestItem);
+      }
+    });
+
+    try {
+      localStorage.setItem(userCartKey, JSON.stringify(userItems));
+    } catch (e) {}
+
+    this.saveItems(userItems);
+  },
+
   addItem: function(productSlug, variantSize, quantity = 1, openDrawer = true) {
     if (!window.HIPA_PRODUCTS) return;
     const product = window.HIPA_PRODUCTS.find(p => p.slug === productSlug || p.id === productSlug);

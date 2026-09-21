@@ -72,6 +72,9 @@ const ProductPage = {
 
     // Related Products Grid
     this.renderRelated();
+
+    // Update Wishlist button active state
+    this.updateWishlistButtonState();
   },
 
   renderSizeOptions: function() {
@@ -194,7 +197,34 @@ const ProductPage = {
     relatedContainer.innerHTML = related.map(p => window.App ? window.App.renderProductCard(p) : '').join('');
   },
 
+  updateWishlistButtonState: function() {
+    const btn = document.getElementById('pdpWishlistBtn');
+    if (!btn || !this.currentProduct || !window.Wishlist) return;
+    const isSaved = window.Wishlist.has(this.currentProduct.slug);
+    btn.classList.toggle('is-in-wishlist', isSaved);
+    btn.setAttribute('title', isSaved ? 'Remove from Wishlist' : 'Add to Wishlist');
+    btn.innerHTML = `
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="${isSaved ? '#DC2626' : 'none'}" stroke="${isSaved ? '#DC2626' : 'currentColor'}" stroke-width="2">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+      </svg>
+    `;
+  },
+
+  toggleWishlist: function(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!this.currentProduct || !window.Wishlist) return;
+    window.Wishlist.toggle(this.currentProduct.slug, e);
+    this.updateWishlistButtonState();
+  },
+
   bindEvents: function() {
+    window.addEventListener('hipa:wishlist-updated', () => {
+      this.updateWishlistButtonState();
+    });
+
     // Specs tabs switching
     document.querySelectorAll('.js-pdp-tab-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {

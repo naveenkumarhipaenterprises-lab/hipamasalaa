@@ -17,6 +17,8 @@
   <link rel="stylesheet" href="css/header-footer.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/home.css">
+  <link rel="stylesheet" href="css/whatsapp.css">
+  <link rel="stylesheet" href="css/preloader.css">
 
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
@@ -86,6 +88,14 @@
           </svg>
         </button>
 
+        <!-- Wishlist Button with Count Badge -->
+        <a href="wishlist.html" class="header-icon-btn" aria-label="View Wishlist" title="Wishlist">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+          </svg>
+          <span class="wishlist-count-badge" id="headerWishlistCount" style="display:none;">0</span>
+        </a>
+
         <!-- Cart Button with Count Badge -->
         <button type="button" class="header-icon-btn js-cart-trigger" aria-label="View Shopping Cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -95,6 +105,14 @@
           </svg>
           <span class="cart-count-badge" id="headerCartCount" style="display:none;">0</span>
         </button>
+
+        <!-- User Authentication Widget -->
+        <div class="nav-auth-container js-auth-action">
+          <a href="login.html" class="nav-auth-link" title="Customer Login">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            <span>Login</span>
+          </a>
+        </div>
 
         <!-- Mobile Hamburger Toggle -->
         <button type="button" class="mobile-toggle" id="mobileNavToggle" aria-label="Open Mobile Menu">
@@ -112,11 +130,13 @@
       <div class="brand-name" style="font-size:1.2rem;">HIPA <span>MASALA</span></div>
       <button type="button" class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">&times;</button>
     </div>
+    <div id="mobileAuthNav" class="mobile-auth-section"></div>
     <ul class="mobile-nav-list">
       <li><a href="index.html" class="mobile-nav-link active">Home</a></li>
       <li><a href="shop.html" class="mobile-nav-link">Shop All Products</a></li>
       <li><a href="shop.html?category=masalas" class="mobile-nav-link">Masala Powders</a></li>
       <li><a href="shop.html?category=spices" class="mobile-nav-link">Pure Spices</a></li>
+      <li><a href="wishlist.html" class="mobile-nav-link">My Wishlist</a></li>
       <li><a href="about.html" class="mobile-nav-link">About Brand</a></li>
       <li><a href="contact.html" class="mobile-nav-link">Contact & Support</a></li>
     </ul>
@@ -153,43 +173,19 @@
           </a>
         </div>
 
-        <!-- Slide 2: Minimum Online Order Threshold -->
-        <div class="hero-slide">
-          <div class="container hero-slide-grid">
-            <div class="hero-content">
-              <div class="hero-badge">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                <span>Store Ordering Policy</span>
-              </div>
-              <h2 class="hero-title">
-                ONLINE ORDERS<br>
-                <span>ABOVE ₹999</span>
-              </h2>
-              <div class="min-order-highlight-card">
-                <div class="min-order-highlight-icon">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
-                </div>
-                <div>
-                  <div class="min-order-highlight-title">Minimum Online Order Value: ₹999</div>
-                  <div class="min-order-highlight-desc">Online orders are accepted for orders above ₹999. Combine your favourite masala powders & pure spices.</div>
-                </div>
-              </div>
-              <p class="hero-desc">
-                Stock your kitchen with authentic pantry essentials including Sambar Powder, Rasam Powder, Garam Masala, Turmeric, Chilli, Coriander, Cumin and Pepper.
-              </p>
-              <div class="hero-cta-group">
-                <a href="#shopProducts" class="btn btn-primary btn-lg">
-                  <span>START SHOPPING NOW</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-                </a>
-              </div>
-            </div>
-            <div class="hero-image-wrapper">
-              <div class="hero-product-display">
-                <img class="hero-main-img" src="assets/images/products/garam-masala.png" alt="HIPA Masala Garam Masala Pack">
-              </div>
-            </div>
-          </div>
+        <!-- Slide 2: Second Hero Creative Banner -->
+        <div class="hero-slide hero-slide-banner">
+          <a href="#shopProducts" class="hero-banner-link" aria-label="Explore HIPA Masala Products - Special Offers">
+            <img 
+              src="assets/images/banners/hipa-hero-banner-2.jpg" 
+              alt="HIPA Masala - Premium Spice Range & Blends" 
+              class="hero-banner-image"
+              loading="lazy"
+              decoding="async"
+              width="1920"
+              height="700"
+            >
+          </a>
         </div>
 
         <!-- Slide 3: Product Discovery -->
@@ -585,9 +581,14 @@
   </div>
 
   <!-- Centralized JavaScript Engines -->
+  <script src="js/config.js"></script>
   <script src="js/products-data.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/wishlist.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/search.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/whatsapp.js"></script>
+  <script src="js/preloader.js"></script>
 </body>
 </html>

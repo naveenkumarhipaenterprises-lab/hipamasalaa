@@ -195,6 +195,30 @@
 .pdp-btn-buy:hover {
   background-color: #B57404;
 }
+.pdp-wishlist-toggle-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-xs);
+  border: 1.5px solid var(--border-color);
+  background: #FFFFFF;
+  color: var(--text-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+.pdp-wishlist-toggle-btn:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  transform: scale(1.05);
+}
+.pdp-wishlist-toggle-btn.is-in-wishlist {
+  border-color: #DC2626;
+  color: #DC2626;
+  background: #FEF2F2;
+}
 .pdp-trust-boxes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

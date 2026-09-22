@@ -1,0 +1,430 @@
+/* =========================================================
+   HIPA MASALA — PRODUCT IMAGE ZOOM & FRONT/BACK VIEWER STYLES
+   ========================================================= */
+
+/* Main Product Image Container */
+.pdp-main-image-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  background: radial-gradient(circle at center, #FAFAFA 0%, #FFFFFF 70%);
+  border: 1px solid var(--border-color, #E5E7EB);
+  border-radius: var(--radius-md, 16px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.pdp-main-image-wrap:hover {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  border-color: rgba(158, 27, 30, 0.2);
+}
+
+.pdp-main-image {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  display: block;
+  cursor: zoom-in;
+  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.08));
+  transition: opacity 0.18s ease, transform 0.2s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.pdp-main-image.is-switching {
+  opacity: 0.25;
+  transform: scale(0.97);
+}
+
+/* Search / Zoom Icon Button (Desktop & Mobile Top-Right) */
+.hipa-zoom-trigger-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  color: var(--text-dark, #1F2937);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 0;
+}
+
+.hipa-zoom-trigger-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: transform 0.2s ease, stroke 0.2s ease;
+}
+
+.hipa-zoom-trigger-btn:hover {
+  background: #ffffff;
+  color: var(--color-primary, #9E1B1E);
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(158, 27, 30, 0.2);
+  border-color: var(--color-primary, #9E1B1E);
+}
+
+.hipa-zoom-trigger-btn:hover svg {
+  transform: scale(1.1);
+}
+
+.hipa-zoom-trigger-btn:active {
+  transform: scale(0.95);
+}
+
+/* Front | Back Switcher on Product Page */
+.hipa-side-switcher-wrap {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hipa-side-switcher {
+  display: inline-flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1.5px solid var(--border-color, #E5E7EB);
+  border-radius: 9999px;
+  padding: 4px 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  gap: 4px;
+}
+
+.hipa-side-btn {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 7px 18px;
+  border-radius: 9999px;
+  color: var(--text-muted, #6B7280);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.hipa-side-btn:hover {
+  color: var(--color-primary, #9E1B1E);
+}
+
+.hipa-side-btn.is-active {
+  background: var(--color-primary, #9E1B1E);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(158, 27, 30, 0.25);
+}
+
+.hipa-side-divider {
+  color: #D1D5DB;
+  font-size: 12px;
+  font-weight: 300;
+  user-select: none;
+}
+
+/* =========================================================
+   FULL-SCREEN PRODUCT IMAGE VIEWER / LIGHTBOX
+   ========================================================= */
+.hipa-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.24s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.24s;
+  overflow: hidden;
+  user-select: none;
+}
+
+.hipa-lightbox-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Lightbox Header Bar */
+.hipa-lightbox-header {
+  height: 64px;
+  min-height: 64px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.94);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 20;
+  gap: 16px;
+}
+
+.hipa-lightbox-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.hipa-lightbox-product-title {
+  font-family: inherit;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-dark, #111827);
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.hipa-lightbox-size-badge {
+  background: var(--color-accent-gold, #C8962B);
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+/* Center Controls: FRONT | BACK */
+.hipa-lightbox-controls-center {
+  display: flex;
+  align-items: center;
+}
+
+.hipa-lightbox-side-pill {
+  display: inline-flex;
+  align-items: center;
+  background: #F3F4F6;
+  border: 1px solid #E5E7EB;
+  border-radius: 9999px;
+  padding: 4px;
+  gap: 4px;
+}
+
+.hipa-lightbox-side-btn {
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  padding: 6px 18px;
+  border-radius: 9999px;
+  color: #4B5563;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.hipa-lightbox-side-btn:hover {
+  color: var(--color-primary, #9E1B1E);
+}
+
+.hipa-lightbox-side-btn.is-active {
+  background: var(--color-primary, #9E1B1E);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(158, 27, 30, 0.25);
+}
+
+/* Right Controls: Zoom & Close */
+.hipa-lightbox-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.hipa-viewer-icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  background: #ffffff;
+  color: var(--text-dark, #1F2937);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.hipa-viewer-icon-btn:hover {
+  background: #F9FAFB;
+  color: var(--color-primary, #9E1B1E);
+  transform: scale(1.06);
+}
+
+.hipa-viewer-close-btn {
+  background: #F3F4F6;
+}
+
+.hipa-viewer-close-btn:hover {
+  background: #FEE2E2;
+  color: #DC2626;
+  border-color: rgba(220, 38, 38, 0.2);
+}
+
+/* Stage Area (Image Container) */
+.hipa-lightbox-stage {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  overflow: hidden;
+  cursor: grab;
+}
+
+.hipa-lightbox-stage:active {
+  cursor: grabbing;
+}
+
+.hipa-lightbox-stage-inner {
+  max-width: 100%;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hipa-lightbox-img {
+  max-width: 85vw;
+  max-height: calc(100vh - 120px);
+  max-height: calc(100dvh - 120px);
+  object-fit: contain;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  transform-origin: center center;
+  transition: transform 0.1s ease-out, opacity 0.16s ease;
+  filter: drop-shadow(0 16px 36px rgba(0, 0, 0, 0.12));
+}
+
+.hipa-lightbox-img.is-switching {
+  opacity: 0.25;
+}
+
+/* Lightbox Navigation Arrows */
+.hipa-lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  color: var(--text-dark, #1F2937);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 15;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.hipa-lightbox-arrow:hover {
+  background: #ffffff;
+  color: var(--color-primary, #9E1B1E);
+  transform: translateY(-50%) scale(1.08);
+  box-shadow: 0 6px 20px rgba(158, 27, 30, 0.2);
+}
+
+.hipa-lightbox-arrow.prev {
+  left: 20px;
+}
+
+.hipa-lightbox-arrow.next {
+  right: 20px;
+}
+
+/* Lightbox Mobile Bottom Info */
+.hipa-lightbox-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: #9CA3AF;
+  letter-spacing: 0.5px;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Responsive Rules */
+@media (max-width: 768px) {
+  .hipa-lightbox-header {
+    height: auto;
+    min-height: 56px;
+    padding: 10px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: auto auto;
+    gap: 8px 10px;
+  }
+
+  .hipa-lightbox-title-wrap {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .hipa-lightbox-controls-right {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .hipa-lightbox-controls-center {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hipa-lightbox-stage {
+    padding: 12px;
+  }
+
+  .hipa-lightbox-arrow {
+    display: none; /* Rely on mobile touch swipe and center tabs */
+  }
+
+  .hipa-lightbox-img {
+    max-width: 92vw;
+    max-height: calc(100dvh - 160px);
+  }
+
+  .hipa-zoom-trigger-btn {
+    top: 10px;
+    right: 10px;
+    width: 44px;
+    height: 44px; /* Ensure 44px mobile touch target */
+  }
+}

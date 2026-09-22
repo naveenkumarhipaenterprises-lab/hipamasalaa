@@ -19,6 +19,10 @@ const ProductPage = {
 
     this.render();
     this.bindEvents();
+
+    if (window.HipaViewer) {
+      window.HipaViewer.init(this.currentProduct.slug, this.selectedSize);
+    }
   },
 
   render: function() {
@@ -95,6 +99,9 @@ const ProductPage = {
     this.selectedSize = size;
     this.renderSizeOptions();
     this.updatePriceDisplay();
+    if (window.HipaViewer) {
+      window.HipaViewer.setSize(size);
+    }
   },
 
   updatePriceDisplay: function() {

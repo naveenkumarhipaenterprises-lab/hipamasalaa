@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="css/header-footer.css">
   <link rel="stylesheet" href="css/components.css">
   <link rel="stylesheet" href="css/product.css">
+  <link rel="stylesheet" href="css/product-viewer.css">
   <link rel="stylesheet" href="css/whatsapp.css">
   <link rel="stylesheet" href="css/preloader.css">
 </head>
@@ -148,9 +149,27 @@
       <!-- Main PDP Layout -->
       <div class="pdp-grid">
         <!-- Gallery -->
-        <div class="pdp-gallery">
+        <div class="pdp-gallery" id="hipaProductShowcase">
           <div class="pdp-main-image-wrap">
-            <img class="pdp-main-image" id="pdpMainImg" src="assets/images/products/sambar-powder.png" alt="Product Pack">
+            <!-- Clean modern search/zoom icon (top-right, inside container) -->
+            <button type="button" class="hipa-zoom-trigger-btn" id="hipaZoomTriggerBtn" aria-label="Zoom product packaging" title="Click to zoom packaging">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="7"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                <line x1="11" y1="8" x2="11" y2="14"></line>
+                <line x1="8" y1="11" x2="14" y2="11"></line>
+              </svg>
+            </button>
+            <img class="pdp-main-image" id="pdpMainImg" src="assets/images/products/sambar/sambar-100g-front-web.png" alt="HIPA Masala Packaging Mockup">
+          </div>
+
+          <!-- Front | Back Switcher -->
+          <div class="hipa-side-switcher-wrap" id="hipaSideSwitcherWrap">
+            <div class="hipa-side-switcher" role="tablist" aria-label="Packaging view side">
+              <button type="button" class="hipa-side-btn is-active" data-side="front" role="tab" aria-selected="true">FRONT</button>
+              <span class="hipa-side-divider" aria-hidden="true">|</span>
+              <button type="button" class="hipa-side-btn" data-side="back" role="tab" aria-selected="false">BACK</button>
+            </div>
           </div>
         </div>
 
@@ -362,15 +381,65 @@
     </div>
   </div>
 
+  <!-- ============ FULL-SCREEN PRODUCT IMAGE VIEWER / LIGHTBOX ============ -->
+  <div class="hipa-lightbox-overlay" id="hipaProductLightbox" role="dialog" aria-modal="true" aria-label="Full-screen product image viewer">
+    <div class="hipa-lightbox-header">
+      <div class="hipa-lightbox-title-wrap">
+        <h2 class="hipa-lightbox-product-title" id="hipaLightboxTitle">Sambar Powder</h2>
+        <span class="hipa-lightbox-size-badge" id="hipaLightboxBadge">100g</span>
+      </div>
+
+      <div class="hipa-lightbox-controls-center">
+        <div class="hipa-lightbox-side-pill" role="tablist" aria-label="Lightbox view side">
+          <button type="button" class="hipa-lightbox-side-btn is-active" data-side="front" role="tab" aria-selected="true">FRONT</button>
+          <span style="color:#cbd5e1; font-size:12px; user-select:none;">|</span>
+          <button type="button" class="hipa-lightbox-side-btn" data-side="back" role="tab" aria-selected="false">BACK</button>
+        </div>
+      </div>
+
+      <div class="hipa-lightbox-controls-right">
+        <button type="button" class="hipa-viewer-icon-btn" id="hipaZoomInBtn" aria-label="Zoom in" title="Zoom in (+)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </button>
+        <button type="button" class="hipa-viewer-icon-btn" id="hipaZoomOutBtn" aria-label="Zoom out" title="Zoom out (-)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+        </button>
+        <button type="button" class="hipa-viewer-icon-btn" id="hipaZoomResetBtn" aria-label="Reset zoom" title="Reset zoom (1:1)" style="font-size:11px; font-weight:700;">
+          1:1
+        </button>
+        <button type="button" class="hipa-viewer-icon-btn hipa-viewer-close-btn" id="hipaLightboxCloseBtn" aria-label="Close viewer" title="Close (Esc)">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="hipa-lightbox-stage" id="hipaLightboxStage">
+      <!-- Navigation Arrows -->
+      <button type="button" class="hipa-lightbox-arrow prev" id="hipaArrowPrev" aria-label="Previous view side" title="Previous (Left Arrow)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
+      <button type="button" class="hipa-lightbox-arrow next" id="hipaArrowNext" aria-label="Next view side" title="Next (Right Arrow)">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+
+      <div class="hipa-lightbox-stage-inner" id="hipaLightboxStageInner">
+        <img id="hipaLightboxImg" class="hipa-lightbox-img" src="assets/images/products/sambar/sambar-100g-front.png" alt="HIPA Masala Packaging full view">
+      </div>
+      <div class="hipa-lightbox-hint">Scroll to zoom • Drag to pan • Swipe or click arrows to view other side</div>
+    </div>
+  </div>
+
   <!-- Centralized JavaScript Engines -->
   <script src="js/config.js"></script>
   <script src="js/products-data.js"></script>
+  <script src="js/product-mockups.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/supabase-client.js"></script>
   <script src="js/wishlist.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/search.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/product-viewer.js"></script>
   <script src="js/product.js"></script>
   <script src="js/whatsapp.js"></script>
   <script src="js/preloader.js"></script>

@@ -16,9 +16,36 @@ const HIPA_PRODUCTS = [
     image: "assets/images/products/sambar-powder.png",
     imageAlt: "HIPA Masala Sambar Powder Pack",
     variants: [
-      { size: "100g", price: 52 },
-      { size: "200g", price: 98 },
-      { size: "500g", price: 235 },
+      {
+        size: "100g",
+        price: 52,
+        images: {
+          front: "assets/images/products/sambar/sambar-100g-front.png",
+          frontWeb: "assets/images/products/sambar/sambar-100g-front-web.png",
+          back: "assets/images/products/sambar/sambar-100g-back.png",
+          backWeb: "assets/images/products/sambar/sambar-100g-back-web.png"
+        }
+      },
+      {
+        size: "200g",
+        price: 98,
+        images: {
+          front: "assets/images/products/sambar/sambar-200g-front.png",
+          frontWeb: "assets/images/products/sambar/sambar-200g-front-web.png",
+          back: "assets/images/products/sambar/sambar-200g-back.png",
+          backWeb: "assets/images/products/sambar/sambar-200g-back-web.png"
+        }
+      },
+      {
+        size: "500g",
+        price: 235,
+        images: {
+          front: "assets/images/products/sambar/sambar-500g-front.png",
+          frontWeb: "assets/images/products/sambar/sambar-500g-front-web.png",
+          back: "assets/images/products/sambar/sambar-500g-back.png",
+          backWeb: "assets/images/products/sambar/sambar-500g-back-web.png"
+        }
+      },
       { size: "1kg", price: 450 }
     ],
     ingredients: [

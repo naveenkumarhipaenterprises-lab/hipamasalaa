@@ -332,7 +332,7 @@ const App = {
   },
 
   initMobileNav: function() {
-    const toggle = document.getElementById('mobileNavToggle');
+    const triggers = document.querySelectorAll('#mobileNavToggle, #mobileMenuPillBtn, .js-mobile-nav-trigger');
     const drawer = document.getElementById('mobileNavDrawer');
     const closeBtn = document.getElementById('mobileNavClose');
     const overlay = document.getElementById('mobileNavBackdrop');
@@ -349,9 +349,31 @@ const App = {
       document.body.style.overflow = '';
     };
 
-    if (toggle) toggle.addEventListener('click', open);
+    triggers.forEach(trigger => trigger.addEventListener('click', open));
     if (closeBtn) closeBtn.addEventListener('click', close);
     if (overlay) overlay.addEventListener('click', close);
+  },
+
+  initFooterAccordions: function() {
+    const headers = document.querySelectorAll('.footer-accordion-header');
+    headers.forEach(header => {
+      header.addEventListener('click', () => {
+        // Run on mobile & tablet viewports
+        if (window.innerWidth > 768) return;
+
+        const col = header.closest('.footer-accordion-col');
+        if (!col) return;
+
+        const wasOpen = col.classList.contains('is-open');
+
+        // Close other open accordions for a crisp single-accordion feel
+        document.querySelectorAll('.footer-accordion-col.is-open').forEach(other => {
+          if (other !== col) other.classList.remove('is-open');
+        });
+
+        col.classList.toggle('is-open', !wasOpen);
+      });
+    });
   },
 
   initQuickViewEvents: function() {
@@ -409,6 +431,7 @@ const App = {
   init: function() {
     this.initHeaderScroll();
     this.initMobileNav();
+    this.initFooterAccordions();
     this.initQuickViewEvents();
     HeroCarousel.init();
 

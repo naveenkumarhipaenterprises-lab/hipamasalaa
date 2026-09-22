@@ -36,51 +36,79 @@
       </div>
     </div>
   </div>
-  </div>
 
   <!-- Header -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
-      <a href="index.html" class="brand" aria-label="HIPA Masala Home">
-        <img class="brand-logo-img" src="assets/images/logo.png" alt="HIPA Masala Logo">
-        <div class="brand-info">
-          <span class="brand-name">HIPA <span>MASALA</span></span>
-          <span class="brand-tag">Taste of Tradition</span>
-        </div>
-      </a>
-
-      <nav class="main-nav" aria-label="Main Navigation">
-        <ul class="nav-list">
-          <li><a href="index.html" class="nav-link">Home</a></li>
-          <li><a href="shop.html" class="nav-link">Shop All</a></li>
-          <li><a href="shop.html?category=masalas" class="nav-link">Masalas</a></li>
-          <li><a href="shop.html?category=spices" class="nav-link">Pure Spices</a></li>
-          <li><a href="about.html" class="nav-link">About Us</a></li>
-          <li><a href="contact.html" class="nav-link">Contact</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-actions">
-        <button type="button" class="header-icon-btn js-search-trigger" aria-label="Search Products">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-        </button>
-        <a href="wishlist.html" class="header-icon-btn" aria-label="View Wishlist" title="Wishlist">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-          <span class="wishlist-count-badge" id="headerWishlistCount" style="display:none;">0</span>
+      <div class="header-main-row">
+        <a href="index.html" class="brand" aria-label="HIPA Masala Home">
+          <img class="brand-logo-img" src="assets/images/logo.png" alt="HIPA Masala Logo">
+          <div class="brand-info">
+            <span class="brand-name">HIPA <span>MASALA</span></span>
+            <span class="brand-tag">Taste of Tradition</span>
+          </div>
         </a>
-        <button type="button" class="header-icon-btn js-cart-trigger" aria-label="View Shopping Cart">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-          <span class="cart-count-badge" id="headerCartCount" style="display:none;">0</span>
-        </button>
-        <div class="nav-auth-container js-auth-action">
-          <a href="login.html" class="nav-auth-link" title="Customer Login">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-            <span>Login</span>
+
+        <nav class="main-nav" aria-label="Main Navigation">
+          <ul class="nav-list">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="shop.html" class="nav-link">Shop All</a></li>
+            <li><a href="shop.html?category=masalas" class="nav-link">Masalas</a></li>
+            <li><a href="shop.html?category=spices" class="nav-link">Pure Spices</a></li>
+            <li><a href="about.html" class="nav-link">About Us</a></li>
+            <li><a href="contact.html" class="nav-link">Contact</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <button type="button" class="header-icon-btn js-search-trigger" aria-label="Search Products">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </button>
+          <a href="wishlist.html" class="header-icon-btn" aria-label="View Wishlist" title="Wishlist">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+            <span class="wishlist-count-badge" id="headerWishlistCount" style="display:none;">0</span>
           </a>
+          <button type="button" class="header-icon-btn js-cart-trigger" aria-label="View Shopping Cart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+            <span class="cart-count-badge" id="headerCartCount" style="display:none;">0</span>
+          </button>
+          <div class="nav-auth-container js-auth-action">
+            <a href="login.html" class="nav-auth-link" title="Customer Login">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+              <span>Login</span>
+            </a>
+          </div>
+          <button type="button" class="mobile-toggle" id="mobileNavToggle" aria-label="Open Mobile Menu">
+            <span></span><span></span><span></span>
+          </button>
         </div>
-        <button type="button" class="mobile-toggle" id="mobileNavToggle" aria-label="Open Mobile Menu">
-          <span></span><span></span><span></span>
+      </div>
+
+      <!-- Mobile Subnav Row (Tier 2) -->
+      <div class="mobile-subnav-row">
+        <button type="button" class="mobile-menu-pill-btn js-mobile-nav-trigger" id="mobileMenuPillBtn" aria-label="Open Menu">
+          <span class="menu-icon-lines" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          <span>Menu</span>
         </button>
+        <div class="mobile-quick-links">
+          <a href="shop.html" class="mobile-quick-chip">All Spices</a>
+          <a href="shop.html?category=masalas" class="mobile-quick-chip">Masalas</a>
+          <a href="shop.html?category=spices" class="mobile-quick-chip">Pure Spices</a>
+          <a href="shop.html?tag=bestseller" class="mobile-quick-chip">Bestsellers</a>
+        </div>
+      </div>
+
+      <!-- Mobile Search Panel -->
+      <div class="mobile-search-panel" id="mobileSearchPanel">
+        <div class="mobile-search-bar">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <input type="text" class="mobile-search-input" id="mobileSearchInput" placeholder="Search masalas, spices..." autocomplete="off">
+          <button type="button" class="mobile-search-clear" id="mobileSearchClear" aria-label="Clear search" style="display:none;">&times;</button>
+          <button type="button" class="mobile-search-close" id="mobileSearchClose" aria-label="Cancel">Cancel</button>
+        </div>
+        <div class="mobile-search-results" id="mobileSearchResults"></div>
       </div>
     </div>
   </header>
@@ -218,27 +246,85 @@
             <span class="brand-name">HIPA <span>MASALA</span></span>
           </a>
           <p class="footer-desc">Authentic South Indian masalas and pure spices crafted for everyday home cooking.</p>
+          <div class="footer-contact-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>Plot No. 10, 5th Main Road, Zamin Pallavaram, Chennai – 600117, India</span>
+          </div>
         </div>
-        <div>
-          <h4 class="footer-col-title">CATEGORIES</h4>
-          <ul class="footer-links">
-            <li><a href="shop.html?category=masalas" class="footer-link">Masala Powders</a></li>
-            <li><a href="shop.html?category=spices" class="footer-link">Pure Spices</a></li>
-          </ul>
+
+        <!-- Col 2: Shop Links -->
+        <div class="footer-accordion-col">
+          <div class="footer-accordion-header" role="button" tabindex="0" aria-label="Toggle Shop HIPA Links">
+            <h4 class="footer-col-title" style="margin-bottom:0;">SHOP HIPA</h4>
+            <span class="footer-accordion-chevron" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </div>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="shop.html" class="footer-link">All Products (8)</a></li>
+              <li><a href="shop.html?category=masalas" class="footer-link">Masala Powders</a></li>
+              <li><a href="shop.html?category=spices" class="footer-link">Pure Spices</a></li>
+              <li><a href="product.html?slug=sambar-powder" class="footer-link">Sambar Powder</a></li>
+              <li><a href="product.html?slug=rasam-powder" class="footer-link">Rasam Powder</a></li>
+              <li><a href="product.html?slug=garam-masala" class="footer-link">Garam Masala</a></li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <h4 class="footer-col-title">PAGES</h4>
-          <ul class="footer-links">
-            <li><a href="index.html" class="footer-link">Home</a></li>
-            <li><a href="shop.html" class="footer-link">Shop All</a></li>
-            <li><a href="about.html" class="footer-link">About Us</a></li>
-            <li><a href="contact.html" class="footer-link">Contact</a></li>
-          </ul>
+
+        <!-- Col 3: Quick Links -->
+        <div class="footer-accordion-col">
+          <div class="footer-accordion-header" role="button" tabindex="0" aria-label="Toggle Quick Links">
+            <h4 class="footer-col-title" style="margin-bottom:0;">QUICK LINKS</h4>
+            <span class="footer-accordion-chevron" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </div>
+          <div class="footer-accordion-content">
+            <ul class="footer-links">
+              <li><a href="index.html" class="footer-link">Home</a></li>
+              <li><a href="shop.html" class="footer-link">Online Store</a></li>
+              <li><a href="about.html" class="footer-link">About Us</a></li>
+              <li><a href="contact.html" class="footer-link">Customer Support</a></li>
+              <li><a href="cart.html" class="footer-link">View Cart</a></li>
+            </ul>
+          </div>
         </div>
-        <div>
-          <h4 class="footer-col-title">SUPPORT</h4>
-          <div style="font-size:0.875rem; color:var(--text-body); margin-bottom:8px;">+91 70580 53055</div>
-          <div style="font-size:0.875rem; color:var(--text-muted);">support@hipamasalas.com</div>
+
+        <!-- Col 4: Customer Support -->
+        <div class="footer-accordion-col">
+          <div class="footer-accordion-header" role="button" tabindex="0" aria-label="Toggle Customer Support">
+            <h4 class="footer-col-title" style="margin-bottom:0;">CUSTOMER SUPPORT</h4>
+            <span class="footer-accordion-chevron" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </span>
+          </div>
+          <div class="footer-accordion-content">
+            <ul class="footer-links" style="margin-bottom:18px;">
+              <li>
+                <a href="tel:+917058053055" class="footer-link" style="display:flex; align-items:center; gap:8px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                  <span>+91 70580 53055</span>
+                </a>
+              </li>
+              <li>
+                <a href="mailto:support@hipamasalas.com" class="footer-link" style="display:flex; align-items:center; gap:8px;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                  <span>support@hipamasalas.com</span>
+                </a>
+              </li>
+            </ul>
+
+            <h4 class="footer-col-title" style="font-size:0.8125rem; margin-bottom:8px;">FOLLOW US</h4>
+            <div class="footer-socials">
+              <a href="https://www.instagram.com/hipa_masala/" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+              </a>
+              <a href="https://www.facebook.com/profile.php?id=61592093192345" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Facebook">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">

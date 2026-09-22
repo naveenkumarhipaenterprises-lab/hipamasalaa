@@ -1,10 +1,22 @@
 /**
  * HIPA MASALA INSTANT SEARCH SYSTEM
- * Instant suggestions, product image preview, quick routing
+ * Instant suggestions, product image preview, mobile slide-down panel & desktop modal
  */
 
 const Search = {
   open: function() {
+    const mobilePanel = document.getElementById('mobileSearchPanel');
+    const mobileInput = document.getElementById('mobileSearchInput');
+    
+    if (window.innerWidth <= 768 && mobilePanel) {
+      mobilePanel.classList.add('is-open');
+      if (mobileInput) {
+        setTimeout(() => mobileInput.focus(), 80);
+      }
+      this.renderMobileSuggestions(mobileInput ? mobileInput.value : '');
+      return;
+    }
+
     const modal = document.getElementById('searchModal');
     const input = document.getElementById('siteSearchInput');
     if (modal) {
@@ -18,6 +30,11 @@ const Search = {
   },
 
   close: function() {
+    const mobilePanel = document.getElementById('mobileSearchPanel');
+    if (mobilePanel) {
+      mobilePanel.classList.remove('is-open');
+    }
+
     const modal = document.getElementById('searchModal');
     if (modal) {
       modal.classList.remove('is-open');
@@ -61,6 +78,42 @@ const Search = {
     `;
   },
 
+  renderMobileSuggestions: function(query) {
+    const resultsContainer = document.getElementById('mobileSearchResults');
+    if (!resultsContainer || !window.HipaStore) return;
+
+    const trimmed = query.trim();
+    const products = trimmed ? window.HipaStore.searchProducts(trimmed) : window.HipaStore.getAllProducts();
+
+    if (products.length === 0) {
+      resultsContainer.innerHTML = `
+        <div style="text-align:center; padding:20px 10px; color:var(--text-muted);">
+          <p style="font-size:0.875rem; margin-bottom:4px; font-weight:700; color:var(--text-dark);">No products found for "${query}"</p>
+          <p style="font-size:0.75rem;">Try Sambar, Rasam, Turmeric, Chilli, or Pepper</p>
+        </div>
+      `;
+      return;
+    }
+
+    const html = products.map(product => `
+      <a href="product.html?slug=${product.slug}" class="search-result-item" onclick="Search.close()">
+        <img class="search-result-img" src="${product.image}" alt="${product.name}">
+        <div class="search-result-info">
+          <div class="search-result-name">${product.name}</div>
+          <div class="search-result-category">${product.categoryName} • ${product.variants.map(v => v.size).join(', ')}</div>
+        </div>
+        <div class="search-result-price">₹${product.variants[0].price}</div>
+      </a>
+    `).join('');
+
+    resultsContainer.innerHTML = `
+      <div style="font-size:0.6875rem; font-weight:700; text-transform:uppercase; color:var(--text-muted); padding:4px 6px 6px;">
+        ${trimmed ? `Search Results (${products.length})` : 'Popular Products'}
+      </div>
+      ${html}
+    `;
+  },
+
   init: function() {
     document.querySelectorAll('.js-search-trigger').forEach(btn => {
       btn.addEventListener('click', (e) => {
@@ -83,6 +136,31 @@ const Search = {
     if (input) {
       input.addEventListener('input', (e) => {
         this.renderSuggestions(e.target.value);
+      });
+    }
+
+    // Mobile Search Panel Events
+    const mobileClose = document.getElementById('mobileSearchClose');
+    if (mobileClose) mobileClose.addEventListener('click', () => this.close());
+
+    const mobileInput = document.getElementById('mobileSearchInput');
+    const mobileClear = document.getElementById('mobileSearchClear');
+    if (mobileInput) {
+      mobileInput.addEventListener('input', (e) => {
+        const val = e.target.value;
+        if (mobileClear) mobileClear.style.display = val ? 'block' : 'none';
+        this.renderMobileSuggestions(val);
+      });
+    }
+
+    if (mobileClear) {
+      mobileClear.addEventListener('click', () => {
+        if (mobileInput) {
+          mobileInput.value = '';
+          mobileInput.focus();
+        }
+        mobileClear.style.display = 'none';
+        this.renderMobileSuggestions('');
       });
     }
 

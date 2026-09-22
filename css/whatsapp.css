@@ -7,7 +7,7 @@
   position: fixed;
   right: 24px;
   bottom: 28px;
-  z-index: 95;
+  z-index: 150;
   display: flex;
   align-items: center;
   gap: 10px;

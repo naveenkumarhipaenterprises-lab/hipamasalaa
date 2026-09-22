@@ -855,4 +855,116 @@
   .quickview-image-box {
     min-height: 220px;
   }
+
+  /* 2-Column Product Cards Grid Reflow */
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 10px !important;
+  }
+  .product-card {
+    padding: 12px 10px !important;
+    border-radius: var(--radius-sm) !important;
+  }
+  .card-top {
+    margin-bottom: 6px !important;
+    min-height: 26px !important;
+  }
+  .card-badge {
+    font-size: 0.625rem !important;
+    padding: 2px 6px !important;
+  }
+  .wishlist-btn {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  .product-media {
+    padding-top: 82% !important;
+    margin-bottom: 8px !important;
+  }
+  .product-title {
+    font-size: 0.875rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 2px !important;
+    -webkit-line-clamp: 2 !important;
+    min-height: 2.2em !important;
+  }
+  .product-tamil-title {
+    font-size: 0.75rem !important;
+    min-height: 16px !important;
+    margin-bottom: 6px !important;
+  }
+  .product-desc {
+    display: none !important;
+  }
+  .pack-size-selector {
+    margin-bottom: 8px !important;
+  }
+  .pack-size-label {
+    font-size: 0.625rem !important;
+    margin-bottom: 4px !important;
+  }
+  .pack-size-chips {
+    gap: 4px !important;
+  }
+  .size-chip {
+    font-size: 0.6875rem !important;
+    padding: 4px 6px !important;
+    min-width: 30px !important;
+  }
+  .card-bottom {
+    padding-top: 8px !important;
+    gap: 8px !important;
+  }
+  .current-price {
+    font-size: 1.15rem !important;
+  }
+  .tax-inclusive-tag {
+    font-size: 0.625rem !important;
+  }
+  .card-actions-row {
+    flex-direction: column !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+  .btn-card-cart {
+    width: 100% !important;
+    height: 38px !important;
+    padding: 8px 10px !important;
+    font-size: 0.75rem !important;
+    justify-content: center !important;
+  }
+  .btn-card-buy {
+    width: 100% !important;
+    height: 34px !important;
+    padding: 6px 10px !important;
+    font-size: 0.75rem !important;
+    justify-content: center !important;
+  }
+}
+
+@media (max-width: 390px) {
+  .grid-4 {
+    gap: 8px !important;
+  }
+  .product-card {
+    padding: 10px 8px !important;
+  }
+  .product-title {
+    font-size: 0.8125rem !important;
+  }
+  .current-price {
+    font-size: 1.05rem !important;
+  }
+  .size-chip {
+    padding: 3px 5px !important;
+    font-size: 0.625rem !important;
+  }
+  .btn-card-cart {
+    font-size: 0.6875rem !important;
+    height: 36px !important;
+  }
+  .btn-card-buy {
+    font-size: 0.6875rem !important;
+    height: 32px !important;
+  }
 }

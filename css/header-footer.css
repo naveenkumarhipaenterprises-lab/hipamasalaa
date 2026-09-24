@@ -254,7 +254,7 @@
 .nav-list {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: clamp(14px, 1.8vw, 26px);
   list-style: none;
 }
 

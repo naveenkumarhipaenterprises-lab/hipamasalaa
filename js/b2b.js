@@ -1,5 +1,5 @@
 /**
- * HIPA MASALAS — B2B BULK SUPPLY ENGINE (js/b2b.js)
+ * HIPA Masala — B2B BULK SUPPLY ENGINE (js/b2b.js)
  * Clean, compact form handling, strict validation, resilient submission,
  * duplicate-submission protection, and instant feedback.
  */
@@ -252,7 +252,7 @@
         const waBtn = document.getElementById('b2bSuccessWhatsappLink');
         if (waBtn) {
           const waText = encodeURIComponent(
-            `Hello HIPA Masalas B2B Team, I submitted a bulk enquiry (${data.refCode}).\n` +
+            `Hello HIPA Masala B2B Team, I submitted a bulk enquiry (${data.refCode}).\n` +
             `Company: ${data.companyName}\n` +
             `Contact: ${data.fullName} (${data.phone})\n` +
             `Requirement: ${data.bulkRequirement} for ${data.products.join(', ')}.\n` +

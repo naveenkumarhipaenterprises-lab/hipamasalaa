@@ -1,5 +1,5 @@
 /**
- * HIPA MASALAS — ADMIN CONSOLE CONTROLLER (js/admin.js)
+ * HIPA Masala — ADMIN CONSOLE CONTROLLER (js/admin.js)
  * Manages admin authentication, live KPI calculation, orders filtering,
  * status transitions, inventory stock updates, and B2B lead management.
  */
@@ -372,7 +372,7 @@
       tbody.innerHTML = this.b2bEnquiries.map(b => {
         const dateStr = b.created_at ? new Date(b.created_at).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' }) : 'Recent';
         const prods = (b.products && Array.isArray(b.products)) ? b.products.join(', ') : 'All Products';
-        const waMsg = encodeURIComponent(`Hello ${b.fullName}, regarding your HIPA Masalas commercial enquiry (${b.refCode})...`);
+        const waMsg = encodeURIComponent(`Hello ${b.fullName}, regarding your HIPA Masala commercial enquiry (${b.refCode})...`);
 
         return `
           <tr>

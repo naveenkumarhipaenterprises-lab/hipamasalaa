@@ -1,5 +1,5 @@
 /**
- * HIPA MASALAS CART & CHECKOUT CONTROLLER
+ * HIPA Masala CART & CHECKOUT CONTROLLER
  * Full-Stack Razorpay Integration, Strict Form Validation, Min ₹999 Online Order Rule
  */
 
@@ -276,7 +276,7 @@ const Checkout = {
           key: orderData.keyId,
           amount: orderData.amount,
           currency: orderData.currency || 'INR',
-          name: 'HIPA Masalas',
+          name: 'HIPA Masala',
           description: 'Authentic Spice Order',
           image: 'assets/images/logo.png',
           order_id: orderData.orderId,

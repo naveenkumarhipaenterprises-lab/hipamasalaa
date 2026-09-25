@@ -1,5 +1,5 @@
 /**
- * HIPA MASALAS E-COMMERCE CENTRAL CONFIGURATION
+ * HIPA Masala E-COMMERCE CENTRAL CONFIGURATION
  * Single source of truth for external services, contact channels, and store settings.
  */
 
@@ -9,7 +9,7 @@ window.HIPA_CONFIG = {
     // Configurable HIPA business WhatsApp number (Country code 91 + 10 digits, no +, no spaces)
     phoneNumber: '917058053055',
     // Default pre-filled message when customer initiates chat
-    defaultMessage: 'Hello HIPA Masalas, I would like to know more about your products.',
+    defaultMessage: 'Hello HIPA Masala, I would like to know more about your products.',
     // Optional display label
     label: 'Chat with us'
   },
@@ -23,7 +23,7 @@ window.HIPA_CONFIG = {
 
   // E-Commerce Store Rules
   store: {
-    name: 'HIPA Masalas Online Store',
+    name: 'HIPA Masala Online Store',
     tagline: 'Authentic Taste. Everyday Tradition.',
     minOrderValue: 999, // ₹999 Minimum Online Order Value
     supportPhone: '+91 70580 53055',

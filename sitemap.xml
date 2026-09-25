@@ -20,12 +20,6 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://www.hipamasalas.com/blog.html</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.hipamasalas.com/about.html</loc>
     <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
@@ -123,38 +117,6 @@
     <loc>https://www.hipamasalas.com/product.html?slug=garam-masala</loc>
     <lastmod>2026-09-25</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <!-- Spice Knowledge & Buyer Guides -->
-  <url>
-    <loc>https://www.hipamasalas.com/blog/best-masala-manufacturer-in-chennai.html</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.hipamasalas.com/blog/how-to-choose-a-masala-manufacturer-in-chennai-for-your-business.html</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.hipamasalas.com/blog/what-makes-a-good-masala-manufacturer-8-things-buyers-should-check.html</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.hipamasalas.com/blog/masala-manufacturer-vs-supplier-vs-distributor.html</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.hipamasalas.com/blog/masala-manufacturer-for-restaurants-retailers-chennai.html</loc>
-    <lastmod>2026-09-25</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 </urlset>

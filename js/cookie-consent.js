@@ -1,5 +1,5 @@
 /**
- * HIPA MASALAS — COOKIE CONSENT CONTROLLER
+ * HIPA Masala — COOKIE CONSENT CONTROLLER
  * Lightweight, compliant privacy consent banner
  */
 

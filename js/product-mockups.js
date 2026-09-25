@@ -1,5 +1,5 @@
 /* =========================================================
-   HIPA MASALAS — DYNAMIC PRODUCT MOCKUP & PACK SIZE SYSTEM
+   HIPA Masala — DYNAMIC PRODUCT MOCKUP & PACK SIZE SYSTEM
    ---------------------------------------------------------
    Centralized configuration for product pack sizes, front/back
    mockup images, and full-screen viewer.

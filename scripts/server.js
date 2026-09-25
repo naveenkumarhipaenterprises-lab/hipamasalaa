@@ -511,10 +511,10 @@ const server = http.createServer(async (req, res) => {
       res.end(`
         <!DOCTYPE html>
         <html lang="en">
-        <head><title>404 - Page Not Found | HIPA Masalas</title></head>
+        <head><title>404 - Page Not Found | HIPA Masala</title></head>
         <body style="font-family:sans-serif; text-align:center; padding:60px 20px;">
           <h2>404 - Page Not Found</h2>
-          <p><a href="/" style="color:#9E1B1E; font-weight:bold;">Return to HIPA Masalas Home &rarr;</a></p>
+          <p><a href="/" style="color:#9E1B1E; font-weight:bold;">Return to HIPA Masala Home &rarr;</a></p>
         </body>
         </html>
       `);
@@ -540,7 +540,7 @@ const server = http.createServer(async (req, res) => {
 function startServer(portToTry) {
   server.listen(portToTry, () => {
     console.log(`=======================================================`);
-    console.log(`HIPA Masalas Full-Stack E-Commerce Server`);
+    console.log(`HIPA Masala Full-Stack E-Commerce Server`);
     console.log(`Running at: http://localhost:${portToTry}/`);
     console.log(`Razorpay Mode: ${RAZORPAY_KEY_ID.startsWith('rzp_') ? 'Configured' : 'Sandbox Fallback'}`);
     console.log(`Admin Panel: http://localhost:${portToTry}/admin.html`);

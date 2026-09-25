@@ -1,5 +1,5 @@
 /**
- * HIPA MASALAS ANIMATED WEBSITE PRELOADER
+ * HIPA Masala ANIMATED WEBSITE PRELOADER
  * Injects branded preloader and hides it cleanly on page load with fallback.
  */
 
@@ -15,7 +15,7 @@
       <div class="preloader-inner">
         <div class="preloader-brand-wrapper">
           <div class="preloader-ring"></div>
-          <img class="preloader-logo-img" src="assets/images/logo.png" alt="HIPA Masalas">
+          <img class="preloader-logo-img" src="assets/images/logo.png" alt="HIPA Masala">
         </div>
         <div class="preloader-title">HIPA <span>MASALA</span></div>
         <div class="preloader-tagline">Pure Spices • Authentic Aroma</div>

@@ -1,5 +1,5 @@
 /**
- * HIPA MASALA WISHLIST PAGE CONTROLLER
+ * HIPA MASALAS WISHLIST PAGE CONTROLLER
  * Renders wishlisted products or empty state and handles remove, add-to-cart, buy-now.
  */
 
@@ -108,7 +108,7 @@ const WishlistPage = {
           </svg>
         </div>
         <h1 class="wishlist-empty-title">Your wishlist is waiting for something delicious.</h1>
-        <p class="wishlist-empty-desc">Save your favourite HIPA Masala products here and come back anytime.</p>
+        <p class="wishlist-empty-desc">Save your favourite HIPA Masalas products here and come back anytime.</p>
         <a href="shop.html" class="btn btn-primary btn-lg">
           <span>Explore Products</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

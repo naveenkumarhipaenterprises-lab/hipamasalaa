@@ -4,7 +4,7 @@
   "private": true,
   "description": "HIPA Masala Standalone E-Commerce Storefront",
   "scripts": {
-    "dev": "node scripts/dev-server.js",
-    "start": "node scripts/dev-server.js"
+    "dev": "node scripts/server.js",
+    "start": "node scripts/server.js"
   }
 }

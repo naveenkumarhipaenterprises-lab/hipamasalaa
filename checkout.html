@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout | HIPA Masala Online Store</title>
-  <meta name="description" content="Secure checkout for your HIPA Masala order. Minimum online order value ₹999. Fast direct shipping.">
+  <title>Checkout | HIPA Masalas Online Store</title>
+  <meta name="description" content="Secure checkout for your HIPA Masalas order. Minimum online order value ₹999. Fast direct shipping.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,13 +24,13 @@
     <div class="marquee-container">
       <div class="marquee-track">
         <div class="marquee-item"><span class="marquee-star">✦</span> <span>ONLINE ORDERS ACCEPTED ABOVE ₹999</span> <span class="marquee-arrow">→</span></div>
-        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALA PRODUCTS</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALAS PRODUCTS</span> <span class="marquee-arrow">→</span></div>
         <div class="marquee-item"><span class="marquee-star">✦</span> <span>MASALA POWDERS & PURE SPICES</span> <span class="marquee-arrow">→</span></div>
         <div class="marquee-item"><span class="marquee-star">✦</span> <span>MINIMUM ONLINE ORDER VALUE: ₹999</span> <span class="marquee-arrow">→</span></div>
       </div>
       <div class="marquee-track" aria-hidden="true">
         <div class="marquee-item"><span class="marquee-star">✦</span> <span>ONLINE ORDERS ACCEPTED ABOVE ₹999</span> <span class="marquee-arrow">→</span></div>
-        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALA PRODUCTS</span> <span class="marquee-arrow">→</span></div>
+        <div class="marquee-item"><span class="marquee-star">✦</span> <span>AUTHENTIC HIPA MASALAS PRODUCTS</span> <span class="marquee-arrow">→</span></div>
         <div class="marquee-item"><span class="marquee-star">✦</span> <span>MASALA POWDERS & PURE SPICES</span> <span class="marquee-arrow">→</span></div>
         <div class="marquee-item"><span class="marquee-star">✦</span> <span>MINIMUM ONLINE ORDER VALUE: ₹999</span> <span class="marquee-arrow">→</span></div>
       </div>
@@ -40,10 +40,10 @@
   <!-- Header -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
-      <a href="index.html" class="brand" aria-label="HIPA Masala Home">
-        <img class="brand-logo-img" src="assets/images/logo.png" alt="HIPA Masala Logo">
+      <a href="index.html" class="brand" aria-label="HIPA Masalas Home">
+        <img class="brand-logo-img" src="assets/images/logo.png" alt="HIPA Masalas Logo">
         <div class="brand-info">
-          <span class="brand-name">HIPA <span>MASALA</span></span>
+          <span class="brand-name">HIPA <span>MASALAS</span></span>
           <span class="brand-tag">Taste of Tradition</span>
         </div>
       </a>
@@ -164,12 +164,18 @@
                   <span id="checkoutSummaryTotal">₹0</span>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:8px;">
+                <button type="submit" id="checkoutSubmitBtn" class="btn btn-primary btn-block btn-lg" style="margin-top:8px;">
                   PLACE ORDER
                 </button>
                 <p style="font-size:0.75rem; color:var(--text-muted); text-align:center; margin-top:10px;">
                   Online orders accepted above ₹999.
                 </p>
+                <div style="font-size:0.75rem; color:var(--text-muted); text-align:center; margin-top:8px; display:flex; justify-content:center; gap:12px;">
+                  <a href="shipping-policy.html" target="_blank" style="color:var(--text-muted); text-decoration:underline;">Shipping</a>
+                  <a href="return-refund-policy.html" target="_blank" style="color:var(--text-muted); text-decoration:underline;">Returns</a>
+                  <a href="privacy-policy.html" target="_blank" style="color:var(--text-muted); text-decoration:underline;">Privacy</a>
+                  <a href="terms-and-conditions.html" target="_blank" style="color:var(--text-muted); text-decoration:underline;">Terms</a>
+                </div>
               </div>
             </div>
           </div>
@@ -189,7 +195,7 @@
         Order Reference: <span id="successOrderNumber">HIPA-123456</span>
       </div>
       <p id="successOrderDetails" style="font-size:0.9375rem; color:var(--text-body); line-height:1.6; margin-bottom:28px;">
-        Thank you for choosing HIPA Masala! Your authentic spice order is confirmed.
+        Thank you for choosing HIPA Masalas! Your authentic spice order is confirmed.
       </p>
       <div style="display:flex; flex-direction:column; gap:10px;">
         <a href="index.html" class="btn btn-primary">Return to Homepage</a>
@@ -201,13 +207,14 @@
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container">
-      <div class="footer-bottom" style="border:none; padding:0;">
-        <div>&copy; 2026 HIPA Masala Online Store. All rights reserved.</div>
+      <div class="footer-bottom" style="border:none; padding:16px 0; text-align:center;">
+        <div>&copy; 2026 HIPA Masalas Online Store. All rights reserved. • Minimum order ₹999 • 256-Bit Encrypted Razorpay Checkout</div>
       </div>
     </div>
   </footer>
 
   <!-- Centralized JavaScript Engines -->
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
   <script src="js/config.js"></script>
   <script src="js/products-data.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -219,5 +226,6 @@
   <script src="js/checkout.js"></script>
   <script src="js/whatsapp.js"></script>
   <script src="js/preloader.js"></script>
+  <script src="js/cookie-consent.js"></script>
 </body>
 </html>

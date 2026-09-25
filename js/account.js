@@ -1,5 +1,5 @@
 /**
- * HIPA MASALA USER ACCOUNT CONTROLLER
+ * HIPA MASALAS USER ACCOUNT CONTROLLER
  * Handles tab navigation, profile editing, order history, and security.
  */
 

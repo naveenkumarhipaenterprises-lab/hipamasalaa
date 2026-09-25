@@ -1,5 +1,5 @@
 /**
- * HIPA MASALA E-COMMERCE STOREFRONT
+ * HIPA MASALAS E-COMMERCE STOREFRONT
  * Centralized Product Data Architecture
  * Single source of truth for all 8 core products, variants, pack sizes, and prices.
  */
@@ -14,7 +14,7 @@ const HIPA_PRODUCTS = [
     categoryName: "Masala Powders",
     description: "Traditional blend of roasted lentils and spices for authentic South Indian sambar.",
     image: "assets/images/products/sambar-powder.png",
-    imageAlt: "HIPA Masala Sambar Powder Pack",
+    imageAlt: "HIPA Masalas Sambar Powder Pack",
     variants: [
       {
         size: "100g",
@@ -82,7 +82,7 @@ const HIPA_PRODUCTS = [
     categoryName: "Masala Powders",
     description: "Tangy, aromatic rasam powder crafted the traditional way with roasted spices.",
     image: "assets/images/products/rasam-powder.png",
-    imageAlt: "HIPA Masala Rasam Powder Pack",
+    imageAlt: "HIPA Masalas Rasam Powder Pack",
     variants: [
       { size: "100g", price: 54 },
       { size: "200g", price: 102 },
@@ -120,7 +120,7 @@ const HIPA_PRODUCTS = [
     categoryName: "Masala Powders",
     description: "A rich, warming blend of whole roasted spices for curries, gravies, and biryanis.",
     image: "assets/images/products/garam-masala.png",
-    imageAlt: "HIPA Masala Garam Masala Pack",
+    imageAlt: "HIPA Masalas Garam Masala Pack",
     variants: [
       { size: "100g", price: 82 },
       { size: "200g", price: 158 },
@@ -160,7 +160,7 @@ const HIPA_PRODUCTS = [
     categoryName: "Pure Spices",
     description: "Pure turmeric powder with natural golden colour and earthy aroma.",
     image: "assets/images/products/turmeric-powder.png",
-    imageAlt: "HIPA Masala Turmeric Powder Pack",
+    imageAlt: "HIPA Masalas Turmeric Powder Pack",
     variants: [
       { size: "100g", price: 38 },
       { size: "200g", price: 72 },
@@ -189,7 +189,7 @@ const HIPA_PRODUCTS = [
     categoryName: "Pure Spices",
     description: "Vibrant red chilli powder ground from handpicked chillies for natural color and controlled heat.",
     image: "assets/images/products/red-chilli-powder.png",
-    imageAlt: "HIPA Masala Red Chilli Powder Pack",
+    imageAlt: "HIPA Masalas Red Chilli Powder Pack",
     variants: [
       { size: "100g", price: 55 },
       { size: "200g", price: 105 },
@@ -218,7 +218,7 @@ const HIPA_PRODUCTS = [
     categoryName: "Pure Spices",
     description: "Freshly ground whole coriander seeds with a naturally sweet, earthy aroma.",
     image: "assets/images/products/coriander-powder.png",
-    imageAlt: "HIPA Masala Coriander Powder Pack",
+    imageAlt: "HIPA Masalas Coriander Powder Pack",
     variants: [
       { size: "100g", price: 42 },
       { size: "200g", price: 80 },
@@ -247,7 +247,7 @@ const HIPA_PRODUCTS = [
     categoryName: "Pure Spices",
     description: "Roasted cumin seeds ground fresh for warm, nutty flavour in every dish.",
     image: "assets/images/products/cumin-powder.png",
-    imageAlt: "HIPA Masala Cumin Powder Pack",
+    imageAlt: "HIPA Masalas Cumin Powder Pack",
     variants: [
       { size: "100g", price: 76 },
       { size: "200g", price: 148 },
@@ -275,7 +275,7 @@ const HIPA_PRODUCTS = [
     categoryName: "Pure Spices",
     description: "Sun-dried black pepper freshly ground to retain its sharp aroma and natural pungency.",
     image: "assets/images/products/pepper-powder.png",
-    imageAlt: "HIPA Masala Pepper Powder Pack",
+    imageAlt: "HIPA Masalas Pepper Powder Pack",
     variants: [
       { size: "50g", price: 60 },
       { size: "100g", price: 115 },

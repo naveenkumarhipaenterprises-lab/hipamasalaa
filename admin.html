@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Console | HIPA Masalas</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+
+  <!-- ======================================================================
+       1. ADMIN AUTHENTICATION SCREEN
+       ====================================================================== -->
+  <div id="adminLoginScreen" class="admin-login-wrap">
+    <div class="admin-login-card">
+      <img src="assets/images/logo.png" alt="HIPA Masalas" class="admin-logo">
+      <h1 class="admin-login-title">HIPA Masalas</h1>
+      <p class="admin-login-sub">Store Administration Console</p>
+
+      <form id="adminLoginForm">
+        <div class="admin-input-group">
+          <label class="admin-input-label" for="adminSecretKey">Admin Passphrase</label>
+          <input type="password" id="adminSecretKey" class="admin-input" placeholder="Enter admin secret key" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-admin-login" id="adminLoginBtn">Authenticate &rarr;</button>
+        <div id="adminLoginError" class="admin-login-error"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       2. ADMIN DASHBOARD SCREEN
+       ====================================================================== -->
+  <div id="adminDashboardScreen" class="admin-layout" style="display:none;">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <img src="assets/images/logo.png" alt="Logo" style="height:32px;">
+        <span style="font-weight:800; font-size:1.1rem; letter-spacing:0.5px;">HIPA MASALAS</span>
+      </div>
+
+      <nav class="admin-sidebar-nav">
+        <button type="button" class="admin-nav-item is-active" data-tab="tabOrders">
+          <span>📦</span> <span>Orders</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="tabProducts">
+          <span>🛍️</span> <span>Products &amp; Stock</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="tabB2b">
+          <span>🏢</span> <span>B2B Enquiries</span>
+        </button>
+        <button type="button" class="admin-nav-item" data-tab="tabContact">
+          <span>✉️</span> <span>Customer Messages</span>
+        </button>
+      </nav>
+
+      <div class="admin-sidebar-footer">
+        <button type="button" class="btn-admin-logout" id="adminLogoutBtn">Sign Out</button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+      <div class="admin-header">
+        <div>
+          <h1 class="admin-page-title" id="adminSectionTitle">Orders Management</h1>
+          <p style="margin:4px 0 0; color:var(--admin-text-muted); font-size:0.875rem;">Live commercial operations &amp; order tracking</p>
+        </div>
+        <div>
+          <button type="button" class="btn-admin-action" id="adminRefreshBtn" style="padding:8px 16px;">⟳ Refresh Data</button>
+        </div>
+      </div>
+
+      <!-- KPI Statistics Cards -->
+      <div class="admin-stats-grid">
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Total Revenue</div>
+          <div class="admin-stat-value" id="kpiRevenue">₹0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Total Orders</div>
+          <div class="admin-stat-value" id="kpiOrders">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Paid Orders</div>
+          <div class="admin-stat-value" id="kpiPaidOrders">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">Pending Orders</div>
+          <div class="admin-stat-value" id="kpiPendingOrders">0</div>
+        </div>
+        <div class="admin-stat-card">
+          <div class="admin-stat-label">B2B Leads</div>
+          <div class="admin-stat-value" id="kpiB2bCount">0</div>
+        </div>
+      </div>
+
+      <!-- TAB 1: ORDERS -->
+      <div id="tabOrders" class="admin-tab-pane">
+        <div class="admin-panel-card">
+          <div class="admin-panel-header">
+            <h2 class="admin-panel-title">Customer Orders</h2>
+            <div style="display:flex; gap:10px;">
+              <input type="text" id="orderSearchInput" class="admin-search-input" placeholder="Search Order # or Customer...">
+              <select id="orderStatusFilter" class="admin-search-input" style="min-width:140px;">
+                <option value="ALL">All Statuses</option>
+                <option value="Confirmed">Confirmed</option>
+                <option value="Processing">Processing</option>
+                <option value="Shipped">Shipped</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+              </select>
+            </div>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Date</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Payment</th>
+                  <th>Order Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <tr><td colspan="8" style="text-align:center; padding:24px;">Loading orders...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: PRODUCTS & INVENTORY -->
+      <div id="tabProducts" class="admin-tab-pane" style="display:none;">
+        <div class="admin-panel-card">
+          <div class="admin-panel-header">
+            <h2 class="admin-panel-title">Product Catalog &amp; Inventory</h2>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Category</th>
+                  <th>Pack Variants</th>
+                  <th>Base Price</th>
+                  <th>Stock Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="productsTableBody">
+                <!-- Injected via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: B2B ENQUIRIES -->
+      <div id="tabB2b" class="admin-tab-pane" style="display:none;">
+        <div class="admin-panel-card">
+          <div class="admin-panel-header">
+            <h2 class="admin-panel-title">B2B Commercial Enquiries</h2>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Ref #</th>
+                  <th>Date</th>
+                  <th>Company / Contact</th>
+                  <th>Location</th>
+                  <th>Business Type</th>
+                  <th>Requirement</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="b2bTableBody">
+                <tr><td colspan="8" style="text-align:center; padding:24px;">Loading B2B enquiries...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: CONTACT MESSAGES -->
+      <div id="tabContact" class="admin-tab-pane" style="display:none;">
+        <div class="admin-panel-card">
+          <div class="admin-panel-header">
+            <h2 class="admin-panel-title">Customer Support Messages</h2>
+          </div>
+          <div style="overflow-x:auto;">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Name</th>
+                  <th>Email / Phone</th>
+                  <th>Subject</th>
+                  <th>Message</th>
+                </tr>
+              </thead>
+              <tbody id="contactTableBody">
+                <tr><td colspan="5" style="text-align:center; padding:24px;">Loading contact messages...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Order Details Modal -->
+  <div id="orderDetailModal" class="admin-modal-overlay" style="display:none;">
+    <div class="admin-modal">
+      <div class="admin-modal-header">
+        <h3 id="modalOrderNumber" style="margin:0;">Order Details</h3>
+        <button type="button" class="admin-modal-close" onclick="AdminApp.closeModal()">&times;</button>
+      </div>
+      <div id="modalOrderContent"></div>
+    </div>
+  </div>
+
+  <script src="js/products-data.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

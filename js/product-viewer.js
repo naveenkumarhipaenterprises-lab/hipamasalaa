@@ -1,5 +1,5 @@
 /* =========================================================
-   HIPA MASALA — DYNAMIC PRODUCT IMAGE ZOOM & FRONT/BACK VIEWER
+   HIPA MASALAS — DYNAMIC PRODUCT IMAGE ZOOM & FRONT/BACK VIEWER
    ========================================================= */
 
 (function () {
@@ -294,7 +294,7 @@
       const fullSrc = this.getImageSrc(false);
       const config = this.getMockupConfig();
       const prod = window.ProductPage ? window.ProductPage.currentProduct : null;
-      const prodName = prod ? prod.name : (config ? config.name : 'HIPA Masala');
+      const prodName = prod ? prod.name : (config ? config.name : 'HIPA Masalas');
 
       const hasBack = this.hasBackImage();
 

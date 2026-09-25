@@ -1,5 +1,5 @@
 /**
- * HIPA MASALA PRODUCT DETAIL PAGE (PDP) CONTROLLER
+ * HIPA MASALAS PRODUCT DETAIL PAGE (PDP) CONTROLLER
  * Loads product by slug/id, controls variant pack size, quantity, specs tabs, and buy now
  */
 
@@ -30,7 +30,7 @@ const ProductPage = {
     if (!p) return;
 
     // Document Title & Meta
-    document.title = `${p.name} (${p.tamilName || ''}) | Buy Online | HIPA Masala`;
+    document.title = `${p.name} (${p.tamilName || ''}) | Buy Online | HIPA Masalas`;
 
     // Breadcrumbs
     const bcCat = document.getElementById('pdpBreadcrumbCategory');

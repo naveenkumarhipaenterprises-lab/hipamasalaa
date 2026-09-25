@@ -1,5 +1,5 @@
 /**
- * HIPA MASALA FLOATING WHATSAPP BUTTON COMPONENT
+ * HIPA MASALAS FLOATING WHATSAPP BUTTON COMPONENT
  * Reads business number & message from centralized config and injects responsive widget.
  */
 
@@ -9,7 +9,7 @@
 
     const config = (window.HIPA_CONFIG && window.HIPA_CONFIG.whatsapp) || {
       phoneNumber: '917058053055',
-      defaultMessage: 'Hello HIPA Masala, I would like to know more about your products.',
+      defaultMessage: 'Hello HIPA Masalas, I would like to know more about your products.',
       label: 'Chat with us'
     };
 

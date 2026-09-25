@@ -1,5 +1,5 @@
 /**
- * HIPA MASALA SHOP CATALOG CONTROLLER
+ * HIPA MASALAS SHOP CATALOG CONTROLLER
  * Handles category filtering, pack size filtering, price sorting, and dynamic grid rendering
  */
 
@@ -103,7 +103,7 @@ const ShopPage = {
       grid.innerHTML = `
         <div style="grid-column:1/-1; text-align:center; padding:60px 20px;">
           <h3 style="color:var(--text-dark); margin-bottom:8px;">No matching products found</h3>
-          <p style="color:var(--text-muted); margin-bottom:16px;">Try resetting your filters to view all HIPA Masala products.</p>
+          <p style="color:var(--text-muted); margin-bottom:16px;">Try resetting your filters to view all HIPA Masalas products.</p>
           <button class="btn btn-outline" onclick="ShopPage.resetFilters()">Reset Filters</button>
         </div>
       `;

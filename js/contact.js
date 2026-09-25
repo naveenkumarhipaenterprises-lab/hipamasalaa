@@ -1,5 +1,5 @@
 /**
- * HIPA MASALA CONTACT PAGE ENGINE
+ * HIPA MASALAS CONTACT PAGE ENGINE
  * Interactive Floating Labels, Real-Time Validation, Character Counter, 3-State Submit, and Success Card
  */
 

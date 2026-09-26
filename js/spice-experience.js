@@ -1,234 +1,253 @@
 /**
- * HIPA MASALA — ADVANCED INTERACTIVE FOOTER EXPERIENCE (js/spice-experience.js)
- * Concept: "FROM SPICE TO FLAVOUR"
- * Pure vanilla JS, 60fps CSS transitions, responsive, accessible, zero dependencies.
+ * HIPA MASALA — "FROM SPICE TO FLAVOUR" INTERACTIVE FOOTER EXPERIENCE
+ * Pure Vanilla JavaScript with high performance hardware-accelerated transforms,
+ * realistic physics, micro-powder dispersion, delicate aroma, and full accessibility.
  */
 
 (function () {
   'use strict';
 
-  const SpicePalettes = {
-    'chilli': {
-      name: 'Guntur Red Chilli',
-      particles: ['#DC2626', '#EF4444', '#B91C1C', '#F87171'],
-      count: 16
-    },
-    'turmeric': {
-      name: 'Erode Turmeric',
-      particles: ['#F59E0B', '#FBBF24', '#D97706', '#FCD34D'],
-      count: 18
-    },
-    'pepper': {
-      name: 'Tellicherry Black Pepper',
-      particles: ['#1F2937', '#374151', '#4B5563', '#111827'],
-      count: 14
-    },
-    'cumin': {
-      name: 'Aromatic Cumin',
-      particles: ['#92400E', '#B45309', '#78350F', '#A16207'],
-      count: 16
-    },
-    'coriander': {
-      name: 'Golden Coriander',
-      particles: ['#D97706', '#CA8A04', '#B45309', '#EAB308'],
-      count: 16
-    },
-    'curry-leaf': {
-      name: 'Fresh Curry Leaf',
-      particles: ['#16A34A', '#15803D', '#22C55E', '#4ADE80'],
-      count: 15
-    }
-  };
+  function initSpiceExperience() {
+    const stage = document.querySelector('.spice-stage');
+    if (!stage) return;
 
-  const SpiceExperience = {
-    container: null,
-    stage: null,
-    mortar: null,
-    particleContainer: null,
-    aromaContainer: null,
-    successBadge: null,
-    announcer: null,
-    isBusy: false,
-    activeTimeouts: [],
+    const pestle = stage.querySelector('.mortar-pestle-img');
+    const mortar = stage.querySelector('.mortar-unit');
+    const particleContainer = stage.querySelector('.particle-container');
+    const aromaContainer = stage.querySelector('.aroma-container');
+    const flavourBadge = document.getElementById('spiceFlavourBadge');
+    const announcer = document.getElementById('spiceAnnouncer');
+    const spiceButtons = stage.querySelectorAll('.spice-item');
 
-    init: function () {
-      this.container = document.getElementById('spiceExperience');
-      if (!this.container) return;
+    if (!pestle || !mortar || !spiceButtons.length) return;
 
-      this.stage = this.container.querySelector('.spice-stage');
-      this.mortar = this.container.querySelector('.mortar-unit');
-      this.particleContainer = this.container.querySelector('.particle-container');
-      this.aromaContainer = this.container.querySelector('.aroma-container');
-      this.successBadge = this.container.querySelector('.spice-success-badge');
-      this.announcer = this.container.querySelector('#spiceAnnouncer');
+    let isBusy = false;
 
-      this.bindEvents();
-    },
-
-    bindEvents: function () {
-      const spices = this.container.querySelectorAll('.spice-item');
-      spices.forEach(spice => {
-        spice.addEventListener('click', (e) => {
-          e.preventDefault();
-          this.handleSpiceClick(spice);
-        });
-
-        // Keyboard activation (Enter / Space)
-        spice.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.handleSpiceClick(spice);
-          }
-        });
-      });
-    },
-
-    handleSpiceClick: function (spiceEl) {
-      if (this.isBusy) return;
-
-      const spiceType = spiceEl.getAttribute('data-spice') || 'chilli';
-      const spiceData = SpicePalettes[spiceType] || SpicePalettes['chilli'];
-
-      this.isBusy = true;
-      this.container.classList.add('is-busy');
-
-      // Announce for screen readers
-      if (this.announcer) {
-        this.announcer.textContent = `Grinding ${spiceData.name} in stone mortar.`;
+    // Realistic spice profiles: specific particle colors, messages & screen reader text
+    const SPICE_PROFILES = {
+      chilli: {
+        name: 'Guntur Red Chilli',
+        particleColors: ['#DC2626', '#B91C1C', '#991B1B', '#EF4444'],
+        announcement: 'Guntur dried red chilli crushed in the granite mortar, releasing vibrant piquancy and warmth.',
+        badge: 'Freshly ground chilli. Piquant and fiery.'
+      },
+      pepper: {
+        name: 'Tellicherry Black Pepper',
+        particleColors: ['#27272A', '#18181B', '#3F3F46', '#52525B'],
+        announcement: 'Tellicherry black peppercorns gently cracked, releasing bold pungent aroma and piperine warmth.',
+        badge: 'Cracked Tellicherry pepper. Bold and aromatic.'
+      },
+      turmeric: {
+        name: 'Erode Turmeric Root',
+        particleColors: ['#F59E0B', '#D97706', '#B45309', '#FBBF24'],
+        announcement: 'Erode whole turmeric root ground into rich golden powder with earthy curcumin notes.',
+        badge: 'Stone-ground golden turmeric. Rich and pure.'
+      },
+      cardamom: {
+        name: 'Green Cardamom Pod',
+        particleColors: ['#65A30D', '#84CC16', '#4D7C0F', '#A3E635'],
+        announcement: 'Fresh green cardamom pod cracked open, dispersing sweet floral camphor notes.',
+        badge: 'Cracked green cardamom. Sweet, floral essence.'
+      },
+      cumin: {
+        name: 'Jeera / Cumin Seeds',
+        particleColors: ['#92400E', '#B45309', '#78350F', '#A16207'],
+        announcement: 'Dry roasted cumin seeds crushed into fragrant, nutty South Indian masala powder.',
+        badge: 'Freshly ground jeera. Warm, toasted aroma.'
+      },
+      coriander: {
+        name: 'Dhania / Coriander Seeds',
+        particleColors: ['#B45309', '#D97706', '#92400E', '#D97706'],
+        announcement: 'Whole coriander seeds milled in granite, releasing gentle citrusy, herbal flavour.',
+        badge: 'Milled coriander seeds. Herbaceous and citrusy.'
+      },
+      cinnamon: {
+        name: 'Ceylon Cinnamon Bark',
+        particleColors: ['#78350F', '#92400E', '#5B2910', '#A16207'],
+        announcement: 'Ceylon cinnamon bark quills crushed, unfolding sweet woody spice aroma.',
+        badge: 'Ground Ceylon cinnamon. Sweet, woody richness.'
       }
+    };
 
-      // STEP 1 & 2: Calculate flight path to mortar cavity
-      const stageRect = this.stage.getBoundingClientRect();
-      const spiceRect = spiceEl.getBoundingClientRect();
-      const mortarRect = this.mortar.getBoundingClientRect();
+    spiceButtons.forEach(btn => {
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        triggerSpiceInteraction(btn);
+      });
 
-      // Target cavity center (top center of the mortar bowl)
-      const targetX = (mortarRect.left + mortarRect.width / 2) - (spiceRect.left + spiceRect.width / 2);
-      const targetY = (mortarRect.top + mortarRect.height * 0.35) - (spiceRect.top + spiceRect.height / 2);
+      // Keyboard accessibility
+      btn.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          triggerSpiceInteraction(btn);
+        }
+      });
+    });
 
-      // Add flight class and apply translation
-      spiceEl.classList.add('is-flying');
-      spiceEl.style.transform = `translate(${targetX}px, ${targetY}px) scale(0.4) rotate(45deg)`;
-      spiceEl.style.opacity = '0';
+    function triggerSpiceInteraction(spiceBtn) {
+      if (isBusy) return;
+      isBusy = true;
 
-      // STEP 3: Impact after flight animation (~720ms)
-      this.setTimeoutSafe(() => {
-        // Mortar bounce & pestle grind
-        this.mortar.classList.add('is-impacted', 'is-grinding');
+      const spiceType = spiceBtn.getAttribute('data-spice') || 'chilli';
+      const profile = SPICE_PROFILES[spiceType] || SPICE_PROFILES.chilli;
 
-        // STEP 4: Spawn tailored particles
-        this.spawnParticles(spiceData);
+      // 1. Calculate physical coordinates to bowl center
+      const stageRect = stage.getBoundingClientRect();
+      const spiceRect = spiceBtn.getBoundingClientRect();
+      const mortarRect = mortar.getBoundingClientRect();
 
-        // STEP 5: Aroma rise
-        if (this.aromaContainer) {
-          this.aromaContainer.classList.add('is-active');
+      // Destination: Mortar cavity center (slightly above bottom)
+      const targetX = (mortarRect.left + mortarRect.width / 2) - stageRect.left;
+      const targetY = (mortarRect.top + mortarRect.height * 0.42) - stageRect.top;
+
+      // Start: Spice center
+      const startX = (spiceRect.left + spiceRect.width / 2) - stageRect.left;
+      const startY = (spiceRect.top + spiceRect.height / 2) - stageRect.top;
+
+      const deltaX = targetX - startX;
+      const deltaY = targetY - startY;
+
+      // Pause idle drift
+      spiceBtn.style.animation = 'none';
+
+      // 2. Perform smooth curved trajectory into mortar bowl
+      spiceBtn.style.transition = 'transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.55s ease';
+      spiceBtn.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(0.35) rotate(${getSpiceSpinAngle(spiceType)}deg)`;
+      spiceBtn.style.opacity = '0.3';
+      spiceBtn.style.zIndex = '4'; // Slides into mortar behind pestle
+
+      // 3. Grinding & Impact when spice reaches bowl
+      setTimeout(() => {
+        // Hide ingredient inside mortar
+        spiceBtn.style.opacity = '0';
+
+        // Pestle grinding motion
+        pestle.classList.add('pestle-grinding');
+        mortar.classList.add('mortar-impact');
+
+        // Spawn realistic micro particles
+        createMicroParticles(profile.particleColors);
+
+        // Spawn delicate aroma wisps
+        triggerAromaWisps();
+
+        // Show flavor badge
+        if (flavourBadge) {
+          const badgeText = flavourBadge.querySelector('.badge-text') || flavourBadge;
+          badgeText.textContent = profile.badge;
+          flavourBadge.classList.add('active');
         }
 
-        // STEP 6: Show elegant success message badge
-        if (this.successBadge) {
-          this.successBadge.classList.add('is-visible');
+        // Screen reader announcement
+        if (announcer) {
+          announcer.textContent = profile.announcement;
+        }
+      }, 550);
+
+      // 4. Reset Scene smoothly after 2.3 seconds
+      setTimeout(() => {
+        pestle.classList.remove('pestle-grinding');
+        mortar.classList.remove('mortar-impact');
+
+        if (flavourBadge) {
+          flavourBadge.classList.remove('active');
         }
 
-        if (this.announcer) {
-          this.announcer.textContent = `From spice to flavour: ${spiceData.name} freshly ground.`;
-        }
+        // Reset spice button
+        spiceBtn.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+        spiceBtn.style.transform = '';
+        spiceBtn.style.opacity = '1';
+        spiceBtn.style.zIndex = '10';
 
-        // STEP 7: Reset scene smoothly
-        this.setTimeoutSafe(() => {
-          this.resetScene(spiceEl);
-        }, 1800);
+        setTimeout(() => {
+          spiceBtn.style.animation = '';
+          spiceBtn.style.transition = '';
+          isBusy = false;
+        }, 400);
 
-      }, 720);
-    },
+      }, 2300);
+    }
 
-    spawnParticles: function (spiceData) {
-      if (!this.particleContainer) return;
-      this.particleContainer.innerHTML = '';
+    function getSpiceSpinAngle(spiceType) {
+      switch (spiceType) {
+        case 'pepper': return 80;
+        case 'cumin': return 120;
+        case 'chilli': return -45;
+        case 'turmeric': return 25;
+        case 'coriander': return 40;
+        case 'cinnamon': return -30;
+        case 'cardamom': return -20;
+        default: return 45;
+      }
+    }
 
-      const count = spiceData.count || 16;
-      const palette = spiceData.particles;
+    // Realistic, micro-powder dispersion (strictly confined to mortar bowl cavity)
+    function createMicroParticles(colors) {
+      if (!particleContainer) return;
+      particleContainer.innerHTML = '';
 
-      for (let i = 0; i < count; i++) {
+      const particleCount = 10;
+      for (let i = 0; i < particleCount; i++) {
         const p = document.createElement('div');
-        p.className = 'spice-particle';
+        p.className = 'micro-spice-particle';
 
-        const color = palette[Math.floor(Math.random() * palette.length)];
-        const size = 3 + Math.random() * 4;
-        const angle = (-70 + Math.random() * 140) * (Math.PI / 180); // Upward dispersion arc
-        const distance = 28 + Math.random() * 55;
-        const destX = Math.sin(angle) * distance;
-        const destY = -Math.cos(angle) * distance;
-        const duration = 0.55 + Math.random() * 0.45;
-        const delay = Math.random() * 0.12;
+        const size = Math.random() * 2 + 1.8; // 1.8px - 3.8px
+        const color = colors[Math.floor(Math.random() * colors.length)];
 
-        p.style.backgroundColor = color;
+        // Random dispersion within 20px radius of bowl cavity
+        const angle = Math.random() * Math.PI * 2;
+        const dist = Math.random() * 22;
+        const tx = Math.cos(angle) * dist;
+        const ty = Math.sin(angle) * dist * 0.5 - (Math.random() * 10); // slight oval spread
+
         p.style.width = `${size}px`;
         p.style.height = `${size}px`;
+        p.style.backgroundColor = color;
         p.style.left = '50%';
-        p.style.top = '40%';
-        p.style.transition = `transform ${duration}s cubic-bezier(0.16, 1, 0.3, 1) ${delay}s, opacity ${duration}s ease ${delay}s`;
+        p.style.top = '50%';
+        p.style.transform = 'translate(-50%, -50%)';
 
-        this.particleContainer.appendChild(p);
+        particleContainer.appendChild(p);
 
-        // Trigger particle animation on next microtask
+        // Animate using Web Animations API or fallback
+        if (p.animate) {
+          p.animate([
+            { opacity: 0, transform: 'translate(-50%, -50%) scale(0.5)' },
+            { opacity: 0.85, transform: `translate(calc(-50% + ${tx * 0.6}px), calc(-50% + ${ty * 0.6}px)) scale(1.1)`, offset: 0.4 },
+            { opacity: 0.6, transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty}px)) scale(1)`, offset: 0.8 },
+            { opacity: 0, transform: `translate(calc(-50% + ${tx}px), calc(-50% + ${ty + 4}px)) scale(0.8)`, offset: 1.0 }
+          ], {
+            duration: 800 + Math.random() * 300,
+            easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)',
+            fill: 'forwards'
+          });
+        }
+      }
+    }
+
+    // Delicate Aroma Wisps (Translucent, natural evaporation)
+    function triggerAromaWisps() {
+      if (!aromaContainer) return;
+      aromaContainer.innerHTML = '';
+
+      for (let i = 0; i < 3; i++) {
+        const wisp = document.createElement('div');
+        wisp.className = 'aroma-wisp';
+        wisp.style.left = `${30 + i * 18}%`;
+        wisp.style.animationDelay = `${i * 0.15}s`;
+        aromaContainer.appendChild(wisp);
+
+        // Trigger animation
         requestAnimationFrame(() => {
-          p.style.transform = `translate(${destX}px, ${destY}px) scale(0.6)`;
-          p.style.opacity = '0.9';
-
-          // Fade out towards end
-          this.setTimeoutSafe(() => {
-            p.style.opacity = '0';
-          }, (duration + delay) * 600);
+          wisp.classList.add('wisp-active');
         });
       }
-    },
-
-    resetScene: function (spiceEl) {
-      // 1. Fade out badge
-      if (this.successBadge) {
-        this.successBadge.classList.remove('is-visible');
-      }
-
-      // 2. Clear aroma & mortar classes
-      if (this.aromaContainer) {
-        this.aromaContainer.classList.remove('is-active');
-      }
-      this.mortar.classList.remove('is-impacted', 'is-grinding');
-
-      // 3. Clear particles
-      if (this.particleContainer) {
-        this.particleContainer.innerHTML = '';
-      }
-
-      // 4. Return spice back to orbital position
-      spiceEl.style.transition = 'transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease';
-      spiceEl.style.transform = '';
-      spiceEl.style.opacity = '1';
-
-      this.setTimeoutSafe(() => {
-        spiceEl.classList.remove('is-flying');
-        spiceEl.style.transition = '';
-        this.container.classList.remove('is-busy');
-        this.isBusy = false;
-      }, 480);
-    },
-
-    setTimeoutSafe: function (fn, delay) {
-      const id = window.setTimeout(fn, delay);
-      this.activeTimeouts.push(id);
-      return id;
-    },
-
-    destroy: function () {
-      this.activeTimeouts.forEach(id => window.clearTimeout(id));
-      this.activeTimeouts = [];
-      this.isBusy = false;
     }
-  };
+  }
 
-  document.addEventListener('DOMContentLoaded', () => {
-    SpiceExperience.init();
-  });
-
-  window.SpiceExperience = SpiceExperience;
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSpiceExperience);
+  } else {
+    initSpiceExperience();
+  }
 })();

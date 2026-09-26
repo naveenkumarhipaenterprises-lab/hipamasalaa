@@ -1,37 +1,58 @@
 /* ==========================================================================
-   HIPA MASALA — PREMIUM REALISTIC FOOTER EXPERIENCE: "FROM SPICE TO FLAVOUR"
-   Full-width seamless culinary still life with authentic photography assets.
+   HIPA MASALA — STRICT FULL-WIDTH FOOTER ARCHITECTURE (EDGE-TO-EDGE)
+   Zero cards, zero borders, zero isolated panels.
+   The entire footer background itself is the culinary environment.
    ========================================================================== */
 
-/* Main Footer Primary Layout (Desktop Wide Composition) */
-.footer-primary-row {
-  display: grid;
-  grid-template-columns: minmax(380px, 480px) 1fr;
-  gap: 56px;
-  align-items: center;
-  margin-bottom: 48px;
+/* Full-Width Site Footer Base */
+.site-footer {
+  position: relative;
   width: 100%;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 64px 0 0 0 !important;
+  background-color: #FAF9F6 !important; /* Authentic, warm culinary background */
+  border-top: 1px solid #E5E7EB !important;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-@media (max-width: 1200px) {
-  .footer-primary-row {
-    grid-template-columns: minmax(340px, 420px) 1fr;
-    gap: 40px;
+/* Outer Full-Width Flex Wrap extending to viewport edges */
+.footer-fullwidth-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  padding: 0 clamp(24px, 4vw, 80px) 48px;
+  box-sizing: border-box;
+  gap: clamp(32px, 4vw, 64px);
+}
+
+@media (max-width: 1024px) {
+  .footer-fullwidth-wrap {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 24px 36px;
+    gap: 36px;
   }
 }
 
-@media (max-width: 991px) {
-  .footer-primary-row {
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-}
-
-/* Left: Navigation & Brand Section */
-.footer-nav-section {
+/* Left: Navigation and Brand Information */
+.footer-info-section {
+  flex: 0 1 540px;
+  max-width: 580px;
   display: flex;
   flex-direction: column;
   gap: 28px;
+}
+
+@media (max-width: 1024px) {
+  .footer-info-section {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 
 .footer-nav-brand .brand-logo-img {
@@ -58,7 +79,21 @@
   line-height: 1.6;
   color: #6B7280;
   margin: 0 0 16px 0;
-  max-width: 440px;
+  max-width: 480px;
+}
+
+.footer-address-line {
+  font-size: 0.8125rem;
+  color: #6B7280;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.footer-address-line svg {
+  margin-top: 2px;
+  flex-shrink: 0;
+  color: #9E1B1E;
 }
 
 .footer-nav-columns {
@@ -70,7 +105,7 @@
 @media (max-width: 480px) {
   .footer-nav-columns {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 18px;
   }
 }
 
@@ -133,7 +168,8 @@
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: #F3F4F6;
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
   color: #4B5563;
   display: flex;
   align-items: center;
@@ -144,21 +180,25 @@
 
 .footer-social-btn:hover {
   background: #9E1B1E;
+  border-color: #9E1B1E;
   color: #FFFFFF;
   transform: translateY(-2px);
 }
 
 /* ==========================================================================
-   RIGHT: SEAMLESS REALISTIC INTERACTIVE SPICE EXPERIENCE
+   RIGHT: INTERACTIVE SPICE BACKGROUND CANVAS
+   STRICTLY ZERO CARDS, ZERO BOXES, ZERO BORDERS, ZERO SHADOW PANELS.
+   The spices and mortar exist directly inside the full-width footer background.
    ========================================================================== */
-.spice-experience {
+.footer-spice-canvas {
+  flex: 1 1 540px;
   position: relative;
-  width: 100%;
-  background: transparent; /* Seamless with footer background */
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -168,10 +208,17 @@
   box-sizing: border-box;
 }
 
-/* Header Typography */
+@media (max-width: 1024px) {
+  .footer-spice-canvas {
+    flex: 1 1 100%;
+    width: 100%;
+    margin-top: 16px !important;
+  }
+}
+
 .spice-exp-header {
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   pointer-events: none;
 }
 
@@ -201,30 +248,33 @@
   font-weight: 500;
 }
 
-/* Culinary Still Life Stage Canvas */
+/* The Stage Canvas — Transparent, unconstrained, zero card borders */
 .spice-stage {
   position: relative;
   width: 100%;
-  max-width: 580px;
-  height: 310px;
+  max-width: 640px;
+  height: 320px;
   margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: visible;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 @media (max-width: 768px) {
   .spice-stage {
     max-width: 440px;
-    height: 270px;
+    height: 280px;
   }
 }
 
 @media (max-width: 480px) {
   .spice-stage {
     max-width: 350px;
-    height: 240px;
+    height: 250px;
   }
 }
 
@@ -306,39 +356,19 @@
 
 /* Grinding Animation Keyframes */
 @keyframes pestleGrindRealistic {
-  0% {
-    transform: rotate(22deg) translate(0, 0);
-  }
-  20% {
-    transform: rotate(14deg) translate(-4px, 14px);
-  }
-  40% {
-    transform: rotate(28deg) translate(3px, 18px);
-  }
-  60% {
-    transform: rotate(8deg) translate(-5px, 16px);
-  }
-  80% {
-    transform: rotate(24deg) translate(2px, 14px);
-  }
-  100% {
-    transform: rotate(22deg) translate(0, 0);
-  }
+  0% { transform: rotate(22deg) translate(0, 0); }
+  20% { transform: rotate(14deg) translate(-4px, 14px); }
+  40% { transform: rotate(28deg) translate(3px, 18px); }
+  60% { transform: rotate(8deg) translate(-5px, 16px); }
+  80% { transform: rotate(24deg) translate(2px, 14px); }
+  100% { transform: rotate(22deg) translate(0, 0); }
 }
 
 @keyframes mortarSettle {
-  0% {
-    transform: translateX(-50%) translateY(0);
-  }
-  30% {
-    transform: translateX(-50%) translateY(2px) scale(0.995);
-  }
-  70% {
-    transform: translateX(-50%) translateY(1px);
-  }
-  100% {
-    transform: translateX(-50%) translateY(0);
-  }
+  0% { transform: translateX(-50%) translateY(0); }
+  30% { transform: translateX(-50%) translateY(2px) scale(0.995); }
+  70% { transform: translateX(-50%) translateY(1px); }
+  100% { transform: translateX(-50%) translateY(0); }
 }
 
 .pestle-grinding {
@@ -350,15 +380,18 @@
 }
 
 /* ==========================================================================
-   REALISTIC SPICE ITEMS
-   Authentic photographic cutout ingredients with natural positions & idle drift
+   FLOATING REALISTIC BACKGROUND SPICES
+   Zero cards, zero borders, zero boxes, zero text labels.
+   Floating freely in the footer background atmosphere.
    ========================================================================== */
 .spice-item {
   position: absolute;
-  background: none;
-  border: none;
-  padding: 4px;
-  margin: 0;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
   cursor: pointer;
   z-index: 10;
   display: flex;
@@ -373,7 +406,7 @@
 .spice-item img {
   display: block;
   pointer-events: none;
-  filter: drop-shadow(0 5px 10px rgba(35, 20, 10, 0.16));
+  filter: drop-shadow(0 6px 12px rgba(35, 20, 10, 0.16));
   transition: filter 0.3s ease, transform 0.3s ease;
 }
 
@@ -383,7 +416,7 @@
 }
 
 .spice-item:hover img {
-  filter: drop-shadow(0 8px 16px rgba(158, 27, 30, 0.25)) brightness(1.04);
+  filter: drop-shadow(0 10px 20px rgba(158, 27, 30, 0.28)) brightness(1.04);
 }
 
 .spice-item:focus-visible {
@@ -392,23 +425,23 @@
   border-radius: 50%;
 }
 
-/* Ingredient Specific Natural Positions & Sizing */
+/* Organic Scattering Positions & Sizing */
 
 /* 1. Dried Red Chilli (Top Left) */
 .spice-item[data-spice="chilli"] {
-  top: 14%;
-  left: 12%;
+  top: 12%;
+  left: 10%;
   animation: subtleDrift1 8s ease-in-out infinite alternate;
 }
 .spice-item[data-spice="chilli"] img {
-  width: 74px;
+  width: 76px;
   transform: rotate(-16deg);
 }
 
 /* 2. Black Peppercorns (Mid Left) */
 .spice-item[data-spice="pepper"] {
-  top: 50%;
-  left: 4%;
+  top: 48%;
+  left: 3%;
   animation: subtleDrift2 9.5s ease-in-out infinite alternate;
 }
 .spice-item[data-spice="pepper"] img {
@@ -419,7 +452,7 @@
 /* 3. Turmeric Root (Bottom Left) */
 .spice-item[data-spice="turmeric"] {
   top: 74%;
-  left: 14%;
+  left: 12%;
   animation: subtleDrift3 11s ease-in-out infinite alternate;
 }
 .spice-item[data-spice="turmeric"] img {
@@ -441,8 +474,8 @@
 
 /* 5. Cumin Seeds (Top Right) */
 .spice-item[data-spice="cumin"] {
-  top: 12%;
-  right: 14%;
+  top: 10%;
+  right: 12%;
   animation: subtleDrift5 9s ease-in-out infinite alternate;
 }
 .spice-item[data-spice="cumin"] img {
@@ -452,8 +485,8 @@
 
 /* 6. Coriander Seeds (Mid Right) */
 .spice-item[data-spice="coriander"] {
-  top: 48%;
-  right: 4%;
+  top: 46%;
+  right: 3%;
   animation: subtleDrift6 10s ease-in-out infinite alternate;
 }
 .spice-item[data-spice="coriander"] img {
@@ -464,7 +497,7 @@
 /* 7. Cinnamon Bark (Bottom Right) */
 .spice-item[data-spice="cinnamon"] {
   top: 72%;
-  right: 14%;
+  right: 12%;
   animation: subtleDrift7 11.5s ease-in-out infinite alternate;
 }
 .spice-item[data-spice="cinnamon"] img {
@@ -482,12 +515,12 @@
   .spice-item[data-spice="coriander"] img { width: 52px; }
   .spice-item[data-spice="cinnamon"] img { width: 56px; }
   
-  .spice-item[data-spice="chilli"] { top: 12%; left: 8%; }
-  .spice-item[data-spice="pepper"] { top: 48%; left: 2%; }
-  .spice-item[data-spice="turmeric"] { top: 72%; left: 8%; }
-  .spice-item[data-spice="cumin"] { top: 10%; right: 10%; }
-  .spice-item[data-spice="coriander"] { top: 46%; right: 2%; }
-  .spice-item[data-spice="cinnamon"] { top: 70%; right: 10%; }
+  .spice-item[data-spice="chilli"] { top: 10%; left: 6%; }
+  .spice-item[data-spice="pepper"] { top: 46%; left: 2%; }
+  .spice-item[data-spice="turmeric"] { top: 72%; left: 6%; }
+  .spice-item[data-spice="cumin"] { top: 8%; right: 8%; }
+  .spice-item[data-spice="coriander"] { top: 44%; right: 2%; }
+  .spice-item[data-spice="cinnamon"] { top: 70%; right: 8%; }
 }
 
 @media (max-width: 480px) {
@@ -499,15 +532,15 @@
   .spice-item[data-spice="coriander"] img { width: 42px; }
   .spice-item[data-spice="cinnamon"] img { width: 46px; }
   
-  .spice-item[data-spice="chilli"] { top: 8%; left: 6%; }
-  .spice-item[data-spice="pepper"] { top: 46%; left: 1%; }
-  .spice-item[data-spice="turmeric"] { top: 70%; left: 6%; }
-  .spice-item[data-spice="cumin"] { top: 6%; right: 6%; }
-  .spice-item[data-spice="coriander"] { top: 44%; right: 1%; }
-  .spice-item[data-spice="cinnamon"] { top: 68%; right: 6%; }
+  .spice-item[data-spice="chilli"] { top: 8%; left: 4%; }
+  .spice-item[data-spice="pepper"] { top: 44%; left: 1%; }
+  .spice-item[data-spice="turmeric"] { top: 70%; left: 4%; }
+  .spice-item[data-spice="cumin"] { top: 6%; right: 4%; }
+  .spice-item[data-spice="coriander"] { top: 42%; right: 1%; }
+  .spice-item[data-spice="cinnamon"] { top: 68%; right: 4%; }
 }
 
-/* Subtle Natural Still Life Drift Animations (Barely Noticeable) */
+/* Subtle Natural Still Life Drift Animations (Barely Noticeable, 2-4px) */
 @keyframes subtleDrift1 {
   0% { transform: translateY(0px) rotate(-16deg); }
   100% { transform: translateY(-3px) rotate(-14deg); }
@@ -543,9 +576,7 @@
   100% { transform: translateY(-2.5px) rotate(-21deg); }
 }
 
-/* ==========================================================================
-   MICRO PARTICLES & DELICATE AROMA (STRICTLY SUBTLE & REALISTIC)
-   ========================================================================== */
+/* Micro Particles & Aroma */
 .particle-container {
   position: absolute;
   bottom: 60px;
@@ -566,7 +597,6 @@
   transition: none;
 }
 
-/* Delicate Transparent Aroma Wisps */
 .aroma-container {
   position: absolute;
   bottom: 85px;
@@ -591,29 +621,17 @@
 }
 
 @keyframes wispRise {
-  0% {
-    opacity: 0;
-    transform: translate(0, 0) scale(0.6);
-  }
-  30% {
-    opacity: 0.35;
-    transform: translate(-3px, -18px) scale(1.1);
-  }
-  70% {
-    opacity: 0.2;
-    transform: translate(4px, -36px) scale(1.4);
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-2px, -52px) scale(1.8);
-  }
+  0% { opacity: 0; transform: translate(0, 0) scale(0.6); }
+  30% { opacity: 0.35; transform: translate(-3px, -18px) scale(1.1); }
+  70% { opacity: 0.2; transform: translate(4px, -36px) scale(1.4); }
+  100% { opacity: 0; transform: translate(-2px, -52px) scale(1.8); }
 }
 
 .wisp-active {
   animation: wispRise 1.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
 }
 
-/* Elegant Success & Flavour Badge */
+/* Brief Feedback Badge */
 .spice-flavour-badge {
   position: absolute;
   bottom: 0px;
@@ -651,24 +669,26 @@
   background: #D97706;
 }
 
+/* Clean Edge-to-Edge Footer Bottom */
+.footer-bottom {
+  width: 100% !important;
+  max-width: none !important;
+  border-top: 1px solid #E5E7EB;
+  padding: 20px clamp(24px, 4vw, 80px) !important;
+  font-size: 0.8125rem;
+  color: #6B7280;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
 /* Reduced Motion Support */
 @media (prefers-reduced-motion: reduce) {
-  .spice-item {
-    animation: none !important;
-  }
-  .mortar-unit {
-    transition: none !important;
-  }
-  .mortar-pestle-img {
-    transition: none !important;
-  }
-  .pestle-grinding {
-    animation: none !important;
-  }
-  .mortar-impact {
-    animation: none !important;
-  }
-  .wisp-active {
-    animation: none !important;
-  }
+  .spice-item { animation: none !important; }
+  .mortar-unit { transition: none !important; }
+  .mortar-pestle-img { transition: none !important; }
+  .pestle-grinding { animation: none !important; }
+  .mortar-impact { animation: none !important; }
+  .wisp-active { animation: none !important; }
 }

@@ -1,7 +1,7 @@
 /**
  * HIPA MASALA — "FROM SPICE TO FLAVOUR" INTERACTIVE FOOTER EXPERIENCE
- * Pure Vanilla JavaScript with high performance hardware-accelerated transforms,
- * realistic physics, micro-powder dispersion, delicate aroma, and full accessibility.
+ * High performance hardware-accelerated transforms, organic background floating,
+ * realistic physics flight, subtle pestle grinding, micro-powder, and delicate aroma.
  */
 
 (function () {
@@ -23,50 +23,15 @@
 
     let isBusy = false;
 
-    // Realistic spice profiles: specific particle colors, messages & screen reader text
-    const SPICE_PROFILES = {
-      chilli: {
-        name: 'Guntur Red Chilli',
-        particleColors: ['#DC2626', '#B91C1C', '#991B1B', '#EF4444'],
-        announcement: 'Guntur dried red chilli crushed in the granite mortar, releasing vibrant piquancy and warmth.',
-        badge: 'Freshly ground chilli. Piquant and fiery.'
-      },
-      pepper: {
-        name: 'Tellicherry Black Pepper',
-        particleColors: ['#27272A', '#18181B', '#3F3F46', '#52525B'],
-        announcement: 'Tellicherry black peppercorns gently cracked, releasing bold pungent aroma and piperine warmth.',
-        badge: 'Cracked Tellicherry pepper. Bold and aromatic.'
-      },
-      turmeric: {
-        name: 'Erode Turmeric Root',
-        particleColors: ['#F59E0B', '#D97706', '#B45309', '#FBBF24'],
-        announcement: 'Erode whole turmeric root ground into rich golden powder with earthy curcumin notes.',
-        badge: 'Stone-ground golden turmeric. Rich and pure.'
-      },
-      cardamom: {
-        name: 'Green Cardamom Pod',
-        particleColors: ['#65A30D', '#84CC16', '#4D7C0F', '#A3E635'],
-        announcement: 'Fresh green cardamom pod cracked open, dispersing sweet floral camphor notes.',
-        badge: 'Cracked green cardamom. Sweet, floral essence.'
-      },
-      cumin: {
-        name: 'Jeera / Cumin Seeds',
-        particleColors: ['#92400E', '#B45309', '#78350F', '#A16207'],
-        announcement: 'Dry roasted cumin seeds crushed into fragrant, nutty South Indian masala powder.',
-        badge: 'Freshly ground jeera. Warm, toasted aroma.'
-      },
-      coriander: {
-        name: 'Dhania / Coriander Seeds',
-        particleColors: ['#B45309', '#D97706', '#92400E', '#D97706'],
-        announcement: 'Whole coriander seeds milled in granite, releasing gentle citrusy, herbal flavour.',
-        badge: 'Milled coriander seeds. Herbaceous and citrusy.'
-      },
-      cinnamon: {
-        name: 'Ceylon Cinnamon Bark',
-        particleColors: ['#78350F', '#92400E', '#5B2910', '#A16207'],
-        announcement: 'Ceylon cinnamon bark quills crushed, unfolding sweet woody spice aroma.',
-        badge: 'Ground Ceylon cinnamon. Sweet, woody richness.'
-      }
+    // Realistic spice particle color palettes
+    const SPICE_COLORS = {
+      chilli: ['#DC2626', '#B91C1C', '#991B1B', '#EF4444'],
+      pepper: ['#27272A', '#18181B', '#3F3F46', '#52525B'],
+      turmeric: ['#F59E0B', '#D97706', '#B45309', '#FBBF24'],
+      cardamom: ['#65A30D', '#84CC16', '#4D7C0F', '#A3E635'],
+      cumin: ['#92400E', '#B45309', '#78350F', '#A16207'],
+      coriander: ['#B45309', '#D97706', '#92400E', '#D97706'],
+      cinnamon: ['#78350F', '#92400E', '#5B2910', '#A16207']
     };
 
     spiceButtons.forEach(btn => {
@@ -89,14 +54,14 @@
       isBusy = true;
 
       const spiceType = spiceBtn.getAttribute('data-spice') || 'chilli';
-      const profile = SPICE_PROFILES[spiceType] || SPICE_PROFILES.chilli;
+      const particleColors = SPICE_COLORS[spiceType] || SPICE_COLORS.chilli;
 
-      // 1. Calculate physical coordinates to bowl center
+      // 1. Calculate physical coordinates to mortar bowl cavity center
       const stageRect = stage.getBoundingClientRect();
       const spiceRect = spiceBtn.getBoundingClientRect();
       const mortarRect = mortar.getBoundingClientRect();
 
-      // Destination: Mortar cavity center (slightly above bottom)
+      // Destination: Mortar cavity center (slightly above base)
       const targetX = (mortarRect.left + mortarRect.width / 2) - stageRect.left;
       const targetY = (mortarRect.top + mortarRect.height * 0.42) - stageRect.top;
 
@@ -126,25 +91,25 @@
         mortar.classList.add('mortar-impact');
 
         // Spawn realistic micro particles
-        createMicroParticles(profile.particleColors);
+        createMicroParticles(particleColors);
 
         // Spawn delicate aroma wisps
         triggerAromaWisps();
 
-        // Show flavor badge
+        // Show brief brand message ("From spice to flavour.")
         if (flavourBadge) {
           const badgeText = flavourBadge.querySelector('.badge-text') || flavourBadge;
-          badgeText.textContent = profile.badge;
+          badgeText.textContent = 'From spice to flavour.';
           flavourBadge.classList.add('active');
         }
 
-        // Screen reader announcement
+        // Screen reader announcement (concise & clean)
         if (announcer) {
-          announcer.textContent = profile.announcement;
+          announcer.textContent = 'Spice ground in stone mortar. From spice to flavour.';
         }
       }, 550);
 
-      // 4. Reset Scene smoothly after 2.3 seconds
+      // 4. Reset Scene smoothly after 2.2 seconds
       setTimeout(() => {
         pestle.classList.remove('pestle-grinding');
         mortar.classList.remove('mortar-impact');
@@ -154,7 +119,7 @@
         }
 
         // Reset spice button
-        spiceBtn.style.transition = 'transform 0.4s ease, opacity 0.4s ease';
+        spiceBtn.style.transition = 'transform 0.45s ease, opacity 0.45s ease';
         spiceBtn.style.transform = '';
         spiceBtn.style.opacity = '1';
         spiceBtn.style.zIndex = '10';
@@ -163,9 +128,9 @@
           spiceBtn.style.animation = '';
           spiceBtn.style.transition = '';
           isBusy = false;
-        }, 400);
+        }, 450);
 
-      }, 2300);
+      }, 2200);
     }
 
     function getSpiceSpinAngle(spiceType) {
@@ -196,9 +161,9 @@
 
         // Random dispersion within 20px radius of bowl cavity
         const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * 22;
+        const dist = Math.random() * 20;
         const tx = Math.cos(angle) * dist;
-        const ty = Math.sin(angle) * dist * 0.5 - (Math.random() * 10); // slight oval spread
+        const ty = Math.sin(angle) * dist * 0.5 - (Math.random() * 8);
 
         p.style.width = `${size}px`;
         p.style.height = `${size}px`;
@@ -209,7 +174,6 @@
 
         particleContainer.appendChild(p);
 
-        // Animate using Web Animations API or fallback
         if (p.animate) {
           p.animate([
             { opacity: 0, transform: 'translate(-50%, -50%) scale(0.5)' },
@@ -237,7 +201,6 @@
         wisp.style.animationDelay = `${i * 0.15}s`;
         aromaContainer.appendChild(wisp);
 
-        // Trigger animation
         requestAnimationFrame(() => {
           wisp.classList.add('wisp-active');
         });

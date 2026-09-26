@@ -2,10 +2,11 @@
    HIPA MASALA HOME STYLES
    ============================================================ */
 
-/* 3-Slide Hero Carousel */
+/* 3-Slide Hero Carousel — TRUE FULL-DISPLAY / FULL-WIDTH EDGE-TO-EDGE */
 .hero-carousel-section {
   position: relative;
   width: 100%;
+  max-width: none;
   margin: 0;
   padding: 0;
   background-color: #FFFFFF;
@@ -13,7 +14,8 @@
   border-bottom: 1px solid var(--border-light);
   aspect-ratio: 1920 / 700;
   min-height: 460px;
-  max-height: 700px;
+  max-height: none;
+  box-sizing: border-box;
 }
 
 .hero-slider-container {
@@ -976,9 +978,10 @@
 @media (max-width: 768px) {
   .hero-carousel-section {
     width: 100% !important;
-    aspect-ratio: 1920 / 700 !important;
-    min-height: auto !important;
-    max-height: none !important;
+    max-width: none !important;
+    aspect-ratio: 16 / 9 !important;
+    min-height: 250px !important;
+    max-height: 400px !important;
     height: auto !important;
   }
   .hero-slide-banner {
@@ -1025,9 +1028,10 @@
 @media (max-width: 480px) {
   .hero-carousel-section {
     width: 100% !important;
-    aspect-ratio: 1920 / 700 !important;
-    min-height: auto !important;
-    max-height: none !important;
+    max-width: none !important;
+    aspect-ratio: 16 / 10 !important;
+    min-height: 220px !important;
+    max-height: 300px !important;
     height: auto !important;
   }
   .carousel-nav-btn {
@@ -1100,9 +1104,10 @@
 @media (max-width: 360px) {
   .hero-carousel-section {
     width: 100% !important;
-    aspect-ratio: 1920 / 700 !important;
-    min-height: auto !important;
-    max-height: none !important;
+    max-width: none !important;
+    aspect-ratio: 16 / 10 !important;
+    min-height: 200px !important;
+    max-height: 270px !important;
     height: auto !important;
   }
   .heritage-video-wrap,

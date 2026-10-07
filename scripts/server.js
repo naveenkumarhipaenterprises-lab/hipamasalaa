@@ -49,12 +49,12 @@ function writeJson(filePath, data) {
 const TRUSTED_PRODUCTS = {
   "sambar-powder": { name: "Sambar Powder", variants: { "100g": 52, "200g": 98, "500g": 235, "1kg": 450 } },
   "rasam-powder": { name: "Rasam Powder", variants: { "100g": 54, "200g": 102, "500g": 245, "1kg": 470 } },
-  "garam-masala": { name: "Garam Masala", variants: { "50g": 48, "100g": 90, "200g": 175, "500g": 420 } },
+  "garam-masala": { name: "Garam Masala", variants: { "50g": 48, "100g": 82, "200g": 158, "500g": 380, "1kg": 740 } },
   "turmeric-powder": { name: "Turmeric Powder", variants: { "100g": 38, "200g": 72, "500g": 170, "1kg": 320 } },
-  "red-chilli-powder": { name: "Red Chilli Powder", variants: { "100g": 58, "200g": 110, "500g": 265, "1kg": 510 } },
+  "red-chilli-powder": { name: "Red Chilli Powder", variants: { "100g": 55, "200g": 105, "500g": 250, "1kg": 480 } },
   "coriander-powder": { name: "Coriander Powder", variants: { "100g": 42, "200g": 80, "500g": 190, "1kg": 360 } },
-  "cumin-powder": { name: "Cumin Powder", variants: { "50g": 45, "100g": 85, "200g": 165, "500g": 395 } },
-  "pepper-powder": { name: "Pepper Powder", variants: { "50g": 60, "100g": 115, "200g": 220, "500g": 520 } }
+  "cumin-powder": { name: "Cumin Powder", variants: { "50g": 45, "100g": 76, "200g": 148, "500g": 350, "1kg": 680 } },
+  "pepper-powder": { name: "Pepper Powder", variants: { "50g": 60, "100g": 115, "200g": 220, "500g": 520, "1kg": 990 } }
 };
 
 const MIME_TYPES = {

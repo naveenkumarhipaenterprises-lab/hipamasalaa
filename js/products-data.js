@@ -13,7 +13,7 @@ const HIPA_PRODUCTS = [
     category: "masalas",
     categoryName: "Masala Powders",
     description: "Traditional blend of roasted lentils and spices for authentic South Indian sambar.",
-    image: "assets/images/products/sambar-powder.png",
+    image: "assets/images/products/sambar/sambar-100g-front-web.png",
     imageAlt: "HIPA Masala Sambar Powder Pack",
     variants: [
       {
@@ -46,7 +46,16 @@ const HIPA_PRODUCTS = [
           backWeb: "assets/images/products/sambar/sambar-500g-back-web.png"
         }
       },
-      { size: "1kg", price: 450 }
+      {
+        size: "1kg",
+        price: 450,
+        images: {
+          front: "assets/images/products/sambar/sambar-1kg-front.png",
+          frontWeb: "assets/images/products/sambar/sambar-1kg-front-web.png",
+          back: "assets/images/products/sambar/sambar-1kg-back.png",
+          backWeb: "assets/images/products/sambar/sambar-1kg-back-web.png"
+        }
+      }
     ],
     ingredients: [
       "Coriander Seeds",
@@ -81,13 +90,49 @@ const HIPA_PRODUCTS = [
     category: "masalas",
     categoryName: "Masala Powders",
     description: "Tangy, aromatic rasam powder crafted the traditional way with roasted spices.",
-    image: "assets/images/products/rasam-powder.png",
+    image: "assets/images/products/rasam/rasam-100g-front-web.png",
     imageAlt: "HIPA Masala Rasam Powder Pack",
     variants: [
-      { size: "100g", price: 54 },
-      { size: "200g", price: 102 },
-      { size: "500g", price: 245 },
-      { size: "1kg", price: 470 }
+      {
+        size: "100g",
+        price: 54,
+        images: {
+          front: "assets/images/products/rasam/rasam-100g-front.png",
+          frontWeb: "assets/images/products/rasam/rasam-100g-front-web.png",
+          back: "assets/images/products/rasam/rasam-100g-back.png",
+          backWeb: "assets/images/products/rasam/rasam-100g-back-web.png"
+        }
+      },
+      {
+        size: "200g",
+        price: 102,
+        images: {
+          front: "assets/images/products/rasam/rasam-200g-front.png",
+          frontWeb: "assets/images/products/rasam/rasam-200g-front-web.png",
+          back: "assets/images/products/rasam/rasam-200g-back.png",
+          backWeb: "assets/images/products/rasam/rasam-200g-back-web.png"
+        }
+      },
+      {
+        size: "500g",
+        price: 245,
+        images: {
+          front: "assets/images/products/rasam/rasam-500g-front.png",
+          frontWeb: "assets/images/products/rasam/rasam-500g-front-web.png",
+          back: "assets/images/products/rasam/rasam-500g-back.png",
+          backWeb: "assets/images/products/rasam/rasam-500g-back-web.png"
+        }
+      },
+      {
+        size: "1kg",
+        price: 470,
+        images: {
+          front: "assets/images/products/rasam/rasam-1kg-front.png",
+          frontWeb: "assets/images/products/rasam/rasam-1kg-front-web.png",
+          back: "assets/images/products/rasam/rasam-1kg-back.png",
+          backWeb: "assets/images/products/rasam/rasam-1kg-back-web.png"
+        }
+      }
     ],
     ingredients: [
       "Coriander Seeds",
@@ -119,12 +164,49 @@ const HIPA_PRODUCTS = [
     category: "masalas",
     categoryName: "Masala Powders",
     description: "A rich, warming blend of whole roasted spices for curries, gravies, and biryanis.",
-    image: "assets/images/products/garam-masala.png",
+    image: "assets/images/products/garam-masala/garam-masala-100g-front-web.png",
     imageAlt: "HIPA Masala Garam Masala Pack",
     variants: [
-      { size: "100g", price: 82 },
-      { size: "200g", price: 158 },
-      { size: "500g", price: 380 }
+      {
+        size: "100g",
+        price: 82,
+        images: {
+          front: "assets/images/products/garam-masala/garam-masala-100g-front.png",
+          frontWeb: "assets/images/products/garam-masala/garam-masala-100g-front-web.png",
+          back: "assets/images/products/garam-masala/garam-masala-100g-back.png",
+          backWeb: "assets/images/products/garam-masala/garam-masala-100g-back-web.png"
+        }
+      },
+      {
+        size: "200g",
+        price: 158,
+        images: {
+          front: "assets/images/products/garam-masala/garam-masala-200g-front.png",
+          frontWeb: "assets/images/products/garam-masala/garam-masala-200g-front-web.png",
+          back: "assets/images/products/garam-masala/garam-masala-200g-back.png",
+          backWeb: "assets/images/products/garam-masala/garam-masala-200g-back-web.png"
+        }
+      },
+      {
+        size: "500g",
+        price: 380,
+        images: {
+          front: "assets/images/products/garam-masala/garam-masala-500g-front.png",
+          frontWeb: "assets/images/products/garam-masala/garam-masala-500g-front-web.png",
+          back: "assets/images/products/garam-masala/garam-masala-500g-back.png",
+          backWeb: "assets/images/products/garam-masala/garam-masala-500g-back-web.png"
+        }
+      },
+      {
+        size: "1kg",
+        price: 740,
+        images: {
+          front: "assets/images/products/garam-masala/garam-masala-1kg-front.png",
+          frontWeb: "assets/images/products/garam-masala/garam-masala-1kg-front-web.png",
+          back: "assets/images/products/garam-masala/garam-masala-1kg-back.png",
+          backWeb: "assets/images/products/garam-masala/garam-masala-1kg-back-web.png"
+        }
+      }
     ],
     ingredients: [
       "Coriander Seeds",
@@ -159,13 +241,49 @@ const HIPA_PRODUCTS = [
     category: "spices",
     categoryName: "Pure Spices",
     description: "Pure turmeric powder with natural golden colour and earthy aroma.",
-    image: "assets/images/products/turmeric-powder.png",
+    image: "assets/images/products/turmeric/turmeric-100g-front-web.png",
     imageAlt: "HIPA Masala Turmeric Powder Pack",
     variants: [
-      { size: "100g", price: 38 },
-      { size: "200g", price: 72 },
-      { size: "500g", price: 170 },
-      { size: "1kg", price: 320 }
+      {
+        size: "100g",
+        price: 38,
+        images: {
+          front: "assets/images/products/turmeric/turmeric-100g-front.png",
+          frontWeb: "assets/images/products/turmeric/turmeric-100g-front-web.png",
+          back: "assets/images/products/turmeric/turmeric-100g-back.png",
+          backWeb: "assets/images/products/turmeric/turmeric-100g-back-web.png"
+        }
+      },
+      {
+        size: "200g",
+        price: 72,
+        images: {
+          front: "assets/images/products/turmeric/turmeric-200g-front.png",
+          frontWeb: "assets/images/products/turmeric/turmeric-200g-front-web.png",
+          back: "assets/images/products/turmeric/turmeric-200g-back.png",
+          backWeb: "assets/images/products/turmeric/turmeric-200g-back-web.png"
+        }
+      },
+      {
+        size: "500g",
+        price: 170,
+        images: {
+          front: "assets/images/products/turmeric/turmeric-500g-front.png",
+          frontWeb: "assets/images/products/turmeric/turmeric-500g-front-web.png",
+          back: "assets/images/products/turmeric/turmeric-500g-back.png",
+          backWeb: "assets/images/products/turmeric/turmeric-500g-back-web.png"
+        }
+      },
+      {
+        size: "1kg",
+        price: 320,
+        images: {
+          front: "assets/images/products/turmeric/turmeric-1kg-front.png",
+          frontWeb: "assets/images/products/turmeric/turmeric-1kg-front-web.png",
+          back: "assets/images/products/turmeric/turmeric-1kg-back.png",
+          backWeb: "assets/images/products/turmeric/turmeric-1kg-back-web.png"
+        }
+      }
     ],
     ingredients: [
       "100% Pure Turmeric Rhizomes"
@@ -188,13 +306,49 @@ const HIPA_PRODUCTS = [
     category: "spices",
     categoryName: "Pure Spices",
     description: "Vibrant red chilli powder ground from handpicked chillies for natural color and controlled heat.",
-    image: "assets/images/products/red-chilli-powder.png",
+    image: "assets/images/products/red-chilli/red-chilli-100g-front-web.png",
     imageAlt: "HIPA Masala Red Chilli Powder Pack",
     variants: [
-      { size: "100g", price: 55 },
-      { size: "200g", price: 105 },
-      { size: "500g", price: 250 },
-      { size: "1kg", price: 480 }
+      {
+        size: "100g",
+        price: 55,
+        images: {
+          front: "assets/images/products/red-chilli/red-chilli-100g-front.png",
+          frontWeb: "assets/images/products/red-chilli/red-chilli-100g-front-web.png",
+          back: "assets/images/products/red-chilli/red-chilli-100g-back.png",
+          backWeb: "assets/images/products/red-chilli/red-chilli-100g-back-web.png"
+        }
+      },
+      {
+        size: "200g",
+        price: 105,
+        images: {
+          front: "assets/images/products/red-chilli/red-chilli-200g-front.png",
+          frontWeb: "assets/images/products/red-chilli/red-chilli-200g-front-web.png",
+          back: "assets/images/products/red-chilli/red-chilli-200g-back.png",
+          backWeb: "assets/images/products/red-chilli/red-chilli-200g-back-web.png"
+        }
+      },
+      {
+        size: "500g",
+        price: 250,
+        images: {
+          front: "assets/images/products/red-chilli/red-chilli-500g-front.png",
+          frontWeb: "assets/images/products/red-chilli/red-chilli-500g-front-web.png",
+          back: "assets/images/products/red-chilli/red-chilli-500g-back.png",
+          backWeb: "assets/images/products/red-chilli/red-chilli-500g-back-web.png"
+        }
+      },
+      {
+        size: "1kg",
+        price: 480,
+        images: {
+          front: "assets/images/products/red-chilli/red-chilli-1kg-front.png",
+          frontWeb: "assets/images/products/red-chilli/red-chilli-1kg-front-web.png",
+          back: "assets/images/products/red-chilli/red-chilli-1kg-back.png",
+          backWeb: "assets/images/products/red-chilli/red-chilli-1kg-back-web.png"
+        }
+      }
     ],
     ingredients: [
       "100% Sun-Dried Red Chillies"
@@ -217,13 +371,49 @@ const HIPA_PRODUCTS = [
     category: "spices",
     categoryName: "Pure Spices",
     description: "Freshly ground whole coriander seeds with a naturally sweet, earthy aroma.",
-    image: "assets/images/products/coriander-powder.png",
+    image: "assets/images/products/coriander/coriander-100g-front-web.png",
     imageAlt: "HIPA Masala Coriander Powder Pack",
     variants: [
-      { size: "100g", price: 42 },
-      { size: "200g", price: 80 },
-      { size: "500g", price: 190 },
-      { size: "1kg", price: 360 }
+      {
+        size: "100g",
+        price: 42,
+        images: {
+          front: "assets/images/products/coriander/coriander-100g-front.png",
+          frontWeb: "assets/images/products/coriander/coriander-100g-front-web.png",
+          back: "assets/images/products/coriander/coriander-100g-back.png",
+          backWeb: "assets/images/products/coriander/coriander-100g-back-web.png"
+        }
+      },
+      {
+        size: "200g",
+        price: 80,
+        images: {
+          front: "assets/images/products/coriander/coriander-200g-front.png",
+          frontWeb: "assets/images/products/coriander/coriander-200g-front-web.png",
+          back: "assets/images/products/coriander/coriander-200g-back.png",
+          backWeb: "assets/images/products/coriander/coriander-200g-back-web.png"
+        }
+      },
+      {
+        size: "500g",
+        price: 190,
+        images: {
+          front: "assets/images/products/coriander/coriander-500g-front.png",
+          frontWeb: "assets/images/products/coriander/coriander-500g-front-web.png",
+          back: "assets/images/products/coriander/coriander-500g-back.png",
+          backWeb: "assets/images/products/coriander/coriander-500g-back-web.png"
+        }
+      },
+      {
+        size: "1kg",
+        price: 360,
+        images: {
+          front: "assets/images/products/coriander/coriander-1kg-front.png",
+          frontWeb: "assets/images/products/coriander/coriander-1kg-front-web.png",
+          back: "assets/images/products/coriander/coriander-1kg-back.png",
+          backWeb: "assets/images/products/coriander/coriander-1kg-back-web.png"
+        }
+      }
     ],
     ingredients: [
       "100% Selected Coriander Seeds (Dhaniya)"
@@ -246,12 +436,49 @@ const HIPA_PRODUCTS = [
     category: "spices",
     categoryName: "Pure Spices",
     description: "Roasted cumin seeds ground fresh for warm, nutty flavour in every dish.",
-    image: "assets/images/products/cumin-powder.png",
+    image: "assets/images/products/cumin/cumin-100g-front-web.png",
     imageAlt: "HIPA Masala Cumin Powder Pack",
     variants: [
-      { size: "100g", price: 76 },
-      { size: "200g", price: 148 },
-      { size: "500g", price: 350 }
+      {
+        size: "100g",
+        price: 76,
+        images: {
+          front: "assets/images/products/cumin/cumin-100g-front.png",
+          frontWeb: "assets/images/products/cumin/cumin-100g-front-web.png",
+          back: "assets/images/products/cumin/cumin-100g-back.png",
+          backWeb: "assets/images/products/cumin/cumin-100g-back-web.png"
+        }
+      },
+      {
+        size: "200g",
+        price: 148,
+        images: {
+          front: "assets/images/products/cumin/cumin-200g-front.png",
+          frontWeb: "assets/images/products/cumin/cumin-200g-front-web.png",
+          back: "assets/images/products/cumin/cumin-200g-back.png",
+          backWeb: "assets/images/products/cumin/cumin-200g-back-web.png"
+        }
+      },
+      {
+        size: "500g",
+        price: 350,
+        images: {
+          front: "assets/images/products/cumin/cumin-500g-front.png",
+          frontWeb: "assets/images/products/cumin/cumin-500g-front-web.png",
+          back: "assets/images/products/cumin/cumin-500g-back.png",
+          backWeb: "assets/images/products/cumin/cumin-500g-back-web.png"
+        }
+      },
+      {
+        size: "1kg",
+        price: 680,
+        images: {
+          front: "assets/images/products/cumin/cumin-1kg-front.png",
+          frontWeb: "assets/images/products/cumin/cumin-1kg-front-web.png",
+          back: "assets/images/products/cumin/cumin-1kg-back.png",
+          backWeb: "assets/images/products/cumin/cumin-1kg-back-web.png"
+        }
+      }
     ],
     ingredients: [
       "100% Roasted Whole Cumin Seeds (Jeera / Seeragam)"
@@ -274,13 +501,59 @@ const HIPA_PRODUCTS = [
     category: "spices",
     categoryName: "Pure Spices",
     description: "Sun-dried black pepper freshly ground to retain its sharp aroma and natural pungency.",
-    image: "assets/images/products/pepper-powder.png",
+    image: "assets/images/products/pepper/pepper-100g-front-web.png",
     imageAlt: "HIPA Masala Pepper Powder Pack",
     variants: [
-      { size: "50g", price: 60 },
-      { size: "100g", price: 115 },
-      { size: "200g", price: 220 },
-      { size: "500g", price: 520 }
+      {
+        size: "50g",
+        price: 60,
+        images: {
+          front: "assets/images/products/pepper/pepper-100g-front.png",
+          frontWeb: "assets/images/products/pepper/pepper-100g-front-web.png",
+          back: "assets/images/products/pepper/pepper-100g-back.png",
+          backWeb: "assets/images/products/pepper/pepper-100g-back-web.png"
+        }
+      },
+      {
+        size: "100g",
+        price: 115,
+        images: {
+          front: "assets/images/products/pepper/pepper-100g-front.png",
+          frontWeb: "assets/images/products/pepper/pepper-100g-front-web.png",
+          back: "assets/images/products/pepper/pepper-100g-back.png",
+          backWeb: "assets/images/products/pepper/pepper-100g-back-web.png"
+        }
+      },
+      {
+        size: "200g",
+        price: 220,
+        images: {
+          front: "assets/images/products/pepper/pepper-200g-front.png",
+          frontWeb: "assets/images/products/pepper/pepper-200g-front-web.png",
+          back: "assets/images/products/pepper/pepper-200g-back.png",
+          backWeb: "assets/images/products/pepper/pepper-200g-back-web.png"
+        }
+      },
+      {
+        size: "500g",
+        price: 520,
+        images: {
+          front: "assets/images/products/pepper/pepper-500g-front.png",
+          frontWeb: "assets/images/products/pepper/pepper-500g-front-web.png",
+          back: "assets/images/products/pepper/pepper-500g-back.png",
+          backWeb: "assets/images/products/pepper/pepper-500g-back-web.png"
+        }
+      },
+      {
+        size: "1kg",
+        price: 990,
+        images: {
+          front: "assets/images/products/pepper/pepper-1kg-front.png",
+          frontWeb: "assets/images/products/pepper/pepper-1kg-front-web.png",
+          back: "assets/images/products/pepper/pepper-1kg-back.png",
+          backWeb: "assets/images/products/pepper/pepper-1kg-back-web.png"
+        }
+      }
     ],
     ingredients: [
       "100% Sun-Dried Black Peppercorns"

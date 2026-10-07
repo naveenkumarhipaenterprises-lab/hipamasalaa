@@ -99,6 +99,15 @@ const ProductPage = {
     this.selectedSize = size;
     this.renderSizeOptions();
     this.updatePriceDisplay();
+    const variant = this.currentProduct && this.currentProduct.variants
+      ? this.currentProduct.variants.find(v => v.size === size)
+      : null;
+    if (variant && variant.images && variant.images.frontWeb) {
+      const imgEl = document.getElementById('pdpMainImg');
+      if (imgEl) {
+        imgEl.src = variant.images.frontWeb;
+      }
+    }
     if (window.HipaViewer) {
       window.HipaViewer.setSize(size);
     }

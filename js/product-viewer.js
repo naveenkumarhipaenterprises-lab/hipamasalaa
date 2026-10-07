@@ -60,7 +60,11 @@
     getSizeMockup() {
       const config = this.getMockupConfig();
       if (!config || !config.sizes) return null;
-      return config.sizes[this.currentSize] || null;
+      if (config.sizes[this.currentSize]) return config.sizes[this.currentSize];
+      const key = (this.currentSize || '').replace(/\s+/g, '');
+      if (config.sizes[key]) return config.sizes[key];
+      const firstKey = Object.keys(config.sizes)[0];
+      return config.sizes[firstKey] || null;
     },
 
     hasBackImage() {

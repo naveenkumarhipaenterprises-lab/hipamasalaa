@@ -1,0 +1,75 @@
+/* ==========================================================================
+   HIPA MASALA — GSAP SCROLLTRIGGER INTERACTION SYSTEM
+   Styles for scrubbed scroll timelines, pinned showcases, and parallax depth
+   ========================================================================== */
+
+/* Hardware acceleration & smooth rendering for GSAP elements */
+.hero-slider-track,
+.hero-banner-image,
+.why-card,
+.heritage-card,
+.heritage-bg-video,
+.support-card {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* On Desktop: Pinned Showcase Section Styling */
+@media (min-width: 992px) {
+  #whyChooseHipa {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .heritage-video-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .heritage-bg-video {
+    position: absolute;
+    top: -10%;
+    left: 0;
+    width: 100%;
+    height: 120%;
+    object-fit: cover;
+  }
+
+  /* Clear CSS transition delays when GSAP scrub is in control */
+  #whyChooseHipa .why-card,
+  .heritage-card,
+  #needHelp .support-card {
+    transition: box-shadow 0.25s ease, border-color 0.25s ease !important;
+  }
+}
+
+/* Tablet & Mobile Touch Responsiveness */
+@media (max-width: 991px) {
+  #whyChooseHipa,
+  .heritage-video-section {
+    min-height: auto;
+    padding: 60px 0;
+  }
+
+  .heritage-bg-video {
+    height: 100%;
+    top: 0;
+  }
+}
+
+/* Clean compatibility override for .reveal elements under GSAP control */
+.js-gsap-ready .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}

@@ -664,6 +664,9 @@ const App = {
     if (homeGrid && window.HipaStore) {
       const allProducts = window.HipaStore.getAllProducts();
       homeGrid.innerHTML = allProducts.map((p, idx) => this.renderProductCard(p, idx)).join('');
+      if (window.ScrollTrigger) {
+        window.ScrollTrigger.refresh();
+      }
     }
 
     // Initialize 3D Packaging Cursor Reaction on all cards & showcases

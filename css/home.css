@@ -1153,3 +1153,78 @@
     font-size: 0.75rem;
   }
 }
+
+/* ==========================================================================
+   HOMEPAGE FULL-SECTION SCROLL-SNAP SIZING & DOCKING
+   ========================================================================== */
+
+/* Hero Carousel Snap Alignment */
+.hero-carousel-section.scroll-snap-section {
+  scroll-snap-align: start;
+  scroll-margin-top: calc(var(--header-height, 74px) + 36px);
+  scroll-snap-stop: always;
+}
+
+@media (min-width: 769px) {
+  /* Products Grid Section: Settle at top, allow natural vertical scrolling for 8 cards */
+  #shopProducts.scroll-snap-section {
+    scroll-snap-align: start;
+    scroll-snap-stop: normal;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 48px 0;
+  }
+
+  /* Bottom sub-snap anchor inside tall products section to cleanly view lower row & explore button */
+  .shop-products-anchor-end {
+    scroll-snap-align: end;
+    scroll-snap-stop: normal;
+  }
+
+  /* Why Choose HIPA: Centered full-screen presentation */
+  #whyChooseHipa.scroll-snap-section {
+    min-height: calc(100vh - var(--header-height, 74px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 48px 0;
+  }
+
+  /* Heritage Video Section: Full-screen cinematic presentation */
+  .heritage-video-section.scroll-snap-section {
+    min-height: calc(100vh - var(--header-height, 74px));
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 48px 0;
+  }
+
+  /* Customer Support Section: Full-screen assistance presentation */
+  .support-section.scroll-snap-section {
+    min-height: calc(100vh - var(--header-height, 74px));
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 48px 0;
+  }
+
+  /* Site Footer docks smoothly at the end of the page */
+  .site-footer.scroll-snap-section {
+    scroll-snap-align: end;
+    scroll-snap-stop: normal;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-carousel-section.scroll-snap-section {
+    scroll-margin-top: 136px;
+  }
+
+  .site-footer.scroll-snap-section {
+    scroll-snap-align: start;
+  }
+}

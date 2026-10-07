@@ -355,3 +355,65 @@ button {
     padding-right: 16px;
   }
 }
+
+/* ==========================================================================
+   PREMIUM SMOOTH FULL-SECTION SCROLL-SNAP SYSTEM
+   Native CSS Scroll Snapping with Controlled Snapping & Zero Scroll-Jacking
+   ========================================================================== */
+
+/* Enable scroll-snap on designated pages */
+html.has-scroll-snap {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: var(--header-height, 74px);
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Major Full-Screen / Page Section Snap Targets */
+.scroll-snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* Desktop Full-Screen Presentation Sections */
+@media (min-width: 769px) {
+  .section-snap-fullscreen {
+    min-height: calc(100vh - var(--header-height, 74px));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+  }
+}
+
+/* Touch-Friendly Mobile Responsiveness */
+@media (max-width: 768px) {
+  html.has-scroll-snap {
+    /* Proximity on mobile allows natural free swiping while gently settling near section headers */
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 100px;
+  }
+
+  .scroll-snap-section {
+    scroll-snap-stop: normal !important;
+    min-height: auto !important;
+    scroll-margin-top: 100px;
+  }
+}
+
+/* Accessibility: Disable all snapping & smooth animation for users with reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html.has-scroll-snap {
+    scroll-behavior: auto !important;
+    scroll-snap-type: none !important;
+  }
+
+  .scroll-snap-section,
+  .shop-products-anchor-end {
+    scroll-snap-align: none !important;
+    scroll-snap-stop: normal !important;
+  }
+}

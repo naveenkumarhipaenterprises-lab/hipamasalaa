@@ -23,6 +23,10 @@ const ProductPage = {
     if (window.HipaViewer) {
       window.HipaViewer.init(this.currentProduct.slug, this.selectedSize);
     }
+
+    if (window.App && typeof window.App.initAll3DTilt === 'function') {
+      window.App.initAll3DTilt();
+    }
   },
 
   render: function() {
@@ -102,10 +106,19 @@ const ProductPage = {
     const variant = this.currentProduct && this.currentProduct.variants
       ? this.currentProduct.variants.find(v => v.size === size)
       : null;
-    if (variant && variant.images && variant.images.frontWeb) {
+    if (variant && variant.images && (variant.images.frontWeb || variant.images.front)) {
+      const newSrc = variant.images.frontWeb || variant.images.front;
       const imgEl = document.getElementById('pdpMainImg');
-      if (imgEl) {
-        imgEl.src = variant.images.frontWeb;
+      if (imgEl && imgEl.getAttribute('src') !== newSrc) {
+        imgEl.classList.add('is-switching');
+        const temp = new Image();
+        const applySrc = () => {
+          imgEl.src = newSrc;
+          setTimeout(() => imgEl.classList.remove('is-switching'), 40);
+        };
+        temp.onload = applySrc;
+        temp.onerror = applySrc;
+        temp.src = newSrc;
       }
     }
     if (window.HipaViewer) {
@@ -211,6 +224,10 @@ const ProductPage = {
 
     const related = window.HipaStore.getRelatedProducts(this.currentProduct.slug, 4);
     relatedContainer.innerHTML = related.map(p => window.App ? window.App.renderProductCard(p) : '').join('');
+
+    if (window.App && typeof window.App.initAll3DTilt === 'function') {
+      window.App.initAll3DTilt();
+    }
   },
 
   updateWishlistButtonState: function() {

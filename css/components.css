@@ -102,6 +102,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  perspective: 1000px;
+  transform-style: preserve-3d;
 }
 
 .product-img {
@@ -112,12 +114,31 @@
   max-width: 86%;
   max-height: 86%;
   object-fit: contain;
-  transition: transform 0.35s cubic-bezier(0.2, 0, 0.2, 1);
-  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.06));
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1), opacity 0.2s ease, filter 0.4s ease;
+  filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.07));
+  will-change: transform, filter;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.product-img.is-switching {
+  opacity: 0.15;
+  transform: translate(-50%, -50%) scale(0.94);
+}
+
+.package-3d-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 4;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  mix-blend-mode: overlay;
 }
 
 .product-card:hover .product-img {
-  transform: translate(-50%, -50%) scale(1.06);
+  filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.13));
 }
 
 .quick-view-overlay-btn {
@@ -833,12 +854,25 @@
   justify-content: center;
   padding: 20px;
   min-height: 320px;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
 }
 
 .quickview-img {
   max-width: 90%;
   max-height: 320px;
   object-fit: contain;
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0.2, 1), opacity 0.2s ease, filter 0.4s ease;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.08));
+  will-change: transform, filter;
+  transform-style: preserve-3d;
+}
+
+.quickview-img.is-switching {
+  opacity: 0.15;
+  transform: scale(0.94);
 }
 
 .quickview-details {

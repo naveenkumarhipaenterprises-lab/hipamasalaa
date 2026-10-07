@@ -68,7 +68,11 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-height, 74px) + 20px);
   -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -93,8 +97,27 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   color: var(--text-dark);
   font-weight: 800;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+/* Tabular Numerals for Crisp E-Commerce Pricing */
+.current-price,
+.pdp-current-price,
+.cart-item-price,
+.cart-subtotal-row span:last-child {
+  font-variant-numeric: tabular-nums lining-nums;
+  font-feature-settings: "tnum" 1, "cv11" 1;
+  letter-spacing: -0.015em;
+}
+
+/* Warm Artisanal Subtitle Typography */
+.product-tamil-title,
+.pdp-tamil-name {
+  color: #964215;
+  font-weight: 600;
+  letter-spacing: 0.015em;
 }
 
 img {

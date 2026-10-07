@@ -112,12 +112,14 @@ const App = {
   renderProductCard: function(product, index = 0) {
     const selectedSize = this.selectedVariants[product.slug] || product.variants[0].size;
     const currentVariant = product.variants.find(v => v.size === selectedSize) || product.variants[0];
+    const variantImg = (currentVariant.images && (currentVariant.images.frontWeb || currentVariant.images.front)) || product.image;
 
     const sizeChipsHtml = product.variants.map(v => `
       <button 
         type="button" 
         class="size-chip ${v.size === selectedSize ? 'is-active' : ''}" 
         onclick="App.selectCardSize('${product.slug}', '${v.size}', event)"
+        data-size="${v.size}"
         title="Select ${v.size} pack">
         ${v.size}
       </button>
@@ -143,8 +145,9 @@ const App = {
           </button>
         </div>
 
-        <a href="product.html?slug=${product.slug}" class="product-media" title="View ${product.name} details">
-          <img class="product-img" src="${product.image}" alt="${product.imageAlt}" loading="lazy">
+        <a href="product.html?slug=${product.slug}" class="product-media" data-slug="${product.slug}" title="View ${product.name} details">
+          <div class="package-3d-glare" aria-hidden="true"></div>
+          <img class="product-img" src="${variantImg}" alt="${product.imageAlt}" loading="lazy">
           <button type="button" class="quick-view-overlay-btn" onclick="App.openQuickView('${product.slug}', event)">Quick View</button>
         </a>
 
@@ -191,13 +194,62 @@ const App = {
     }
     this.selectedVariants[productSlug] = size;
     const cardEl = document.getElementById(`card-${productSlug}`);
-    if (cardEl && window.HipaStore) {
-      const product = window.HipaStore.getProductBySlug(productSlug);
-      if (product) {
-        cardEl.outerHTML = this.renderProductCard(product);
-        const newCard = document.getElementById(`card-${productSlug}`);
-        if (newCard) newCard.classList.add('is-visible');
-      }
+    if (!cardEl || !window.HipaStore) return;
+
+    const product = window.HipaStore.getProductBySlug(productSlug);
+    if (!product) return;
+
+    const variant = product.variants.find(v => v.size === size) || product.variants[0];
+    const newImgSrc = (variant.images && (variant.images.frontWeb || variant.images.front)) || product.image;
+
+    // 1. Update card packaging image with smooth transition
+    const imgEl = cardEl.querySelector('.product-img');
+    if (imgEl && imgEl.getAttribute('src') !== newImgSrc) {
+      imgEl.classList.add('is-switching');
+      const tempImg = new Image();
+      const applySrc = () => {
+        imgEl.src = newImgSrc;
+        setTimeout(() => imgEl.classList.remove('is-switching'), 40);
+      };
+      tempImg.onload = applySrc;
+      tempImg.onerror = applySrc;
+      tempImg.src = newImgSrc;
+    }
+
+    // 2. Update active size chip buttons
+    cardEl.querySelectorAll('.size-chip').forEach(chip => {
+      const chipSize = chip.getAttribute('data-size') || chip.textContent.trim();
+      chip.classList.toggle('is-active', chipSize === size);
+    });
+
+    // 3. Update pack size label
+    const labelEl = cardEl.querySelector('.pack-size-label');
+    if (labelEl) {
+      labelEl.innerHTML = `Pack Size: <strong>${size}</strong>`;
+    }
+
+    // 4. Update price display
+    const priceEl = cardEl.querySelector('.current-price');
+    if (priceEl) {
+      priceEl.textContent = `₹${variant.price}`;
+    }
+
+    // 5. Update Add to Cart & Buy Now buttons
+    const cartBtn = cardEl.querySelector('.btn-card-cart');
+    if (cartBtn) {
+      cartBtn.setAttribute('onclick', `Cart.addItem('${product.slug}', '${size}', 1)`);
+      cartBtn.setAttribute('aria-label', `Add ${product.name} ${size} to cart`);
+    }
+    const buyBtn = cardEl.querySelector('.btn-card-buy');
+    if (buyBtn) {
+      buyBtn.setAttribute('onclick', `Cart.buyNow('${product.slug}', '${size}', 1)`);
+      buyBtn.setAttribute('aria-label', `Buy ${product.name} now`);
+    }
+
+    // Ensure 3D tilt remains attached
+    const mediaEl = cardEl.querySelector('.product-media');
+    if (mediaEl && !mediaEl._has3DTilt) {
+      this.attach3DTilt(mediaEl, '.product-img');
     }
   },
 
@@ -222,59 +274,100 @@ const App = {
 
     let selectedSize = this.selectedVariants[product.slug] || product.variants[0].size;
     let variant = product.variants.find(v => v.size === selectedSize) || product.variants[0];
+    let variantImg = (variant.images && (variant.images.frontWeb || variant.images.front)) || product.image;
 
     const modal = document.getElementById('quickviewModal');
     const content = document.getElementById('quickviewContent');
     if (!modal || !content) return;
 
-    const renderModalContent = () => {
-      content.innerHTML = `
-        <div class="quickview-image-box">
-          <img class="quickview-img" src="${product.image}" alt="${product.name}">
+    content.innerHTML = `
+      <div class="quickview-image-box" id="qvImageBox">
+        <div class="package-3d-glare" aria-hidden="true"></div>
+        <img class="quickview-img" id="qvImg" src="${variantImg}" alt="${product.name}">
+      </div>
+      <div class="quickview-details">
+        <div class="card-badge" style="align-self:flex-start; margin-bottom:8px;">${product.categoryName}</div>
+        <h2 style="font-size:1.5rem; font-weight:800; color:var(--text-dark); margin-bottom:4px;">${product.name}</h2>
+        <div style="font-size:0.875rem; color:var(--text-muted); margin-bottom:12px;">${product.tamilName || ''}</div>
+        
+        <div class="price-row" style="margin-bottom:16px;">
+          <span class="current-price" id="qvPrice" style="font-size:1.75rem;">₹${variant.price}</span>
+          <span class="tax-inclusive-tag">Inc. of all taxes</span>
         </div>
-        <div class="quickview-details">
-          <div class="card-badge" style="align-self:flex-start; margin-bottom:8px;">${product.categoryName}</div>
-          <h2 style="font-size:1.5rem; font-weight:800; color:var(--text-dark); margin-bottom:4px;">${product.name}</h2>
-          <div style="font-size:0.875rem; color:var(--text-muted); margin-bottom:12px;">${product.tamilName || ''}</div>
-          
-          <div class="price-row" style="margin-bottom:16px;">
-            <span class="current-price" style="font-size:1.75rem;">₹${variant.price}</span>
-            <span class="tax-inclusive-tag">Inc. of all taxes</span>
-          </div>
 
-          <p style="font-size:0.875rem; color:var(--text-body); line-height:1.5; margin-bottom:20px;">
-            ${product.description}
-          </p>
+        <p style="font-size:0.875rem; color:var(--text-body); line-height:1.5; margin-bottom:20px;">
+          ${product.description}
+        </p>
 
-          <div style="margin-bottom:20px;">
-            <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Select Pack Size:</div>
-            <div class="pack-size-chips">
-              ${product.variants.map(v => `
-                <button type="button" class="size-chip ${v.size === selectedSize ? 'is-active' : ''}" onclick="App.changeQuickViewSize('${product.slug}', '${v.size}')">
-                  ${v.size}
-                </button>
-              `).join('')}
-            </div>
-          </div>
-
-          <div style="display:flex; gap:10px; margin-top:auto;">
-            <button class="btn btn-primary" style="flex:1;" onclick="Cart.addItem('${product.slug}', '${selectedSize}', 1); App.closeQuickView();">
-              + Add to Cart • ₹${variant.price}
-            </button>
-            <a href="product.html?slug=${product.slug}" class="btn btn-secondary">Full Details</a>
+        <div style="margin-bottom:20px;">
+          <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; color:var(--text-muted); margin-bottom:8px;">Select Pack Size:</div>
+          <div class="pack-size-chips" id="qvChips">
+            ${product.variants.map(v => `
+              <button type="button" class="size-chip ${v.size === selectedSize ? 'is-active' : ''}" onclick="App.changeQuickViewSize('${product.slug}', '${v.size}')" data-size="${v.size}">
+                ${v.size}
+              </button>
+            `).join('')}
           </div>
         </div>
-      `;
-    };
 
-    renderModalContent();
+        <div style="display:flex; gap:10px; margin-top:auto;">
+          <button class="btn btn-primary" id="qvAddCartBtn" style="flex:1;" onclick="Cart.addItem('${product.slug}', '${selectedSize}', 1); App.closeQuickView();">
+            + Add to Cart • ₹${variant.price}
+          </button>
+          <a href="product.html?slug=${product.slug}" class="btn btn-secondary">Full Details</a>
+        </div>
+      </div>
+    `;
+
     modal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
+
+    // Attach 3D tilt to Quick View image container
+    const qvBox = document.getElementById('qvImageBox');
+    if (qvBox) {
+      this.attach3DTilt(qvBox, '#qvImg');
+    }
   },
 
   changeQuickViewSize: function(productSlug, size) {
     this.selectedVariants[productSlug] = size;
-    this.openQuickView(productSlug);
+    const product = window.HipaStore.getProductBySlug(productSlug);
+    if (!product) return;
+
+    const variant = product.variants.find(v => v.size === size) || product.variants[0];
+    const newImgSrc = (variant.images && (variant.images.frontWeb || variant.images.front)) || product.image;
+
+    // Smooth image switch in Quick View
+    const imgEl = document.getElementById('qvImg');
+    if (imgEl && imgEl.getAttribute('src') !== newImgSrc) {
+      imgEl.classList.add('is-switching');
+      const tempImg = new Image();
+      const applySrc = () => {
+        imgEl.src = newImgSrc;
+        setTimeout(() => imgEl.classList.remove('is-switching'), 40);
+      };
+      tempImg.onload = applySrc;
+      tempImg.onerror = applySrc;
+      tempImg.src = newImgSrc;
+    }
+
+    // Update active size chip buttons in Quick View
+    const chipsContainer = document.getElementById('qvChips');
+    if (chipsContainer) {
+      chipsContainer.querySelectorAll('.size-chip').forEach(btn => {
+        btn.classList.toggle('is-active', btn.getAttribute('data-size') === size);
+      });
+    }
+
+    // Update price and cart button
+    const priceEl = document.getElementById('qvPrice');
+    if (priceEl) priceEl.textContent = `₹${variant.price}`;
+
+    const addBtn = document.getElementById('qvAddCartBtn');
+    if (addBtn) {
+      addBtn.textContent = `+ Add to Cart • ₹${variant.price}`;
+      addBtn.setAttribute('onclick', `Cart.addItem('${product.slug}', '${size}', 1); App.closeQuickView();`);
+    }
   },
 
   closeQuickView: function() {
@@ -428,6 +521,137 @@ const App = {
     }
   },
 
+  /**
+   * 3D Packaging Hover & Rotation Reaction
+   * Reacts to cursor movement with realistic 3D perspective, specular glare, and dynamic shadow
+   */
+  attach3DTilt: function(container, imgSelector = '.product-img') {
+    if (!container || container._has3DTilt) return;
+    container._has3DTilt = true;
+
+    const img = container.querySelector(imgSelector);
+    if (!img) return;
+
+    // Specular sheen highlight overlay
+    let glare = container.querySelector('.package-3d-glare');
+    if (!glare) {
+      glare = document.createElement('div');
+      glare.className = 'package-3d-glare';
+      glare.setAttribute('aria-hidden', 'true');
+      container.appendChild(glare);
+    }
+
+    let rect = null;
+    let rafId = null;
+    let targetX = 0; // -1 to 1
+    let targetY = 0; // -1 to 1
+    let currentX = 0;
+    let currentY = 0;
+    let isHovered = false;
+
+    const isCardImg = img.classList.contains('product-img');
+
+    const updateTilt = () => {
+      // Smooth lerp damping for organic springy feel
+      currentX += (targetX - currentX) * 0.16;
+      currentY += (targetY - currentY) * 0.16;
+
+      const rotY = (currentX * 18).toFixed(2);  // Yaw (horizontal tilt)
+      const rotX = (-currentY * 16).toFixed(2); // Pitch (vertical tilt)
+      const shadowX = (-currentX * 14).toFixed(1);
+      const shadowY = (12 + currentY * 8).toFixed(1);
+
+      if (isCardImg) {
+        img.style.transform = `translate(-50%, -50%) perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(${isHovered ? 1.08 : 1}, ${isHovered ? 1.08 : 1}, ${isHovered ? 1.08 : 1}) translateZ(24px)`;
+      } else {
+        img.style.transform = `perspective(1000px) rotateX(${rotX}deg) rotateY(${rotY}deg) scale3d(${isHovered ? 1.05 : 1}, ${isHovered ? 1.05 : 1}, ${isHovered ? 1.05 : 1}) translateZ(20px)`;
+      }
+
+      img.style.filter = `drop-shadow(${shadowX}px ${shadowY}px 20px rgba(0, 0, 0, ${isHovered ? 0.18 : 0.08}))`;
+
+      // Specular sheen follows light reflection opposite to gaze
+      if (glare) {
+        const glareX = ((currentX + 1) * 50).toFixed(1);
+        const glareY = ((currentY + 1) * 50).toFixed(1);
+        glare.style.background = `radial-gradient(circle at ${glareX}% ${glareY}%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0) 65%)`;
+        glare.style.opacity = isHovered ? '1' : '0';
+      }
+
+      if (isHovered || Math.abs(currentX) > 0.005 || Math.abs(currentY) > 0.005) {
+        rafId = requestAnimationFrame(updateTilt);
+      } else {
+        // Return to rest position cleanly
+        if (isCardImg) {
+          img.style.transform = '';
+        } else {
+          img.style.transform = '';
+        }
+        img.style.filter = '';
+        if (glare) glare.style.opacity = '0';
+        rafId = null;
+      }
+    };
+
+    container.addEventListener('mouseenter', () => {
+      rect = container.getBoundingClientRect();
+      isHovered = true;
+      if (!rafId) rafId = requestAnimationFrame(updateTilt);
+    });
+
+    container.addEventListener('mousemove', (e) => {
+      if (!rect) rect = container.getBoundingClientRect();
+      const mouseX = e.clientX - rect.left;
+      const mouseY = e.clientY - rect.top;
+      targetX = Math.max(-1, Math.min(1, (mouseX / rect.width - 0.5) * 2));
+      targetY = Math.max(-1, Math.min(1, (mouseY / rect.height - 0.5) * 2));
+      if (!rafId) rafId = requestAnimationFrame(updateTilt);
+    });
+
+    container.addEventListener('mouseleave', () => {
+      isHovered = false;
+      targetX = 0;
+      targetY = 0;
+      rect = null;
+    });
+  },
+
+  initAll3DTilt: function() {
+    // 1. All product cards
+    document.querySelectorAll('.product-media').forEach(media => {
+      this.attach3DTilt(media, '.product-img');
+    });
+
+    // 2. PDP main image container
+    const pdpWrap = document.querySelector('.pdp-main-image-wrap');
+    if (pdpWrap) {
+      this.attach3DTilt(pdpWrap, '#pdpMainImg');
+    }
+  },
+
+  /**
+   * Smooth Scrolling Engine
+   * Smoothly scrolls internal links with fixed navigation offset
+   */
+  initSmoothScroll: function() {
+    document.querySelectorAll('a[href^="#"]:not([href="#"]):not([href="#0"])').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (!href || href === '#') return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          const header = document.getElementById('siteHeader');
+          const headerOffset = header ? header.offsetHeight + 14 : 85;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+          window.scrollTo({
+            top: Math.max(0, targetPosition),
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+  },
+
   init: function() {
     this.initHeaderScroll();
     this.initMobileNav();
@@ -441,6 +665,12 @@ const App = {
       const allProducts = window.HipaStore.getAllProducts();
       homeGrid.innerHTML = allProducts.map((p, idx) => this.renderProductCard(p, idx)).join('');
     }
+
+    // Initialize 3D Packaging Cursor Reaction on all cards & showcases
+    this.initAll3DTilt();
+
+    // Initialize Smooth Scrolling for internal anchors
+    this.initSmoothScroll();
 
     // Initialize Heritage Video Background
     this.initHeritageVideo();

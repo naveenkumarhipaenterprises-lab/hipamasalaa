@@ -112,9 +112,12 @@ const ShopPage = {
 
     grid.innerHTML = list.map((p, idx) => window.App ? window.App.renderProductCard(p, idx) : '').join('');
 
-    // Ensure all newly rendered cards are observed / made visible
+    // Ensure all newly rendered cards are observed / made visible and have 3D tilt
     if (window.App && typeof window.App.initScrollReveal === 'function') {
       window.App.initScrollReveal();
+    }
+    if (window.App && typeof window.App.initAll3DTilt === 'function') {
+      window.App.initAll3DTilt();
     }
   },
 

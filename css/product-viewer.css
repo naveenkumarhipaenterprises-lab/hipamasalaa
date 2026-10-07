@@ -15,6 +15,8 @@
   justify-content: center;
   padding: 24px;
   overflow: hidden;
+  perspective: 1000px;
+  transform-style: preserve-3d;
   transition: box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
@@ -30,7 +32,9 @@
   display: block;
   cursor: zoom-in;
   filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.08));
-  transition: opacity 0.18s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.4s cubic-bezier(0.2, 0, 0.2, 1);
+  will-change: transform, filter;
+  transform-style: preserve-3d;
   user-select: none;
   -webkit-user-drag: none;
 }

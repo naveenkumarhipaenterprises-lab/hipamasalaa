@@ -2,3 +2,13 @@ node_modules/
 .DS_Store
 Thumbs.db
 *.log
+
+# Secrets: never commit
+.env
+.env.*
+!.env.example
+
+# Local dev data (orders, enquiries with customer details)
+data/
+
+.vercel

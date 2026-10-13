@@ -28,34 +28,30 @@ const Cart = {
     }
   },
 
+  // The cart lives in this browser, so a guest's cart is simply still there after
+  // they log in. On login we only refresh prices/names from the current catalog.
   syncWithUser: function(user) {
     if (!user) return;
-    const userCartKey = `hipa_cart_user_${user.id}`;
-    const guestItems = this.getItems();
-    let userItems = [];
+    this.refreshFromCatalog();
+  },
 
-    try {
-      const savedUserCart = localStorage.getItem(userCartKey);
-      userItems = savedUserCart ? JSON.parse(savedUserCart) : [];
-    } catch (e) {
-      userItems = [];
-    }
-
-    // Merge guest items into user cart without duplicates
-    guestItems.forEach(guestItem => {
-      const matchIndex = userItems.findIndex(u => u.slug === guestItem.slug && u.size === guestItem.size);
-      if (matchIndex > -1) {
-        userItems[matchIndex].quantity = Math.max(userItems[matchIndex].quantity, guestItem.quantity);
-      } else {
-        userItems.push(guestItem);
+  /** Re-prices saved cart lines from the live catalog and drops products that no longer exist. */
+  refreshFromCatalog: function() {
+    if (!window.HIPA_PRODUCTS) return;
+    const items = this.getItems();
+    let changed = false;
+    const fresh = items.filter(item => {
+      const product = window.HIPA_PRODUCTS.find(p => p.slug === item.slug);
+      const variant = product && product.variants.find(v => v.size === item.size);
+      if (!variant) { changed = true; return false; }
+      if (item.price !== variant.price || item.name !== product.name) {
+        item.price = variant.price;
+        item.name = product.name;
+        changed = true;
       }
+      return true;
     });
-
-    try {
-      localStorage.setItem(userCartKey, JSON.stringify(userItems));
-    } catch (e) {}
-
-    this.saveItems(userItems);
+    if (changed) this.saveItems(fresh);
   },
 
   addItem: function(productSlug, variantSize, quantity = 1, openDrawer = true) {
@@ -93,7 +89,7 @@ const Cart = {
     this.addItem(productSlug, variantSize, quantity, false);
     const subtotal = this.getSubtotal();
     if (subtotal >= this.MIN_ORDER_VALUE) {
-      window.location.href = 'checkout.html';
+      this.goToCheckout();
     } else {
       this.openDrawer();
       const needed = this.MIN_ORDER_VALUE - subtotal;
@@ -126,8 +122,18 @@ const Cart = {
       return false;
     }
 
-    window.location.href = 'checkout.html';
+    this.goToCheckout();
     return true;
+  },
+
+  // Browsing and the cart work without an account; placing the order needs one.
+  // Guests go to login and come straight back to checkout with their cart intact.
+  goToCheckout: function() {
+    if (window.HipaAuth && !window.HipaAuth.isAuthenticated()) {
+      window.HipaAuth.requireAuth('checkout.html', 'checkout');
+      return;
+    }
+    window.location.href = 'checkout.html';
   },
 
   updateQuantity: function(itemId, newQty) {
@@ -307,6 +313,7 @@ const Cart = {
   },
 
   init: function() {
+    this.refreshFromCatalog();
     this.updateBadges();
 
     // Bind triggers

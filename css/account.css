@@ -283,3 +283,8 @@
     padding: 24px 18px;
   }
 }
+
+
+.status-processing { background-color: #EDE9FE; color: #5B21B6; }
+.status-shipped { background-color: #E0F2FE; color: #075985; }
+.status-cancelled { background-color: #F3F4F6; color: #4B5563; }

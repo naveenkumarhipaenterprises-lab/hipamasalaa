@@ -105,50 +105,75 @@ const Checkout = {
   },
 
   // =========================================================================
-  // CHECKOUT PAGE HANDLERS
+  // CHECKOUT PAGE HANDLERS (login required)
   // =========================================================================
-  initCheckoutPage: function() {
-    this.renderCheckoutSummary();
-
+  initCheckoutPage: async function() {
     const form = document.getElementById('checkoutForm');
+    if (form) form.style.visibility = 'hidden';
+
+    if (window.HipaAuth) {
+      await window.HipaAuth.ready;
+      if (!window.HipaAuth.requireAuth('checkout.html', 'checkout')) return;
+    }
+    if (!this.renderCheckoutSummary()) return;
+    if (form) form.style.visibility = '';
+
     if (form) {
       form.addEventListener('submit', (e) => {
         e.preventDefault();
         this.processOrder();
       });
     }
-
-    // Prefill if authenticated
-    setTimeout(() => {
-      if (window.HipaAuth && window.HipaAuth.currentUser) {
-        const u = window.HipaAuth.currentUser;
-        const nameEl = document.getElementById('custName');
-        const emailEl = document.getElementById('custEmail');
-        const phoneEl = document.getElementById('custPhone');
-        if (nameEl && !nameEl.value && u.name) nameEl.value = u.name;
-        if (emailEl && !emailEl.value && u.email) emailEl.value = u.email;
-        if (phoneEl && !phoneEl.value && u.phone) phoneEl.value = u.phone;
-      }
-    }, 100);
+    this.prefillCustomer();
   },
 
+  prefillCustomer: async function() {
+    const auth = window.HipaAuth;
+    if (!auth || !auth.currentUser) return;
+    const setIfEmpty = (id, value) => {
+      const el = document.getElementById(id);
+      if (el && !el.value && value) el.value = value;
+    };
+    setIfEmpty('custName', auth.getDisplayName());
+    setIfEmpty('custEmail', auth.currentUser.email);
+
+    const signedInEl = document.getElementById('checkoutSignedInAs');
+    if (signedInEl) signedInEl.textContent = `Signed in as ${auth.currentUser.email}`;
+
+    try {
+      const profile = await auth.getProfile();
+      if (!profile) return;
+      setIfEmpty('custName', profile.full_name);
+      setIfEmpty('custPhone', profile.phone);
+      const a = profile.default_address;
+      if (a) {
+        setIfEmpty('custAddress', a.street);
+        setIfEmpty('custCity', a.city);
+        setIfEmpty('custPincode', a.pincode);
+        setIfEmpty('custLandmark', a.landmark);
+        const stateEl = document.getElementById('custState');
+        if (stateEl && !stateEl.value && a.state) stateEl.value = a.state;
+      }
+    } catch (e) {
+      console.warn('Could not load saved profile', e);
+    }
+  },
+
+  /** Returns false (and redirects) when the cart can't be checked out. */
   renderCheckoutSummary: function() {
     const itemsListEl = document.getElementById('checkoutItemsList');
-    if (!itemsListEl || !window.Cart) return;
+    if (!itemsListEl || !window.Cart) return false;
 
     const items = window.Cart.getItems();
     const subtotal = window.Cart.getSubtotal();
 
     if (items.length === 0) {
       window.location.href = 'shop.html';
-      return;
+      return false;
     }
-
     if (subtotal < this.MIN_ORDER_VALUE) {
-      const needed = this.MIN_ORDER_VALUE - subtotal;
-      alert(`Online orders require a minimum order value of ₹999. Please add ₹${needed} more to place your order.`);
-      window.location.href = 'shop.html';
-      return;
+      window.location.href = 'cart.html';
+      return false;
     }
 
     itemsListEl.innerHTML = items.map(item => `
@@ -166,9 +191,9 @@ const Checkout = {
 
     const subEl = document.getElementById('checkoutSummarySubtotal');
     const totEl = document.getElementById('checkoutSummaryTotal');
-
     if (subEl) subEl.textContent = `₹${subtotal}`;
     if (totEl) totEl.textContent = `₹${subtotal}`;
+    return true;
   },
 
   setSubmitLoading: function(isLoading, message = 'Processing...') {
@@ -181,11 +206,49 @@ const Checkout = {
     } else {
       btn.disabled = false;
       btn.removeAttribute('aria-disabled');
-      btn.textContent = 'PLACE ORDER';
+      btn.textContent = 'PLACE ORDER & PAY';
     }
   },
 
+  showError: function(message) {
+    const box = document.getElementById('checkoutError');
+    if (box) {
+      box.textContent = message;
+      box.style.display = 'block';
+      box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } else if (window.Cart) {
+      window.Cart.showToast(message, 'error');
+    }
+  },
+
+  clearError: function() {
+    const box = document.getElementById('checkoutError');
+    if (box) box.style.display = 'none';
+  },
+
+  authHeaders: async function() {
+    const headers = { 'Content-Type': 'application/json' };
+    const token = window.HipaAuth ? await window.HipaAuth.getAccessToken() : null;
+    if (token) headers.Authorization = `Bearer ${token}`;
+    return headers;
+  },
+
+  readForm: function() {
+    const val = id => (document.getElementById(id)?.value || '').trim();
+    return {
+      customer: { name: val('custName'), phone: val('custPhone').replace(/\D/g, '').slice(-10), email: val('custEmail') },
+      address: {
+        street: val('custAddress'),
+        city: val('custCity'),
+        state: val('custState'),
+        pincode: val('custPincode'),
+        landmark: val('custLandmark')
+      }
+    };
+  },
+
   processOrder: async function() {
+    this.clearError();
     const form = document.getElementById('checkoutForm');
     if (!form.checkValidity()) {
       form.reportValidity();
@@ -193,211 +256,155 @@ const Checkout = {
     }
 
     const items = window.Cart.getItems();
-    const subtotal = window.Cart.getSubtotal();
-
     if (!items.length) {
-      alert('Your cart is empty. Please add items to continue.');
       window.location.href = 'shop.html';
       return;
     }
-
-    if (subtotal < this.MIN_ORDER_VALUE) {
-      alert(`Minimum online order value is ₹999. Please add more items to your cart.`);
+    if (window.Cart.getSubtotal() < this.MIN_ORDER_VALUE) {
+      this.showError('Online orders need a minimum value of ₹999. Please add more items.');
       return;
     }
 
-    const name = document.getElementById('custName')?.value.trim() || '';
-    const phone = document.getElementById('custPhone')?.value.trim() || '';
-    const email = document.getElementById('custEmail')?.value.trim() || '';
-    const address = document.getElementById('custAddress')?.value.trim() || '';
-    const city = document.getElementById('custCity')?.value.trim() || '';
-    const state = document.getElementById('custState')?.value.trim() || '';
-    const pincode = document.getElementById('custPincode')?.value.trim() || '';
-    const landmark = document.getElementById('custLandmark')?.value.trim() || '';
-
-    // Field-level validation
-    if (!/^[6-9]\d{9}$/.test(phone)) {
-      alert('Please enter a valid 10-digit Indian mobile number.');
+    const { customer, address } = this.readForm();
+    if (!/^[6-9]\d{9}$/.test(customer.phone)) {
+      this.showError('Please enter a valid 10-digit Indian mobile number.');
       document.getElementById('custPhone')?.focus();
       return;
     }
-
-    if (!/^\d{6}$/.test(pincode)) {
-      alert('Please enter a valid 6-digit postal PIN code.');
+    if (!/^\d{6}$/.test(address.pincode)) {
+      this.showError('Please enter a valid 6-digit PIN code.');
       document.getElementById('custPincode')?.focus();
       return;
     }
 
-    this.setSubmitLoading(true, 'Creating Secure Order...');
+    this.setSubmitLoading(true, 'Creating secure order...');
 
+    // Only slug, size and quantity are sent; the server sets every price.
     const payload = {
-      items: items.map(i => ({
-        id: i.id,
-        slug: i.id.replace('hipa-', ''),
-        name: i.name,
-        size: i.size,
-        price: i.price,
-        quantity: i.quantity,
-        image: i.image
-      })),
-      customer: {
-        name,
-        phone,
-        email
-      },
-      address: {
-        street: address,
-        city,
-        state,
-        pincode,
-        landmark
-      }
+      items: items.map(i => ({ slug: i.slug, size: i.size, quantity: i.quantity, name: i.name })),
+      customer,
+      address
     };
 
     try {
       const response = await fetch('/api/payment/create-order', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: await this.authHeaders(),
         body: JSON.stringify(payload)
       });
+      const orderData = await response.json().catch(() => ({}));
 
-      const orderData = await response.json();
-
+      if (response.status === 401) {
+        window.HipaAuth.requireAuth('checkout.html', 'checkout');
+        return;
+      }
       if (!response.ok || !orderData.success) {
-        throw new Error(orderData.error || 'Failed to initialize order.');
+        throw new Error(orderData.error || 'We could not start your order. Please try again.');
       }
 
-      const isLiveRazorpayKey = orderData.keyId && orderData.keyId.startsWith('rzp_') && !orderData.keyId.includes('placeholder');
-      const isRazorpaySdkLoaded = typeof window.Razorpay === 'function';
-
-      // If live or configured test Razorpay credentials & SDK available, invoke Razorpay Checkout modal
-      if (isRazorpaySdkLoaded && isLiveRazorpayKey && orderData.mode !== 'test_sandbox') {
-        const options = {
+      if (orderData.mode === 'razorpay') {
+        if (typeof window.Razorpay !== 'function') {
+          throw new Error('The payment window could not load. Please check your connection and try again.');
+        }
+        const rzp = new window.Razorpay({
           key: orderData.keyId,
           amount: orderData.amount,
-          currency: orderData.currency || 'INR',
+          currency: orderData.currency,
           name: 'HIPA Masala',
-          description: 'Authentic Spice Order',
+          description: `Order ${orderData.orderNumber}`,
           image: 'assets/images/logo.png',
-          order_id: orderData.orderId,
-          prefill: {
-            name: name,
-            email: email,
-            contact: phone
-          },
-          theme: {
-            color: '#b82329'
-          },
-          handler: async (rzpRes) => {
-            await this.verifyOrderPayment(rzpRes, orderData, payload);
-          },
-          modal: {
-            ondismiss: () => {
-              this.setSubmitLoading(false);
-            }
-          }
-        };
-
-        const rzp = new window.Razorpay(options);
-        rzp.on('payment.failed', function (resp) {
-          alert(`Payment Failed: ${resp.error.description || 'Transaction could not be processed.'}`);
-          Checkout.setSubmitLoading(false);
+          order_id: orderData.razorpayOrderId,
+          prefill: { name: customer.name, email: customer.email, contact: customer.phone },
+          notes: { order_number: orderData.orderNumber },
+          theme: { color: '#9E1B1E' },
+          handler: (rzpRes) => this.verifyOrderPayment(rzpRes, orderData, payload),
+          modal: { ondismiss: () => this.setSubmitLoading(false) }
+        });
+        rzp.on('payment.failed', (resp) => {
+          this.showError(`Payment failed: ${(resp.error && resp.error.description) || 'the transaction could not be processed.'} No money was taken for this attempt.`);
+          this.setSubmitLoading(false);
         });
         rzp.open();
       } else {
-        // Test Sandbox / Simulated environment fallback: Automatically verifies order safely
-        this.setSubmitLoading(true, 'Verifying Payment...');
-        const simulatedRzpResponse = {
-          razorpay_order_id: orderData.orderId,
-          razorpay_payment_id: 'pay_test_' + Date.now().toString().slice(-8),
-          razorpay_signature: 'test_signature_valid'
-        };
-        await this.verifyOrderPayment(simulatedRzpResponse, orderData, payload);
+        // Test mode (local development only, enforced by the server): no real payment.
+        this.setSubmitLoading(true, 'Confirming test payment...');
+        await this.verifyOrderPayment({
+          razorpay_order_id: orderData.razorpayOrderId,
+          razorpay_payment_id: 'pay_test_' + Date.now(),
+          razorpay_signature: ''
+        }, orderData, payload);
       }
-
     } catch (err) {
       console.error('Checkout error:', err);
-      alert(err.message || 'An unexpected error occurred during checkout. Please try again.');
+      this.showError(err.message || 'Something went wrong. Please try again.');
       this.setSubmitLoading(false);
     }
   },
 
   verifyOrderPayment: async function(rzpRes, orderData, payload) {
-    this.setSubmitLoading(true, 'Confirming Order Details...');
-
+    this.setSubmitLoading(true, 'Confirming your order...');
     try {
       const verifyRes = await fetch('/api/payment/verify', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          razorpay_order_id: rzpRes.razorpay_order_id,
-          razorpay_payment_id: rzpRes.razorpay_payment_id,
-          razorpay_signature: rzpRes.razorpay_signature,
-          customer: payload.customer,
-          address: payload.address,
-          items: orderData.items || payload.items,
-          subtotal: orderData.subtotal,
-          shipping: orderData.shipping || 0,
-          total: orderData.total
-        })
+        headers: await this.authHeaders(),
+        body: JSON.stringify(rzpRes)
       });
-
-      const verifyData = await verifyRes.json();
-
+      const verifyData = await verifyRes.json().catch(() => ({}));
       if (!verifyRes.ok || !verifyData.success) {
         throw new Error(verifyData.error || 'Payment verification failed.');
       }
-
-      // Order Confirmed Successfully!
-      const orderNumber = verifyData.orderNumber || ('HIPA-' + Math.floor(100000 + Math.random() * 900000));
-      const orderNumEl = document.getElementById('successOrderNumber');
-      const orderDetailsEl = document.getElementById('successOrderDetails');
-      const modal = document.getElementById('orderSuccessModal');
-
-      if (orderNumEl) orderNumEl.textContent = orderNumber;
-      if (orderDetailsEl) {
-        orderDetailsEl.innerHTML = `
-          Thank you <strong>${payload.customer.name}</strong>!<br>
-          Your payment of <strong>₹${orderData.total}</strong> has been received.<br>
-          Order reference <strong>${orderNumber}</strong> has been confirmed.<br>
-          A confirmation and tracking link will be sent to <strong>${payload.customer.phone}</strong> and <strong>${payload.customer.email}</strong>.<br>
-          <div style="margin-top:10px; font-size:0.8125rem; color:var(--text-muted); background:#f8fafc; padding:10px; border-radius:6px;">
-            Shipping to: ${payload.address.street}, ${payload.address.city}, ${payload.address.state} – ${payload.address.pincode}
-          </div>
-        `;
-      }
-
-      if (modal) {
-        modal.classList.add('is-open');
-      }
-
-      // Persist in local customer history
-      try {
-        const savedOrders = JSON.parse(localStorage.getItem('hipa_user_orders') || '[]');
-        savedOrders.unshift({
-          order_number: orderNumber,
-          created_at: new Date().toISOString(),
-          total_amount: orderData.total,
-          status: 'Confirmed',
-          items: (orderData.items || payload.items).map(i => ({
-            name: i.name,
-            size: i.size,
-            price: i.unitPrice || i.price,
-            quantity: i.quantity,
-            image: i.image
-          }))
-        });
-        localStorage.setItem('hipa_user_orders', JSON.stringify(savedOrders));
-      } catch (e) {}
-
-      // Clear customer's active cart
-      window.Cart.clearCart();
-      this.setSubmitLoading(false);
-
+      this.showSuccess(verifyData, orderData, payload);
     } catch (err) {
       console.error('Payment verification error:', err);
-      alert(`Payment verification error: ${err.message}. If money was debited from your account, please contact support@hipamasalas.com with your transaction ID.`);
+      this.showError(`${err.message} If money was debited, it is safe: write to info@hipamasalas.com or WhatsApp +91 70580 53055 with order ${orderData.orderNumber}.`);
       this.setSubmitLoading(false);
+    }
+  },
+
+  showSuccess: function(verifyData, orderData, payload) {
+    const esc = window.HipaAuth ? window.HipaAuth.escape.bind(window.HipaAuth) : (t => t);
+    const orderNumber = verifyData.orderNumber;
+    const { customer, address } = payload;
+
+    const orderNumEl = document.getElementById('successOrderNumber');
+    const orderDetailsEl = document.getElementById('successOrderDetails');
+    if (orderNumEl) orderNumEl.textContent = orderNumber;
+    if (orderDetailsEl) {
+      orderDetailsEl.innerHTML = `
+        Thank you <strong>${esc(customer.name)}</strong>!<br>
+        Your payment of <strong>₹${verifyData.total}</strong> has been received${orderData.mode === 'test' ? ' <em>(test mode, no money moved)</em>' : ''}.<br>
+        We'll send updates to <strong>${esc(customer.phone)}</strong> and <strong>${esc(customer.email)}</strong>.
+        <div style="margin-top:10px; font-size:0.8125rem; color:var(--text-muted); background:#f8fafc; padding:10px; border-radius:6px;">
+          Shipping to: ${esc(address.street)}, ${esc(address.city)}, ${esc(address.state)} – ${esc(address.pincode)}
+        </div>
+      `;
+    }
+    const modal = document.getElementById('orderSuccessModal');
+    if (modal) modal.classList.add('is-open');
+
+    // Remember the address for next time
+    if (window.HipaAuth) window.HipaAuth.saveDefaultAddress(address, customer.phone).catch(() => {});
+
+    // Without Supabase (local dev) the account page reads order history from this browser.
+    if (!window.HipaAuth || !window.HipaAuth.isLive()) {
+      try {
+        const saved = JSON.parse(localStorage.getItem('hipa_user_orders') || '[]');
+        saved.unshift({
+          order_number: orderNumber,
+          created_at: new Date().toISOString(),
+          total: verifyData.total,
+          status: 'Confirmed',
+          items: orderData.items.map(i => ({ name: i.name, size: i.size, price: i.unitPrice, quantity: i.quantity }))
+        });
+        localStorage.setItem('hipa_user_orders', JSON.stringify(saved.slice(0, 50)));
+      } catch (e) {}
+    }
+
+    window.Cart.clearCart();
+    const btn = document.getElementById('checkoutSubmitBtn');
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = 'ORDER PLACED';
     }
   }
 };

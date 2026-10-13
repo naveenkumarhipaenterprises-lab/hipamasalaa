@@ -14,11 +14,11 @@ window.HIPA_CONFIG = {
     label: 'Chat with us'
   },
 
-  // Supabase PostgreSQL + Auth Configuration
+  // Supabase Auth + Postgres. Public values are served by /api/public-config from
+  // environment variables (.env locally, Vercel env in production). Never hardcode keys here.
   supabase: {
-    // Replace with your live project credentials or set via environment
-    url: window.__HIPA_SUPABASE_URL__ || 'https://vkmjklxquidqopkvdzvy.supabase.co',
-    anonKey: window.__HIPA_SUPABASE_ANON_KEY__ || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.placeholder'
+    url: (window.__HIPA_PUBLIC_CONFIG__ && window.__HIPA_PUBLIC_CONFIG__.supabaseUrl) || '',
+    anonKey: (window.__HIPA_PUBLIC_CONFIG__ && window.__HIPA_PUBLIC_CONFIG__.supabaseAnonKey) || ''
   },
 
   // E-Commerce Store Rules

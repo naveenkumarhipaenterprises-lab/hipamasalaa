@@ -194,24 +194,30 @@
         createdAt: new Date().toISOString()
       };
 
-      // 1. Always persist to localStorage for resilience
+      // Submit to the server (saved to the database)
+      let ok = false;
+      let errorMessage = '';
       try {
-        const stored = JSON.parse(localStorage.getItem('hipa_b2b_enquiries') || '[]');
-        stored.unshift(payload);
-        localStorage.setItem('hipa_b2b_enquiries', JSON.stringify(stored));
-      } catch (e) {
-        console.warn('Local storage error:', e);
-      }
-
-      // 2. Submit to backend API if available
-      try {
-        await fetch('/api/b2b-enquiry', {
+        const res = await fetch('/api/b2b-enquiry', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
         });
+        const data = await res.json().catch(() => ({}));
+        ok = res.ok && data.success;
+        errorMessage = data.error || '';
+        if (data.refCode) payload.refCode = data.refCode;
       } catch (e) {
-        // Backend failure will not disrupt customer experience
+        errorMessage = 'Could not reach our server.';
+      }
+
+      if (!ok) {
+        this.setLoading(false);
+        this.isSubmitting = false;
+        if (window.Cart && typeof window.Cart.showToast === 'function') {
+          window.Cart.showToast((errorMessage || 'Your enquiry could not be sent.') + ' Please WhatsApp us on +91 70580 53055.', 'error');
+        }
+        return;
       }
 
       // 3. Show Success State

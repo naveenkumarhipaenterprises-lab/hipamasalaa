@@ -1,2 +1,6 @@
 scripts/
-.git
+data/
+sql/
+.env
+.env.*
+!.env.example

@@ -356,7 +356,7 @@ const Checkout = {
       this.showSuccess(verifyData, orderData, payload);
     } catch (err) {
       console.error('Payment verification error:', err);
-      this.showError(`${err.message} If money was debited, it is safe: write to info@hipamasalas.com or WhatsApp +91 70580 53055 with order ${orderData.orderNumber}.`);
+      this.showError(`${err.message} If money was debited, it is safe: write to support@hipamasalas.com or WhatsApp +91 70580 53055 with order ${orderData.orderNumber}.`);
       this.setSubmitLoading(false);
     }
   },

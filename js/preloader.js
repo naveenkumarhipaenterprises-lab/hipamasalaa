@@ -7,6 +7,13 @@
   function createPreloader() {
     if (document.getElementById('sitePreloader')) return;
 
+    // Brand intro once per visit; later page-to-page navigation shouldn't wait on it.
+    try {
+      if (sessionStorage.getItem('hipa_preloader_seen')) return;
+      sessionStorage.setItem('hipa_preloader_seen', '1');
+    } catch (e) {}
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
     const preloader = document.createElement('div');
     preloader.id = 'sitePreloader';
     preloader.className = 'site-preloader';

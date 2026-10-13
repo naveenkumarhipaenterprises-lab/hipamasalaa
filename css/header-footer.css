@@ -748,6 +748,8 @@
   border-top: 1px solid var(--border-light);
   padding-top: 24px;
   display: flex;
+  flex-direction: column;
+  gap: 6px;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -1118,4 +1120,10 @@
     padding: 4px 8px !important;
     font-size: 0.6875rem !important;
   }
+}
+
+.footer-legal-ids {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  letter-spacing: 0.01em;
 }

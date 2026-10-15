@@ -103,7 +103,7 @@ const Wishlist = {
       try {
         await window.HipaAuth.client
           .from('wishlist_items')
-          .upsert({ user_id: window.HipaAuth.currentUser.id, product_slug: productSlug }, { onConflict: 'user_id,product_slug' });
+          .upsert({ user_id: window.HipaAuth.currentUser.id, product_slug: productSlug }, { onConflict: 'user_id,product_slug', ignoreDuplicates: true });
       } catch (e) {
         console.error('Error syncing wishlist item to database', e);
       }
@@ -142,7 +142,8 @@ const Wishlist = {
         const toUpload = localItems.filter(s => !dbSlugs.includes(s));
         if (toUpload.length > 0) {
           await window.HipaAuth.client.from('wishlist_items').upsert(
-            toUpload.map(slug => ({ user_id: user.id, product_slug: slug }))
+            toUpload.map(slug => ({ user_id: user.id, product_slug: slug })),
+            { onConflict: 'user_id,product_slug', ignoreDuplicates: true }
           );
         }
 

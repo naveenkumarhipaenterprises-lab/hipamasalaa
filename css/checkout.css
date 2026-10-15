@@ -248,3 +248,14 @@
   transform: none !important;
   box-shadow: none !important;
 }
+/* Inline checkout error (replaces browser alert popups) */
+.checkout-error {
+  margin: 12px 0 4px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #991B1B;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}

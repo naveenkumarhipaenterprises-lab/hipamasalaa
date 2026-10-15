@@ -480,21 +480,46 @@ const App = {
     }
   },
 
+  // Tasteful scroll reveals. Elements fade/slide in once as they enter the viewport;
+  // grid siblings are staggered. Skipped entirely for prefers-reduced-motion, and the
+  // home page's GSAP experience (scroll-experience.js) manages its own sections.
+  REVEAL_TARGETS: [
+    '.section-header', '.b2b-section-header', '.why-card', '.faq-item',
+    '.b2b-benefit-card', '.b2b-audience-card', '.b2b-product-card', '.b2b-process-card',
+    '.legal-hero', '.legal-content-card', '.legal-sidebar', '.shop-banner',
+    '.pdp-tabs-container', '.wishlist-page-section .container > *', '.account-tab-pane.is-active'
+  ],
+
   initScrollReveal: function() {
-    if (!('IntersectionObserver' in window)) {
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
       document.querySelectorAll('.reveal').forEach(el => el.classList.add('is-visible'));
       return;
+    }
+
+    if (!window.gsap) {
+      const viewportBottom = window.innerHeight;
+      document.querySelectorAll(this.REVEAL_TARGETS.join(',')).forEach(el => {
+        if (el.classList.contains('reveal') || el.closest('.reveal')) return;
+        // Already on screen at load: leave it alone so nothing flickers.
+        if (el.getBoundingClientRect().top < viewportBottom * 0.9) return;
+        el.classList.add('reveal');
+        const siblings = el.parentElement ? Array.from(el.parentElement.children).filter(c => c.classList.contains('reveal')) : [];
+        const index = siblings.indexOf(el);
+        if (index > 0) el.style.transitionDelay = `${Math.min(index, 4) * 0.08}s`;
+      });
     }
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
         }
       });
     }, {
-      rootMargin: '0px 0px -20px 0px',
-      threshold: 0.05
+      rootMargin: '0px 0px -8% 0px',
+      threshold: 0.08
     });
 
     document.querySelectorAll('.reveal:not(.is-visible)').forEach(el => observer.observe(el));

@@ -312,3 +312,54 @@
   }
 }
 
+
+/* ---- Checkout hand-off notice ---- */
+.auth-checkout-notice {
+  margin-bottom: 18px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #FFF7ED;
+  border: 1px solid #FED7AA;
+  color: #7C2D12;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.auth-checkout-notice[hidden] { display: none; }
+
+/* ---- Google sign-in ---- */
+.auth-google-wrap[hidden] { display: none; }
+.auth-google-btn {
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #D1D5DB;
+  background: #FFFFFF;
+  color: #1F2937;
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.auth-google-btn:hover { background: #F9FAFB; border-color: #9CA3AF; }
+.auth-google-btn:focus-visible { outline: 2px solid var(--color-primary, #9E1B1E); outline-offset: 2px; }
+.auth-google-btn:disabled { opacity: 0.6; cursor: wait; }
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 18px 0;
+  color: #9CA3AF;
+  font-size: 0.8125rem;
+}
+.auth-divider::before,
+.auth-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #E5E7EB;
+}

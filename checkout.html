@@ -56,7 +56,8 @@
   <main>
     <section class="section" style="padding-top:32px;">
       <div class="container">
-        <h1 style="font-size:2rem; font-weight:800; color:var(--text-dark); margin-bottom:28px;">SECURE CHECKOUT</h1>
+        <h1 style="font-size:2rem; font-weight:800; color:var(--text-dark); margin-bottom:8px;">SECURE CHECKOUT</h1>
+        <p id="checkoutSignedInAs" class="checkout-signed-in" style="font-size:0.875rem; color:var(--text-muted); margin-bottom:24px;"></p>
 
         <form id="checkoutForm">
           <div class="checkout-grid">
@@ -72,32 +73,32 @@
                 <div class="form-grid-2">
                   <div class="form-group">
                     <label class="form-label" for="custName">Full Name *</label>
-                    <input type="text" id="custName" class="form-input" placeholder="e.g. Ramesh Kumar" required>
+                    <input type="text" id="custName" autocomplete="name" class="form-input" placeholder="e.g. Ramesh Kumar" required>
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="custPhone">Mobile Number *</label>
-                    <input type="tel" id="custPhone" class="form-input" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
+                    <input type="tel" id="custPhone" autocomplete="tel-national" inputmode="numeric" maxlength="10" class="form-input" placeholder="e.g. 9876543210" pattern="[0-9]{10}" required>
                   </div>
                 </div>
 
                 <div class="form-group">
                   <label class="form-label" for="custEmail">Email Address (for order invoice) *</label>
-                  <input type="email" id="custEmail" class="form-input" placeholder="e.g. name@example.com" required>
+                  <input type="email" id="custEmail" autocomplete="email" class="form-input" placeholder="e.g. name@example.com" required>
                 </div>
 
                 <div class="form-group">
                   <label class="form-label" for="custAddress">Street Address / House No. / Flat *</label>
-                  <input type="text" id="custAddress" class="form-input" placeholder="e.g. Flat 302, Green Meadows, 4th Cross" required>
+                  <input type="text" id="custAddress" autocomplete="street-address" class="form-input" placeholder="e.g. Flat 302, Green Meadows, 4th Cross" required>
                 </div>
 
                 <div class="form-grid-2">
                   <div class="form-group">
                     <label class="form-label" for="custCity">City *</label>
-                    <input type="text" id="custCity" class="form-input" placeholder="e.g. Chennai" required>
+                    <input type="text" id="custCity" autocomplete="address-level2" class="form-input" placeholder="e.g. Chennai" required>
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="custState">State *</label>
-                    <select id="custState" class="form-select" required>
+                    <select id="custState" autocomplete="address-level1" class="form-select" required>
                       <option value="Tamil Nadu" selected>Tamil Nadu</option>
                       <option value="Karnataka">Karnataka</option>
                       <option value="Kerala">Kerala</option>
@@ -112,7 +113,7 @@
                 <div class="form-grid-2">
                   <div class="form-group">
                     <label class="form-label" for="custPincode">PIN Code *</label>
-                    <input type="text" id="custPincode" class="form-input" placeholder="e.g. 600001" pattern="[0-9]{6}" required>
+                    <input type="text" id="custPincode" autocomplete="postal-code" inputmode="numeric" maxlength="6" class="form-input" placeholder="e.g. 600001" pattern="[0-9]{6}" required>
                   </div>
                   <div class="form-group">
                     <label class="form-label" for="custLandmark">Landmark (Optional)</label>
@@ -164,8 +165,9 @@
                   <span id="checkoutSummaryTotal">₹0</span>
                 </div>
 
+                <div id="checkoutError" class="checkout-error" role="alert" style="display:none;"></div>
                 <button type="submit" id="checkoutSubmitBtn" class="btn btn-primary btn-block btn-lg" style="margin-top:8px;">
-                  PLACE ORDER
+                  PLACE ORDER &amp; PAY
                 </button>
                 <p style="font-size:0.75rem; color:var(--text-muted); text-align:center; margin-top:10px;">
                   Online orders accepted above ₹999.
@@ -209,16 +211,18 @@
     <div class="container">
       <div class="footer-bottom" style="border:none; padding:16px 0; text-align:center;">
         <div>&copy; 2026 HIPA Masala Online Store. All rights reserved.</div>
+        <div class="footer-legal-ids">HIPA Enterprises &middot; FSSAI Lic. No. 22426423000366 &middot; GSTIN 33BVIPR5839J1Z1 &middot; UDYAM-TN-08-0138927</div>
       </div>
     </div>
   </footer>
 
   <!-- Centralized JavaScript Engines -->
   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="/api/public-config"></script>
   <script src="js/config.js"></script>
   <script src="js/products-data.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-client.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-client.js"></script>
   <script src="js/wishlist.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/search.js"></script>

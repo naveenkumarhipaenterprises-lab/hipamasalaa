@@ -176,30 +176,51 @@ const ContactPage = {
     this.submitBtn.disabled = true;
     if (btnText) btnText.textContent = 'SENDING MESSAGE...';
 
-    setTimeout(() => {
-      // State 2: Success Button State
+    this.sendMessage({
+      name: nameEl.value.trim(),
+      phone: phoneEl.value.trim(),
+      email: emailEl.value.trim(),
+      subject: subjectEl.value.trim(),
+      message: msgEl.value.trim()
+    });
+  },
+
+  sendMessage: async function(payload) {
+    const btnText = this.submitBtn.querySelector('.btn-text');
+    let data = {};
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      data = await res.json().catch(() => ({}));
+      if (!res.ok || !data.success) throw new Error(data.error || 'Message could not be sent.');
+    } catch (err) {
       this.submitBtn.classList.remove('is-loading');
-      this.submitBtn.classList.add('is-success');
-      if (btnText) btnText.textContent = 'MESSAGE SENT ✓';
-
+      this.submitBtn.disabled = false;
+      if (btnText) btnText.textContent = 'SEND MESSAGE';
       if (window.Cart && typeof window.Cart.showToast === 'function') {
-        window.Cart.showToast('Your message has been sent successfully.');
+        window.Cart.showToast((err.message || 'Message could not be sent.') + ' You can also WhatsApp us on +91 70580 53055.', 'error');
       }
+      return;
+    }
 
-      setTimeout(() => {
-        // Transition to Full Success Card Screen
-        if (this.formContainer && this.successCard) {
-          this.formContainer.style.display = 'none';
-          this.successCard.style.display = 'flex';
+    this.submitBtn.classList.remove('is-loading');
+    this.submitBtn.classList.add('is-success');
+    if (btnText) btnText.textContent = 'MESSAGE SENT ✓';
+    if (window.Cart && typeof window.Cart.showToast === 'function') {
+      window.Cart.showToast('Your message has been sent successfully.');
+    }
 
-          const refCodeEl = document.getElementById('successRefCode');
-          if (refCodeEl) {
-            const randomRef = 'HP-' + Math.floor(10000 + Math.random() * 90000);
-            refCodeEl.textContent = randomRef;
-          }
-        }
-      }, 700);
-    }, 1200);
+    setTimeout(() => {
+      if (this.formContainer && this.successCard) {
+        this.formContainer.style.display = 'none';
+        this.successCard.style.display = 'flex';
+        const refCodeEl = document.getElementById('successRefCode');
+        if (refCodeEl && data.refCode) refCodeEl.textContent = data.refCode;
+      }
+    }, 700);
   },
 
   resetForm: function() {

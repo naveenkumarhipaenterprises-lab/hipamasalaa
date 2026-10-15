@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/header-footer.css">
   <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/auth.css">
   <link rel="stylesheet" href="css/account.css">
   <link rel="stylesheet" href="css/legal.css">
   <link rel="stylesheet" href="css/whatsapp.css">
@@ -182,6 +183,7 @@
           <h2 class="account-section-title">Profile Information</h2>
           <p class="account-section-desc">Manage your personal details and account settings.</p>
 
+          <div class="auth-alert-box" id="profileAlert" role="status"></div>
           <form id="profileForm" class="account-form-grid">
             <div>
               <label class="auth-label" for="profileName">Full Name</label>
@@ -190,6 +192,10 @@
             <div>
               <label class="auth-label" for="profileEmail">Email Address</label>
               <input type="email" id="profileEmail" class="auth-input" style="padding-left:14px;" readonly disabled>
+            </div>
+            <div>
+              <label class="auth-label" for="profilePhone">Mobile Number</label>
+              <input type="tel" id="profilePhone" class="auth-input" style="padding-left:14px;" inputmode="numeric" maxlength="10" pattern="[6-9][0-9]{9}" placeholder="10-digit mobile" autocomplete="tel-national">
             </div>
             <div>
               <label class="auth-label" for="profileCreated">Member Since</label>
@@ -226,14 +232,15 @@
           <h2 class="account-section-title">Security Settings</h2>
           <p class="account-section-desc">Change your account password to keep your account secure.</p>
 
+          <div class="auth-alert-box" id="passwordAlert" role="status" style="max-width:420px;"></div>
           <form id="passwordForm" style="max-width:420px; display:flex; flex-direction:column; gap:16px;">
             <div>
               <label class="auth-label" for="newPassword">New Password</label>
-              <input type="password" id="newPassword" class="auth-input" style="padding-left:14px;" required placeholder="Minimum 6 characters">
+              <input type="password" id="newPassword" class="auth-input" style="padding-left:14px;" required placeholder="Minimum 6 characters" minlength="6" autocomplete="new-password">
             </div>
             <div>
               <label class="auth-label" for="confirmNewPassword">Confirm New Password</label>
-              <input type="password" id="confirmNewPassword" class="auth-input" style="padding-left:14px;" required placeholder="Re-enter new password">
+              <input type="password" id="confirmNewPassword" class="auth-input" style="padding-left:14px;" required placeholder="Re-enter new password" autocomplete="new-password">
             </div>
             <button type="submit" class="btn btn-primary btn-sm" style="align-self:flex-start; margin-top:6px;">Update Password</button>
           </form>
@@ -373,15 +380,17 @@
         <div>
           &copy; 2026 HIPA Masala Online Store. All rights reserved.
         </div>
+        <div class="footer-legal-ids">HIPA Enterprises &middot; FSSAI Lic. No. 22426423000366 &middot; GSTIN 33BVIPR5839J1Z1 &middot; UDYAM-TN-08-0138927</div>
       </div>
     </div>
   </footer>
 
   <!-- Scripts -->
+  <script src="/api/public-config"></script>
   <script src="js/config.js"></script>
   <script src="js/products-data.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="js/supabase-client.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+    <script src="js/supabase-client.js"></script>
   <script src="js/wishlist.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/search.js"></script>
